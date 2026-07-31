@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IconDownload, IconCaret, IconChevron, IconEye, IconEyeOff } from "./icons";
-import type { ArLabel } from "../lib/labels";
+import { nameLines, oneLineName, type ArLabel } from "../lib/labels";
 import { loadImage, canvasToJpegBlob, releaseCanvas, saveBlob } from "../lib/exportImage";
 import { readShootingInfo } from "../lib/exif";
 import FsSlider from "./FsSlider";
@@ -846,8 +846,8 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
           : l,
       ),
     );
-  const capName = capItem?.name ?? "";
-  const capNameEn = capItem?.nameEn || capItem?.name || "";
+  const capName = oneLineName(capItem?.name ?? "");
+  const capNameEn = oneLineName(capItem?.nameEn || capItem?.name || "");
   const capColHasTitle = !capBoth || captionTitleMode === "each";
   const capTagLang: "ja" | "en" = captionLang === "en" ? "en" : "ja";
   const capSharedHasTags = !!capItem && capChips(capItem, capTagLang).length > 0;
@@ -880,7 +880,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     if (!it) return null;
     const en = titleLang === "en";
     const up = (s: string) => (en ? s.toUpperCase() : s);
-    const main = up(en ? it.nameEn || it.name : it.name);
+    const main = up(oneLineName(en ? it.nameEn || it.name : it.name));
     const over =
       titleShowOver && it.prefecture
         ? up(en ? prefEn(it.prefecture) : it.prefecture.replace(/\//g, "・"))
@@ -890,9 +890,11 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   };
 
   // ラベルの1段目(name)と2段目(sub)の文字列を labelMode から決める。
+  // name には編集で入れた改行(\n)がそのまま残り、名札の描画側で複数行に折り返す。
+  // 2段目(sub)と英名は1行に畳む。
   const labelContent = (lb: { name: string; nameEn?: string; elevM?: number }) => {
     const ja = lb.name;
-    const en = lb.nameEn || lb.name;
+    const en = oneLineName(lb.nameEn || lb.name);
     // 標高なし（自由入力）の場合は標高部分だけ省いて表示する。
     const elev = lb.elevM != null ? `${Math.round(lb.elevM).toLocaleString()}m` : "";
     switch (labelMode) {
@@ -1228,11 +1230,17 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
         const cx = pfx(lb.labelU);
         const cy = pfy(lb.labelV);
         const { name, sub } = labelContent(lb);
+        // 山名は改行(\n)で複数行になる。最下行の基準線を従来の nameBaseline に固定し、
+        // 上へ積む（ラベルは下端基準で置かれるため、行が増えても位置がずれない）。
+        const nameLns = nameLines(name);
+        if (nameLns.length === 0) nameLns.push("");
+        // 行送りはプレビュー(.ar-edit-label の line-height: 1.12)と揃える。
+        const nameLineH = Math.round(nameFs * 1.12);
         const subBaseline = cy;
         const nameBaseline = sub ? cy - Math.round(subFs * 1.35 * labelLineHeight) : cy;
         ctx.font = `${fwName} ${nameFs}px ${ffName}`;
         setLS(nameFs * labelLetterSpace);
-        const nameW = ctx.measureText(name).width;
+        const nameW = Math.max(...nameLns.map((ln) => ctx.measureText(ln).width));
         let subW = 0;
         if (sub) {
           ctx.font = `${fwSub} ${subFs}px ${ffSub}`;
@@ -1240,7 +1248,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
           subW = ctx.measureText(sub).width;
         }
         const boxW = Math.max(nameW, subW);
-        const boxTop = nameBaseline - nameFs;
+        const boxTop = nameBaseline - nameFs - nameLineH * (nameLns.length - 1);
         const boxBottom = cy;
         const boxMidY = (boxTop + boxBottom) / 2;
         const anchor = lb.labelAnchor ?? "bottom";
@@ -1271,7 +1279,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
         ctx.fillStyle = labelColor;
         ctx.font = `${fwName} ${nameFs}px ${ffName}`;
         setLS(nameFs * labelLetterSpace);
-        ctx.fillText(name, cx, nameBaseline);
+        nameLns.forEach((ln, li) => {
+          ctx.fillText(ln, cx, nameBaseline - nameLineH * (nameLns.length - 1 - li));
+        });
         if (sub) {
           ctx.font = `${fwSub} ${subFs}px ${ffSub}`;
           setLS(subFs * labelLetterSpace);
@@ -1289,9 +1299,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     if (captionLang !== "none" && cap && (capJa || capEn)) {
       const cols: { title: string; body: string; lang: "ja" | "en" }[] = [];
       if ((captionLang === "ja" || captionLang === "both") && capJa)
-        cols.push({ title: cap.name, body: capJa, lang: "ja" });
+        cols.push({ title: oneLineName(cap.name), body: capJa, lang: "ja" });
       if ((captionLang === "en" || captionLang === "both") && capEn)
-        cols.push({ title: cap.nameEn || cap.name, body: capEn, lang: "en" });
+        cols.push({ title: oneLineName(cap.nameEn || cap.name), body: capEn, lang: "en" });
       if (cols.length) {
         const titleFs = Math.round(L * 0.026 * captionTitleScale);
         const bodyFs = Math.round(L * 0.02 * captionBodyScale);
@@ -1588,6 +1598,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
         const both = segs.length > 0 && !!exifSpec;
         if (segs.length > 0) {
           // 部分ごとに太さ・色が違うため、全体幅を測ってから左詰めで中央揃えに描く。
+          setLS(mainFs * 0.01); // プレビュー(.ar-exif-model の letter-spacing: 0.01em)と揃える
           let total = 0;
           for (const s of segs) {
             ctx.font = s.font;
@@ -1605,6 +1616,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
         if (exifSpec) {
           ctx.textAlign = "center";
           ctx.font = `500 ${subFs}px ${noteFF}`;
+          setLS(subFs * 0.04); // プレビュー(.ar-exif-spec の letter-spacing: 0.04em)と揃える
           ctx.fillStyle = ink.sub;
           ctx.fillText(exifSpec, OW / 2, both ? cy + gap : cy);
         }
@@ -1614,11 +1626,14 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
         ctx.textAlign = "center";
         if (noteLine1) {
           ctx.font = `${noteL1.italic ? "italic " : ""}${noteL1.bold ? 700 : 600} ${mainFs}px ${ff}`;
+          setLS(mainFs * 0.03); // プレビュー(.ar-exif-l1 の letter-spacing: 0.03em)と揃える
           ctx.fillStyle = noteL1.dim ? ink.sub : ink.main;
           ctx.fillText(noteLine1, OW / 2, both ? cy - gap : cy);
         }
         if (noteLine2) {
-          ctx.font = `${noteL2.italic ? "italic " : ""}${noteL2.bold ? 600 : 400} ${Math.round(L * 0.016)}px ${ff}`;
+          const fs2 = Math.round(L * 0.016);
+          ctx.font = `${noteL2.italic ? "italic " : ""}${noteL2.bold ? 600 : 400} ${fs2}px ${ff}`;
+          setLS(fs2 * 0.03); // プレビュー(.ar-exif-l2 の letter-spacing: 0.03em)と揃える
           ctx.fillStyle = noteL2.dim ? ink.sub : ink.main;
           ctx.fillText(noteLine2, OW / 2, both ? cy + gap : cy);
         }
@@ -2079,10 +2094,11 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       <span className="studio-data-head">{t("studio.data.heading")}</span>
       {arLabels.map((lb, i) => (
         <div key={lb.id} className="studio-data-row">
-          <input
-            type="text"
+          {/* 山名は改行可（Enterで改行）。改行は写真上の名札にそのまま反映される。 */}
+          <textarea
             className="studio-data-input studio-data-input--name"
             value={lb.name}
+            rows={Math.max(1, lb.name.split("\n").length)}
             onChange={(e) => setLabelName(i, e.target.value)}
             placeholder={t("studio.data.namePlaceholder")}
             aria-label={t("studio.data.nameLabel", { n: i + 1 })}
@@ -2094,7 +2110,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
             value={lb.nameEn ?? ""}
             onChange={(e) => setLabelNameEn(i, e.target.value)}
             placeholder={t("studio.data.nameEnPlaceholder")}
-            aria-label={t("studio.data.nameEnLabel", { name: lb.name })}
+            aria-label={t("studio.data.nameEnLabel", { name: oneLineName(lb.name) })}
             autoComplete="off"
           />
           <span className="studio-data-elev">
@@ -2105,7 +2121,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
               value={lb.elevM ?? ""}
               onChange={(e) => setLabelElev(i, e.target.value)}
               placeholder={t("studio.data.elevationPlaceholder")}
-              aria-label={t("studio.data.elevationLabel", { name: lb.name })}
+              aria-label={t("studio.data.elevationLabel", { name: oneLineName(lb.name) })}
             />
             m
           </span>
@@ -2114,7 +2130,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
             className={`studio-data-eye${lb.hidden ? " is-off" : ""}`}
             onClick={() => setLabelHidden(i, !lb.hidden)}
             title={t("studio.data.showOnPhoto")}
-            aria-label={t("studio.data.showOnPhotoLabel", { name: lb.name })}
+            aria-label={t("studio.data.showOnPhotoLabel", { name: oneLineName(lb.name) })}
             aria-pressed={!lb.hidden}
           >
             {lb.hidden ? <IconEyeOff size={15} /> : <IconEye size={15} />}
@@ -2132,7 +2148,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
         <div className="ar-font-sel">
           <select value={captionIdx} onChange={(e) => setCaptionIdx(Number(e.target.value))} aria-label={t("studio.data.subject")}>
             {arLabels.map((l, i) => (
-              <option key={i} value={i}>{l.name}</option>
+              <option key={i} value={i}>{oneLineName(l.name)}</option>
             ))}
           </select>
         </div>
@@ -2487,7 +2503,8 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                         onPointerUp={onEditUp}
                         onPointerCancel={onEditUp}
                       >
-                        <span className="ar-label-name">{lc.name}</span>
+                        {/* 改行入りの山名は焼き込みと同じ行立て（空行除去）で表示する */}
+                        <span className="ar-label-name">{nameLines(lc.name).join("\n")}</span>
                         {lc.sub && <span className="ar-label-sub">{lc.sub}</span>}
                       </div>
                     );
@@ -2542,7 +2559,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           className="ar-cap-col"
                           style={capBoth && captionLayout === "horizontal" ? { flex: `${captionSplit} 1 0` } : undefined}
                         >
-                          {capColHasTitle && <div className="ar-caption-title">{arLabels[captionIdx].name}</div>}
+                          {capColHasTitle && <div className="ar-caption-title">{oneLineName(arLabels[captionIdx].name)}</div>}
                           {capColHasTitle && !capBoth && capTagEls(capTagLang)}
                           <p className="ar-caption-text">{descJa(arLabels[captionIdx])}</p>
                         </div>
@@ -2562,7 +2579,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           className="ar-cap-col"
                           style={capBoth && captionLayout === "horizontal" ? { flex: `${1 - captionSplit} 1 0` } : undefined}
                         >
-                          {capColHasTitle && <div className="ar-caption-title">{arLabels[captionIdx].nameEn || arLabels[captionIdx].name}</div>}
+                          {capColHasTitle && <div className="ar-caption-title">{oneLineName(arLabels[captionIdx].nameEn || arLabels[captionIdx].name)}</div>}
                           {capColHasTitle && !capBoth && capTagEls(capTagLang)}
                           <p className="ar-caption-text">{descEn(arLabels[captionIdx])}</p>
                         </div>
@@ -2619,7 +2636,13 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
               {exifOn && (() => {
                 const ink = noteInkColors();
                 const ch = (photoNat?.h ?? 1000) * fChF;
-                const totalH = ch * (1 + fMtb) + NOTE_EDGE * ch + noteBand * ch;
+                const cw = (photoNat?.w ?? 1500) * fCwF;
+                const innerW = cw * (1 + fMlr), innerH = ch * (1 + fMtb);
+                const totalH = innerH + NOTE_EDGE * ch + noteBand * ch;
+                const outerW = innerW + NOTE_EDGE * ch * 2;
+                // 焼き込みの文字サイズ基準は内側（L=max(OW,OH)）。プレビューの cqmax は
+                // 外枠（縁＋帯込み）基準なので、その比で補正して実寸を揃える。
+                const noteK = Math.max(innerW, innerH) / Math.max(outerW, totalH);
                 return (
                   <div
                     className="ar-exif"
@@ -2629,6 +2652,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                         fontFamily: roleFontStack(noteFont),
                         "--exif-main": ink.main,
                         "--exif-sub": ink.sub,
+                        "--note-k": noteK,
                       } as React.CSSProperties
                     }
                     aria-hidden="true"
