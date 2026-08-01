@@ -5,12 +5,18 @@
     "name_kana": "ながおかはなび",
     "name_en": "Nagaoka Fireworks",
     "aliases": [
-      { "name": "長岡まつり大花火大会", "kana": "ながおかまつりおおはなびたいかい" },
-      { "name": "花火", "kana": "はなび" }
+      {
+        "name": "長岡まつり大花火大会",
+        "kana": "ながおかまつりおおはなびたいかい"
+      },
+      {
+        "name": "花火",
+        "kana": "はなび"
+      }
     ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 650,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 1000,
     "description": {
@@ -20,8 +26,18 @@
       "description_ja_short": "毎年8月2日・3日、信濃川河川敷で開催される日本三大花火の一つ。慰霊と復興の祈りを込めた正三尺玉とフェニックスが夜空を彩る。",
       "description_en_long": "The Nagaoka Festival Grand Fireworks Show is held every August 2nd and 3rd along the Shinano River in Nagaoka, Niigata. Counted among Japan's three greatest fireworks displays, it began as a prayer for recovery and peace after the air raid of August 1, 1945. Highlights include the Shosanjakudama, a giant shell blooming roughly 650 meters across, and the Phoenix, a restoration-prayer display stretching about two kilometers along the riverbank.",
       "description_en_short": "One of Japan's three greatest fireworks festivals, held August 2nd and 3rd on the Shinano River in Nagaoka as a prayer for peace and recovery.",
-      "tags_ja": ["花火", "夏", "新潟県", "祭り"],
-      "tags_en": ["Fireworks", "Summer", "Niigata", "Festival"],
+      "tags_ja": [
+        "花火",
+        "夏",
+        "新潟県",
+        "祭り"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Summer",
+        "Niigata",
+        "Festival"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -31,10 +47,15 @@
     "name": "復興祈願花火フェニックス",
     "name_kana": "ふっこうきがんはなびふぇにっくす",
     "name_en": "Phoenix",
-    "aliases": [{ "name": "フェニックス", "kana": "ふぇにっくす" }],
+    "aliases": [
+      {
+        "name": "フェニックス",
+        "kana": "ふぇにっくす"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 330,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 999,
     "description": {
@@ -44,8 +65,16 @@
       "description_ja_short": "中越地震からの復興を祈り2005年に誕生した超大型スターマイン。全長約2kmの光のパノラマが音楽とともに夜空を包む。",
       "description_en_long": "The Phoenix is Nagaoka's signature super-wide starmine, launched first in 2005 as a prayer for recovery from the 2004 Chuetsu Earthquake. Named for the immortal bird rising again, it fills a launch front stretching about two kilometers along the Shinano River, synchronized to music. The panorama of light is too wide to take in at a single glance and draws spectators from across Japan every year.",
       "description_en_short": "Nagaoka's signature 2km-wide starmine, born in 2005 as a prayer for recovery from the Chuetsu Earthquake.",
-      "tags_ja": ["花火", "長岡花火", "復興祈願"],
-      "tags_en": ["Fireworks", "Nagaoka", "Phoenix"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "復興祈願"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Phoenix"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -55,10 +84,15 @@
     "name": "正三尺玉",
     "name_kana": "しょうさんじゃくだま",
     "name_en": "Shosanjakudama",
-    "aliases": [{ "name": "三尺玉", "kana": "さんじゃくだま" }],
+    "aliases": [
+      {
+        "name": "三尺玉",
+        "kana": "さんじゃくだま"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 600,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 998,
     "description": {
@@ -68,8 +102,16 @@
       "description_ja_short": "直径約90cmの玉が上空約600mで直径約650mの大輪に開く、長岡名物の巨大花火。腹に響く轟音とともに夜空を覆う。",
       "description_en_long": "The Shosanjakudama is Nagaoka's iconic giant shell, roughly 90 centimeters across, fired some 600 meters into the sky where it blooms about 650 meters wide. Its thunderous report rolls across the Shinano River and envelops the entire venue. Nagaoka has launched these three-shaku shells since the early Showa era, and today they climax a four-stage sequence of ever-larger shells.",
       "description_en_short": "Nagaoka's iconic giant shell, blooming about 650 meters across some 600 meters above the Shinano River.",
-      "tags_ja": ["花火", "長岡花火", "三尺玉"],
-      "tags_en": ["Fireworks", "Nagaoka", "Giant shell"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "三尺玉"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Giant shell"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -79,10 +121,15 @@
     "name": "白菊",
     "name_kana": "しらぎく",
     "name_en": "Shiragiku",
-    "aliases": [{ "name": "慰霊の白菊", "kana": "いれいのしらぎく" }],
+    "aliases": [
+      {
+        "name": "慰霊の白菊",
+        "kana": "いれいのしらぎく"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 330,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 997,
     "description": {
@@ -92,8 +139,16 @@
       "description_ja_short": "白一色で開く慰霊の花火。戦争と災害の犠牲者への鎮魂を込め、大会の冒頭に静かに打ち上げられる長岡花火の原点。",
       "description_en_long": "The Shiragiku, or White Chrysanthemum, is a memorial shell that blooms in pure white silence. It began when Nagaoka pyrotechnician Seiji Kase fired it in mourning for comrades who died in Siberian internment, and it now opens the festival as a prayer for all victims of war and disaster, including the Nagaoka air raid. Amid the spectacle, this single unadorned bloom speaks for the festival's origin: consolation and a prayer for peace.",
       "description_en_short": "A pure-white memorial shell that opens the festival as a silent prayer for victims of war and disaster.",
-      "tags_ja": ["花火", "長岡花火", "慰霊"],
-      "tags_en": ["Fireworks", "Nagaoka", "Memorial"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "慰霊"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Memorial"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -103,10 +158,15 @@
     "name": "天地人花火",
     "name_kana": "てんちじんはなび",
     "name_en": "Tenchijin Fireworks",
-    "aliases": [{ "name": "天地人", "kana": "てんちじん" }],
+    "aliases": [
+      {
+        "name": "天地人",
+        "kana": "てんちじん"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 300,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 996,
     "description": {
@@ -116,8 +176,16 @@
       "description_ja_short": "大河ドラマ「天地人」を記念した音楽付きスターマイン。直江兼続の義と愛の物語を勇壮な花火で描く。",
       "description_en_long": "The Tenchijin Fireworks are a musical starmine created to commemorate the NHK taiga drama Tenchijin, which portrayed Naoe Kanetsugu, the samurai of loyalty and love associated with the Nagaoka region. Set to the drama's opening theme, the gallant display sweeps across the night sky over the Shinano River, telling local history through fireworks.",
       "description_en_short": "A musical starmine honoring the taiga drama Tenchijin and the local samurai Naoe Kanetsugu.",
-      "tags_ja": ["花火", "長岡花火", "天地人"],
-      "tags_en": ["Fireworks", "Nagaoka", "Tenchijin"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "天地人"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Tenchijin"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -128,12 +196,18 @@
     "name_kana": "こめひゃっぴょうはなびしゃくだまひゃくれんぱつ",
     "name_en": "Kome Hyappyo 100 Shells",
     "aliases": [
-      { "name": "米百俵花火", "kana": "こめひゃっぴょうはなび" },
-      { "name": "尺玉100連発", "kana": "しゃくだまひゃくれんぱつ" }
+      {
+        "name": "米百俵花火",
+        "kana": "こめひゃっぴょうはなび"
+      },
+      {
+        "name": "尺玉100連発",
+        "kana": "しゃくだまひゃくれんぱつ"
+      }
     ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 330,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 995,
     "description": {
@@ -143,8 +217,16 @@
       "description_ja_short": "「米百俵の精神」にちなみ尺玉100発を連続打上げ。大輪が絶え間なく夜空を埋める大会屈指の迫力のプログラム。",
       "description_en_long": "This program honors the Kome Hyappyo spirit: after the Boshin War, Nagaoka sold a gift of one hundred bales of rice to build a school, investing in the future rather than the present. One hundred ichi-shaku shells, each blooming about 330 meters up, are fired in relentless succession — a lavish, unbroken cascade of giant blossoms that ranks among the festival's most powerful spectacles.",
       "description_en_short": "One hundred giant shells fired in relentless succession, honoring Nagaoka's Kome Hyappyo spirit of investing in the future.",
-      "tags_ja": ["花火", "長岡花火", "米百俵"],
-      "tags_en": ["Fireworks", "Nagaoka", "Kome Hyappyo"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "米百俵"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Kome Hyappyo"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -154,10 +236,15 @@
     "name": "ナイアガラ超大型スターマイン",
     "name_kana": "ないあがらちょうおおがたすたーまいん",
     "name_en": "Niagara Starmine",
-    "aliases": [{ "name": "ナイアガラ", "kana": "ないあがら" }],
+    "aliases": [
+      {
+        "name": "ナイアガラ",
+        "kana": "ないあがら"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 300,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 994,
     "description": {
@@ -167,8 +254,16 @@
       "description_ja_short": "大手大橋から滝のように流れ落ちる光のカーテンと超大型スターマインの共演。川面に映る金色の光が美しい。",
       "description_en_long": "The Niagara pairs a set-piece cascade of golden light pouring from the Ohte Bridge over the Shinano River with a super-wide starmine bursting above it. The curtain of falling sparks spans the bridge and mirrors on the water while giant blossoms fill the sky overhead — a three-dimensional interplay of water and light unique to Nagaoka's riverside setting.",
       "description_en_short": "A golden cascade pouring from the Ohte Bridge, paired with a super-wide starmine bursting above the river.",
-      "tags_ja": ["花火", "長岡花火", "ナイアガラ"],
-      "tags_en": ["Fireworks", "Nagaoka", "Niagara"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "ナイアガラ"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Niagara"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -178,10 +273,15 @@
     "name": "ベスビアス超大型スターマイン",
     "name_kana": "べすびあすちょうおおがたすたーまいん",
     "name_en": "Vesuvius Starmine",
-    "aliases": [{ "name": "ベスビアス", "kana": "べすびあす" }],
+    "aliases": [
+      {
+        "name": "ベスビアス",
+        "kana": "べすびあす"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 300,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 993,
     "description": {
@@ -191,8 +291,16 @@
       "description_ja_short": "火山の噴火にたとえられる長岡伝統の超大型スターマイン。湧き上がる光の奔流が夜空を焦がす主力プログラム。",
       "description_en_long": "Named for the eruption of Mount Vesuvius, this traditional Nagaoka super starmine sends hundreds of shells surging upward from a wide launch front, like a torrent of fire scorching the night sky. Staged several times through the festival with varied themes by its sponsors, it is one of the workhorses of the Nagaoka program.",
       "description_en_short": "Nagaoka's traditional super starmine, a volcanic torrent of light staged several times through the festival.",
-      "tags_ja": ["花火", "長岡花火", "スターマイン"],
-      "tags_en": ["Fireworks", "Nagaoka", "Starmine"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "スターマイン"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Starmine"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
@@ -202,10 +310,15 @@
     "name": "匠の花火",
     "name_kana": "たくみのはなび",
     "name_en": "Takumi Fireworks",
-    "aliases": [{ "name": "匠", "kana": "たくみ" }],
+    "aliases": [
+      {
+        "name": "匠",
+        "kana": "たくみ"
+      }
+    ],
     "latitude": 37.4463,
     "longitude": 138.8367,
-    "elevation_m": 330,
+    "elevation_m": 2026,
     "prefecture": "新潟県",
     "priority": 992,
     "description": {
@@ -215,8 +328,1786 @@
       "description_ja_short": "花火師の技を主役にした通好みのプログラム。一発一発の色・開き・消え際の完成度をじっくり味わえる。",
       "description_en_long": "Presented by the Nagaoka Fireworks Foundation, Takumi puts the pyrotechnician's craft itself center stage. Each shell is savored for its color shifts, the precision of its bloom, and the beauty of its fade — a connoisseur's interlude between the grand spectacles, devoted to fireworks as an art form.",
       "description_en_short": "A connoisseur's program devoted to the artisan's craft — each shell savored for color, precision, and fade.",
-      "tags_ja": ["花火", "長岡花火", "花火師"],
-      "tags_en": ["Fireworks", "Nagaoka", "Artisan"],
+      "tags_ja": [
+        "花火",
+        "長岡花火",
+        "花火師"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka",
+        "Artisan"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000101,
+    "name": "カノン～この先に続く道(ミライ)に向かって～",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "カノン～この先に続く道(ミライ)に向かって～",
+      "description_ja_long": "長岡まつり大花火大会(8月2日・3日 19:25頃)で打ち上げられるナイアガラ超大型スターマイン「カノン～この先に続く道(ミライ)に向かって～」(オンヨネ＆エヌ・シィ・ティ・JTB＆エヌ・シィ・ティ協賛)。大手大橋から滝のように流れ落ちるナイアガラと超大型スターマインの共演で、川面に映る光のカーテンが美しい。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日・3日 19:25頃打上げ。オンヨネ＆エヌ・シィ・ティ・JTB＆エヌ・シィ・ティ協賛のナイアガラ超大型スターマイン。",
+      "description_en_long": "\"カノン～この先に続く道(ミライ)に向かって～\" is a Niagara cascade pouring from the Ohte Bridge paired with a super-wide starmine, sponsored by オンヨネ＆エヌ・シィ・ティ・JTB＆エヌ・シィ・ティ, launched around 19:25 on August 2nd and 3rd at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A niagara cascade pouring from the ohte bridge paired with a super-wide starmine at the Nagaoka Fireworks Show (August 2nd and 3rd, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000102,
+    "name": "純金箔24K 黄金の輝き",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "純金箔24K 黄金の輝き",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:25頃)で打ち上げられるベスビアス超大型スターマイン「純金箔24K 黄金の輝き」(トーア協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:25頃打上げ。トーア協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"純金箔24K 黄金の輝き\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by トーア, launched around 19:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 2, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000103,
+    "name": "ガラスが拓く未来のとびら",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "ガラスが拓く未来のとびら",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:25頃)で打ち上げられる超大型スーパーベスビアス「ガラスが拓く未来のとびら」(ミクロ技術研究所長岡事業所協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:25頃打上げ。ミクロ技術研究所長岡事業所協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"ガラスが拓く未来のとびら\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by ミクロ技術研究所長岡事業所, launched around 19:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000104,
+    "name": "大河の恵み～水が生む紙の物語",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "大河の恵み～水が生む紙の物語",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:25頃)で打ち上げられるベスビアス大スターマイン「大河の恵み～水が生む紙の物語」(北越コーポレーション・北越グループ協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:25頃打上げ。北越コーポレーション・北越グループ協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"大河の恵み～水が生む紙の物語\" is a traditional Vesuvius-style grand starmine, sponsored by 北越コーポレーション・北越グループ, launched around 19:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000105,
+    "name": "誰かのために！72年の感謝報恩",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "誰かのために！72年の感謝報恩",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:25頃)で打ち上げられる10号72発「誰かのために！72年の感謝報恩」(ソリマチテックグループ協賛)。10号72発を打ち上げる協賛プログラムで、大輪が連続して夜空に開く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:25頃打上げ。ソリマチテックグループ協賛の10号72発。",
+      "description_en_long": "\"誰かのために！72年の感謝報恩\" is a program of large shells (10号72発), sponsored by ソリマチテックグループ, launched around 19:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A program of large shells (10号72発) at the Nagaoka Fireworks Show (August 2, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000106,
+    "name": "米百俵の心",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "米百俵の心",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:25頃)で打ち上げられる超大型スーパーベスビアス「米百俵の心」(中越興業グループ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:25頃打上げ。中越興業グループ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"米百俵の心\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 中越興業グループ, launched around 19:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000107,
+    "name": "長岡から世界へ、希望の花束",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "長岡から世界へ、希望の花束",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:25頃)で打ち上げられるベスビアス超大型スターマイン「長岡から世界へ、希望の花束」(イートラスト協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:25頃打上げ。イートラスト協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"長岡から世界へ、希望の花束\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by イートラスト, launched around 19:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 2, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000108,
+    "name": "ともに歩んだ80年、明日へ届ける感謝の響き",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "ともに歩んだ80年、明日へ届ける感謝の響き",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:45頃)で打ち上げられるベスビアス超大型スターマイン「ともに歩んだ80年、明日へ届ける感謝の響き」(越後製菓協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:45頃打上げ。越後製菓協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"ともに歩んだ80年、明日へ届ける感謝の響き\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 越後製菓, launched around 19:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 2, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000109,
+    "name": "真夏のイルミネーション",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "真夏のイルミネーション",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:45頃)で打ち上げられる超大型スーパーベスビアス「真夏のイルミネーション」(ユニオンツール協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:45頃打上げ。ユニオンツール協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"真夏のイルミネーション\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by ユニオンツール, launched around 19:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000110,
+    "name": "人が想い描く未来、その先へ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "人が想い描く未来、その先へ",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:45頃)で打ち上げられるベスビアス大スターマイン「人が想い描く未来、その先へ」(クレスコ協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:45頃打上げ。クレスコ協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"人が想い描く未来、その先へ\" is a traditional Vesuvius-style grand starmine, sponsored by クレスコ, launched around 19:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000111,
+    "name": "心ひとつに",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "心ひとつに",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:45頃)で打ち上げられるベスビアス超大型スターマイン「心ひとつに」(TeNYテレビ新潟協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:45頃打上げ。TeNYテレビ新潟協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"心ひとつに\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by TeNYテレビ新潟, launched around 19:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 2, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000112,
+    "name": "未来へ～平和を願って～",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "未来へ～平和を願って～",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 19:45頃)で打ち上げられる10号20発・20号3発「未来へ～平和を願って～」(リバーサイド千秋・アピタ長岡店・JTB協賛)。10号20発・20号3発を打ち上げる協賛プログラムで、大輪が連続して夜空に開く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 19:45頃打上げ。リバーサイド千秋・アピタ長岡店・JTB協賛の10号20発・20号3発。",
+      "description_en_long": "\"未来へ～平和を願って～\" is a program of large shells (10号20発・20号3発), sponsored by リバーサイド千秋・アピタ長岡店・JTB, launched around 19:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A program of large shells (10号20発・20号3発) at the Nagaoka Fireworks Show (August 2, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000113,
+    "name": "ふるさとの四季",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "ふるさとの四季",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:00頃)で打ち上げられる超大型ワイドスターマイン「ふるさとの四季」(岩塚製菓グループ協賛)。広い打上げ幅を活かした超大型スターマインで、横一線に広がる光のパノラマが見どころ。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:00頃打上げ。岩塚製菓グループ協賛の超大型ワイドスターマイン。",
+      "description_en_long": "\"ふるさとの四季\" is a super-wide starmine spread across a broad launch front, sponsored by 岩塚製菓グループ, launched around 20:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A super-wide starmine spread across a broad launch front at the Nagaoka Fireworks Show (August 2, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000114,
+    "name": "福田グループスピリット～100年先も誠実～",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "福田グループスピリット～100年先も誠実～",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:00頃)で打ち上げられる超大型スーパーベスビアス「福田グループスピリット～100年先も誠実～」(福田グループ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:00頃打上げ。福田グループ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"福田グループスピリット～100年先も誠実～\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 福田グループ, launched around 20:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000115,
+    "name": "感謝の絆、未来への輝き",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "感謝の絆、未来への輝き",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:00頃)で打ち上げられるベスビアス超大型スターマイン「感謝の絆、未来への輝き」(日産サティオ新潟西協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:00頃打上げ。日産サティオ新潟西協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"感謝の絆、未来への輝き\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 日産サティオ新潟西, launched around 20:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 2, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000116,
+    "name": "すべての『いのち』にありがとう",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "すべての『いのち』にありがとう",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:00頃)で打ち上げられるスペシャルスターマイン「すべての『いのち』にありがとう」(長岡市仏教会・立正佼成会長岡教会協賛)。テーマに合わせて構成されたスターマインで、音楽や色彩の演出とともに夜空を彩る。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:00頃打上げ。長岡市仏教会・立正佼成会長岡教会協賛のスペシャルスターマイン。",
+      "description_en_long": "\"すべての『いのち』にありがとう\" is a themed starmine staged with music and color, sponsored by 長岡市仏教会・立正佼成会長岡教会, launched around 20:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A themed starmine staged with music and color at the Nagaoka Fireworks Show (August 2, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000117,
+    "name": "AIRMANスパーキング",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "AIRMANスパーキング",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:00頃)で打ち上げられる超大型スーパーベスビアス「AIRMANスパーキング」(AIRMAN協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:00頃打上げ。AIRMAN協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"AIRMANスパーキング\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by AIRMAN, launched around 20:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000118,
+    "name": "故郷はひとつ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "故郷はひとつ",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:15頃)で打ち上げられる花火「故郷はひとつ」(協賛企業一同協賛)。多数の協賛により打ち上げられる特別プログラム。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:15頃打上げ。協賛企業一同協賛の花火。",
+      "description_en_long": "\"故郷はひとつ\" is a special program supported by many sponsors, sponsored by 協賛企業一同, launched around 20:15 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A special program supported by many sponsors at the Nagaoka Fireworks Show (August 2, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000119,
+    "name": "インプレッション・トリップ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "インプレッション・トリップ",
+      "description_ja_long": "長岡まつり大花火大会(8月2日・3日 20:15頃)で打ち上げられるベスビアス大スターマイン「インプレッション・トリップ」(クラブツーリズム協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日・3日 20:15頃打上げ。クラブツーリズム協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"インプレッション・トリップ\" is a traditional Vesuvius-style grand starmine, sponsored by クラブツーリズム, launched around 20:15 on August 2nd and 3rd at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2nd and 3rd, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000120,
+    "name": "光差す明日へ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "光差す明日へ",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:15頃)で打ち上げられる超大型スーパーベスビアス「光差す明日へ」(伊藤建設グループ・宮下電設協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:15頃打上げ。伊藤建設グループ・宮下電設協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"光差す明日へ\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 伊藤建設グループ・宮下電設, launched around 20:15 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000121,
+    "name": "挑戦の精神",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "挑戦の精神",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:15頃)で打ち上げられるベスビアス大スターマイン「挑戦の精神」(カナデビア・カナデビアE&E協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:15頃打上げ。カナデビア・カナデビアE&E協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"挑戦の精神\" is a traditional Vesuvius-style grand starmine, sponsored by カナデビア・カナデビアE&E, launched around 20:15 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000122,
+    "name": "夜空に輝くプレミアム",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "夜空に輝くプレミアム",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:15頃)で打ち上げられる超大型スーパーベスビアス「夜空に輝くプレミアム」(セブン-イレブン・セブン銀行協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:15頃打上げ。セブン-イレブン・セブン銀行協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"夜空に輝くプレミアム\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by セブン-イレブン・セブン銀行, launched around 20:15 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000123,
+    "name": "エコの華",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "エコの華",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:30頃)で打ち上げられるベスビアス超大型スターマイン「エコの華」(ナンバグループ協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:30頃打上げ。ナンバグループ協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"エコの華\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by ナンバグループ, launched around 20:30 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 2, around 20:30).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000124,
+    "name": "光ある美しく豊かな世界へ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "光ある美しく豊かな世界へ",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:30頃)で打ち上げられる超大型スーパーベスビアス「光ある美しく豊かな世界へ」(トクサイ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:30頃打上げ。トクサイ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"光ある美しく豊かな世界へ\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by トクサイ, launched around 20:30 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:30).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000125,
+    "name": "夏の思い出",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "夏の思い出",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:30頃)で打ち上げられるベスビアス大スターマイン「夏の思い出」(コメリ協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:30頃打上げ。コメリ協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"夏の思い出\" is a traditional Vesuvius-style grand starmine, sponsored by コメリ, launched around 20:30 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2, around 20:30).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000126,
+    "name": "スプラッシュファイヤー炎の舞",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "スプラッシュファイヤー炎の舞",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:40頃)で打ち上げられる超大型ミラクルスターマイン「スプラッシュファイヤー炎の舞」(ワタナベグループ協賛)。多彩な演出を織り込んだ超大型スターマインで、変化に富んだ光の展開が楽しめる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:40頃打上げ。ワタナベグループ協賛の超大型ミラクルスターマイン。",
+      "description_en_long": "\"スプラッシュファイヤー炎の舞\" is a super-size starmine with varied, theatrical effects, sponsored by ワタナベグループ, launched around 20:40 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A super-size starmine with varied, theatrical effects at the Nagaoka Fireworks Show (August 2, around 20:40).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000127,
+    "name": "ホテルニューオータニ長岡感謝の大輪",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "ホテルニューオータニ長岡感謝の大輪",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:40頃)で打ち上げられるベスビアス大スターマイン「ホテルニューオータニ長岡感謝の大輪」(ホテルニューオータニ長岡協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:40頃打上げ。ホテルニューオータニ長岡協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"ホテルニューオータニ長岡感謝の大輪\" is a traditional Vesuvius-style grand starmine, sponsored by ホテルニューオータニ長岡, launched around 20:40 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2, around 20:40).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000128,
+    "name": "長岡とともに技大、感謝の50年",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "長岡とともに技大、感謝の50年",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:45頃)で打ち上げられる超大型スーパーベスビアス「長岡とともに技大、感謝の50年」(長岡技術科学大学開学50周年記念花火協賛者一同協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:45頃打上げ。長岡技術科学大学開学50周年記念花火協賛者一同協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"長岡とともに技大、感謝の50年\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 長岡技術科学大学開学50周年記念花火協賛者一同, launched around 20:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000129,
+    "name": "クリーンエナジー",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "クリーンエナジー",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:45頃)で打ち上げられる超大型スーパーベスビアス「クリーンエナジー」(石油資源開発協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:45頃打上げ。石油資源開発協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"クリーンエナジー\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 石油資源開発, launched around 20:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000130,
+    "name": "つながり",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "つながり",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 20:45頃)で打ち上げられる超大型スーパーベスビアス「つながり」(ネクスコ東日本長岡管理事務所グループ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 20:45頃打上げ。ネクスコ東日本長岡管理事務所グループ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"つながり\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by ネクスコ東日本長岡管理事務所グループ, launched around 20:45 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 20:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000131,
+    "name": "鉄にいのち、ひとに未来",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "鉄にいのち、ひとに未来",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 21:00頃)で打ち上げられる超大型スーパーベスビアス「鉄にいのち、ひとに未来」(北越メタル協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 21:00頃打上げ。北越メタル協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"鉄にいのち、ひとに未来\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 北越メタル, launched around 21:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000132,
+    "name": "龍華～未来へ続く日の光～",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "龍華～未来へ続く日の光～",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 21:00頃)で打ち上げられるベスビアス大スターマイン「龍華～未来へ続く日の光～」(目崎グループ協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 21:00頃打上げ。目崎グループ協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"龍華～未来へ続く日の光～\" is a traditional Vesuvius-style grand starmine, sponsored by 目崎グループ, launched around 21:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 2, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000133,
+    "name": "感謝",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "感謝",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 21:00頃)で打ち上げられる超大型スーパーベスビアス「感謝」(SBFグループ・三共土地開発協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 21:00頃打上げ。SBFグループ・三共土地開発協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"感謝\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by SBFグループ・三共土地開発, launched around 21:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000134,
+    "name": "皆さまへ創業百周年の感謝を込めて",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "皆さまへ創業百周年の感謝を込めて",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 21:00頃)で打ち上げられる超大型スーパーベスビアス「皆さまへ創業百周年の感謝を込めて」(ジェスクホリウチ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 21:00頃打上げ。ジェスクホリウチ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"皆さまへ創業百周年の感謝を込めて\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by ジェスクホリウチ, launched around 21:00 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 2, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000135,
+    "name": "君と花火と約束と",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "君と花火と約束と",
+      "description_ja_long": "長岡まつり大花火大会(8月2日 21:25頃)で打ち上げられるサプライズ花火「君と花火と約束と」(映画製作委員会協賛)。映画「君と花火と約束と」とタイアップした特別演出のサプライズ花火。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月2日 21:25頃打上げ。映画製作委員会協賛のサプライズ花火。",
+      "description_en_long": "\"君と花火と約束と\" is a surprise display tied to the film Kimi to Hanabi to Yakusoku to, sponsored by 映画製作委員会, launched around 21:25 on August 2 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A surprise display tied to the film kimi to hanabi to yakusoku to at the Nagaoka Fireworks Show (August 2, around 21:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000136,
+    "name": "上場記念花火アリガトウナガオカ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "上場記念花火アリガトウナガオカ",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:25頃)で打ち上げられるベスビアス超大型スターマイン「上場記念花火アリガトウナガオカ」(フラー協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:25頃打上げ。フラー協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"上場記念花火アリガトウナガオカ\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by フラー, launched around 19:25 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000137,
+    "name": "マンマのフルーツカーニバル",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "マンマのフルーツカーニバル",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:25頃)で打ち上げられる超大型スーパーベスビアス「マンマのフルーツカーニバル」(北陸学園協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:25頃打上げ。北陸学園協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"マンマのフルーツカーニバル\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 北陸学園, launched around 19:25 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000138,
+    "name": "水とともに",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "水とともに",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:25頃)で打ち上げられるスペシャルスターマイン「水とともに」(前澤工業ほか協賛)。テーマに合わせて構成されたスターマインで、音楽や色彩の演出とともに夜空を彩る。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:25頃打上げ。前澤工業ほか協賛のスペシャルスターマイン。",
+      "description_en_long": "\"水とともに\" is a themed starmine staged with music and color, sponsored by 前澤工業ほか, launched around 19:25 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A themed starmine staged with music and color at the Nagaoka Fireworks Show (August 3, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000139,
+    "name": "つながれ！～モノづくりの未来へ～",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "つながれ！～モノづくりの未来へ～",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:25頃)で打ち上げられる超大型スーパーベスビアス「つながれ！～モノづくりの未来へ～」(シマキュウグループ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:25頃打上げ。シマキュウグループ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"つながれ！～モノづくりの未来へ～\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by シマキュウグループ, launched around 19:25 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000140,
+    "name": "千人鮮色、ありがとうの花",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "千人鮮色、ありがとうの花",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:25頃)で打ち上げられるベスビアス超大型スターマイン「千人鮮色、ありがとうの花」(高田建築事務所と愉快な仲間たち協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:25頃打上げ。高田建築事務所と愉快な仲間たち協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"千人鮮色、ありがとうの花\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 高田建築事務所と愉快な仲間たち, launched around 19:25 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 19:25).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000141,
+    "name": "この空の花",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "この空の花",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:45頃)で打ち上げられる花火「この空の花」(協賛企業一同協賛)。多数の協賛により打ち上げられる特別プログラム。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:45頃打上げ。協賛企業一同協賛の花火。",
+      "description_en_long": "\"この空の花\" is a special program supported by many sponsors, sponsored by 協賛企業一同, launched around 19:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A special program supported by many sponsors at the Nagaoka Fireworks Show (August 3, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000142,
+    "name": "燃ゆる華心",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "燃ゆる華心",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:45頃)で打ち上げられるベスビアス大スターマイン「燃ゆる華心」(コロナ協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:45頃打上げ。コロナ協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"燃ゆる華心\" is a traditional Vesuvius-style grand starmine, sponsored by コロナ, launched around 19:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 3, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000143,
+    "name": "アルプスアルパイン・シャイニングスター",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "アルプスアルパイン・シャイニングスター",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:45頃)で打ち上げられる超大型スーパーベスビアス「アルプスアルパイン・シャイニングスター」(アルプスアルパイングループ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:45頃打上げ。アルプスアルパイングループ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"アルプスアルパイン・シャイニングスター\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by アルプスアルパイングループ, launched around 19:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000144,
+    "name": "信濃川の夕涼み",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "信濃川の夕涼み",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:45頃)で打ち上げられるスターマイン「信濃川の夕涼み」(イオン長岡店・専門店街Well協賛)。速射連発花火。次々と打ち上がる花火が途切れなく夜空を彩る。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:45頃打上げ。イオン長岡店・専門店街Well協賛のスターマイン。",
+      "description_en_long": "\"信濃川の夕涼み\" is a rapid-fire starmine, sponsored by イオン長岡店・専門店街Well, launched around 19:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A rapid-fire starmine at the Nagaoka Fireworks Show (August 3, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000145,
+    "name": "あなたとずっとこの空と",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "あなたとずっとこの空と",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:45頃)で打ち上げられる超大型スーパーベスビアス「あなたとずっとこの空と」(岡三にいがた証券協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:45頃打上げ。岡三にいがた証券協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"あなたとずっとこの空と\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 岡三にいがた証券, launched around 19:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000146,
+    "name": "金燦、銀燦",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "金燦、銀燦",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 19:45頃)で打ち上げられるベスビアス超大型スターマイン「金燦、銀燦」(伊丹自動車ほか協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 19:45頃打上げ。伊丹自動車ほか協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"金燦、銀燦\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 伊丹自動車ほか, launched around 19:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 19:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000147,
+    "name": "安心と感動に満ちた世界と未来のために",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "安心と感動に満ちた世界と未来のために",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:00頃)で打ち上げられる超大型ワイドスターマイン「安心と感動に満ちた世界と未来のために」(日本精機グループ協賛)。広い打上げ幅を活かした超大型スターマインで、横一線に広がる光のパノラマが見どころ。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:00頃打上げ。日本精機グループ協賛の超大型ワイドスターマイン。",
+      "description_en_long": "\"安心と感動に満ちた世界と未来のために\" is a super-wide starmine spread across a broad launch front, sponsored by 日本精機グループ, launched around 20:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A super-wide starmine spread across a broad launch front at the Nagaoka Fireworks Show (August 3, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000148,
+    "name": "太陽の輝き",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "太陽の輝き",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:00頃)で打ち上げられるベスビアス超大型スターマイン「太陽の輝き」(太陽工機協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:00頃打上げ。太陽工機協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"太陽の輝き\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 太陽工機, launched around 20:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000149,
+    "name": "子供たちの未来のために",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "子供たちの未来のために",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:00頃)で打ち上げられる超大型スーパーベスビアス「子供たちの未来のために」(スプリックス協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:00頃打上げ。スプリックス協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"子供たちの未来のために\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by スプリックス, launched around 20:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000150,
+    "name": "ともに創る未来へ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "ともに創る未来へ",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:00頃)で打ち上げられるベスビアス超大型スターマイン「ともに創る未来へ」(ヤマト運輸長岡主管支店協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:00頃打上げ。ヤマト運輸長岡主管支店協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"ともに創る未来へ\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by ヤマト運輸長岡主管支店, launched around 20:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000151,
+    "name": "酔火連発 尺玉の響",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "酔火連発 尺玉の響",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:00頃)で打ち上げられる10号28発「酔火連発 尺玉の響」(酔火連協賛)。10号28発を打ち上げる協賛プログラムで、大輪が連続して夜空に開く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:00頃打上げ。酔火連協賛の10号28発。",
+      "description_en_long": "\"酔火連発 尺玉の響\" is a program of large shells (10号28発), sponsored by 酔火連, launched around 20:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A program of large shells (10号28発) at the Nagaoka Fireworks Show (August 3, around 20:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000152,
+    "name": "HOPE TO THE FUTURE～未来へ～",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "HOPE TO THE FUTURE～未来へ～",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:15頃)で打ち上げられる花火「HOPE TO THE FUTURE～未来へ～」(協賛企業一同協賛)。多数の協賛により打ち上げられる特別プログラム。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:15頃打上げ。協賛企業一同協賛の花火。",
+      "description_en_long": "\"HOPE TO THE FUTURE～未来へ～\" is a special program supported by many sponsors, sponsored by 協賛企業一同, launched around 20:15 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A special program supported by many sponsors at the Nagaoka Fireworks Show (August 3, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000153,
+    "name": "輝け愛花火",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "輝け愛花火",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:15頃)で打ち上げられるスターマイン「輝け愛花火」(崇徳厚生事業団職員有志一同協賛)。速射連発花火。次々と打ち上がる花火が途切れなく夜空を彩る。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:15頃打上げ。崇徳厚生事業団職員有志一同協賛のスターマイン。",
+      "description_en_long": "\"輝け愛花火\" is a rapid-fire starmine, sponsored by 崇徳厚生事業団職員有志一同, launched around 20:15 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A rapid-fire starmine at the Nagaoka Fireworks Show (August 3, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000154,
+    "name": "天空華宴",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "天空華宴",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:15頃)で打ち上げられるベスビアス超大型スターマイン「天空華宴」(大石組協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:15頃打上げ。大石組協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"天空華宴\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 大石組, launched around 20:15 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000155,
+    "name": "mirai",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "mirai",
+      "title_en": "mirai",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:15頃)で打ち上げられるベスビアス大スターマイン「mirai」(扉-tobira-協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:15頃打上げ。扉-tobira-協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"mirai\" is a traditional Vesuvius-style grand starmine, sponsored by 扉-tobira-, launched around 20:15 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 3, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000156,
+    "name": "駆け抜ける丙午 60-60",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "駆け抜ける丙午 60-60",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:15頃)で打ち上げられる10号60連発＆ベスビアス大スターマイン「駆け抜ける丙午 60-60」(長岡高校昭和60年卒還暦花火の会協賛)。10号60連発＆ベスビアス大スターマインを打ち上げる協賛プログラムで、大輪が連続して夜空に開く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:15頃打上げ。長岡高校昭和60年卒還暦花火の会協賛の10号60連発＆ベスビアス大スターマイン。",
+      "description_en_long": "\"駆け抜ける丙午 60-60\" is a program of large shells (10号60連発＆ベスビアス大スターマイン), sponsored by 長岡高校昭和60年卒還暦花火の会, launched around 20:15 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A program of large shells (10号60連発＆ベスビアス大スターマイン) at the Nagaoka Fireworks Show (August 3, around 20:15).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000157,
+    "name": "No Attack,No Chance",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "No Attack,No Chance",
+      "title_en": "No Attack,No Chance",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:30頃)で打ち上げられるベスビアス超大型スターマイン「No Attack,No Chance」(ピカイチ・INSIGHT LAB協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:30頃打上げ。ピカイチ・INSIGHT LAB協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"No Attack,No Chance\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by ピカイチ・INSIGHT LAB, launched around 20:30 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 20:30).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000158,
+    "name": "平和への誓い",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "平和への誓い",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:30頃)で打ち上げられるスペシャルスターマイン「平和への誓い」(創価学会協賛)。テーマに合わせて構成されたスターマインで、音楽や色彩の演出とともに夜空を彩る。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:30頃打上げ。創価学会協賛のスペシャルスターマイン。",
+      "description_en_long": "\"平和への誓い\" is a themed starmine staged with music and color, sponsored by 創価学会, launched around 20:30 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A themed starmine staged with music and color at the Nagaoka Fireworks Show (August 3, around 20:30).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000159,
+    "name": "夜空に感謝の花束",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "夜空に感謝の花束",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:30頃)で打ち上げられるベスビアス超大型スターマイン「夜空に感謝の花束」(明治安田協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:30頃打上げ。明治安田協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"夜空に感謝の花束\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 明治安田, launched around 20:30 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 20:30).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000160,
+    "name": "世界への躍動",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "世界への躍動",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:40頃)で打ち上げられる超大型ミラクルスターマイン「世界への躍動」(ヨネックス協賛)。多彩な演出を織り込んだ超大型スターマインで、変化に富んだ光の展開が楽しめる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:40頃打上げ。ヨネックス協賛の超大型ミラクルスターマイン。",
+      "description_en_long": "\"世界への躍動\" is a super-size starmine with varied, theatrical effects, sponsored by ヨネックス, launched around 20:40 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A super-size starmine with varied, theatrical effects at the Nagaoka Fireworks Show (August 3, around 20:40).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000161,
+    "name": "大河の夕景",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "大河の夕景",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:40頃)で打ち上げられるベスビアス超大型スターマイン「大河の夕景」(高野不動産グループ協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:40頃打上げ。高野不動産グループ協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"大河の夕景\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by 高野不動産グループ, launched around 20:40 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 20:40).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000162,
+    "name": "99年分のありがとうを込めて",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "99年分のありがとうを込めて",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:45頃)で打ち上げられる超大型スーパーベスビアス「99年分のありがとうを込めて」(ナカザワグループ協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:45頃打上げ。ナカザワグループ協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"99年分のありがとうを込めて\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by ナカザワグループ, launched around 20:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 20:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000163,
+    "name": "ラブラブファイヤー2026",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "ラブラブファイヤー2026",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:45頃)で打ち上げられる超大型スーパーベスビアス「ラブラブファイヤー2026」(アークベルグループ長岡ベルナール協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:45頃打上げ。アークベルグループ長岡ベルナール協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"ラブラブファイヤー2026\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by アークベルグループ長岡ベルナール, launched around 20:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 20:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000164,
+    "name": "アイデアと技術の宝石箱",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "アイデアと技術の宝石箱",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 20:45頃)で打ち上げられる超大型スーパーベスビアス「アイデアと技術の宝石箱」(大森機械工業長岡工場協賛)。ベスビアスの中でも最大級の打上げ規模を誇る超大型スターマインで、視界いっぱいに光が広がる。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 20:45頃打上げ。大森機械工業長岡工場協賛の超大型スーパーベスビアス。",
+      "description_en_long": "\"アイデアと技術の宝石箱\" is the largest class of Vesuvius starmine, filling the entire field of view, sponsored by 大森機械工業長岡工場, launched around 20:45 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "The largest class of vesuvius starmine, filling the entire field of view at the Nagaoka Fireworks Show (August 3, around 20:45).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000165,
+    "name": "未来飛翔",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "未来飛翔",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 21:00頃)で打ち上げられる7号12発・10号12発「未来飛翔」(長岡市共同受注グループ「けやき」協賛)。7号12発・10号12発を打ち上げる協賛プログラムで、大輪が連続して夜空に開く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 21:00頃打上げ。長岡市共同受注グループ「けやき」協賛の7号12発・10号12発。",
+      "description_en_long": "\"未来飛翔\" is a program of large shells (7号12発・10号12発), sponsored by 長岡市共同受注グループ「けやき」, launched around 21:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A program of large shells (7号12発・10号12発) at the Nagaoka Fireworks Show (August 3, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000166,
+    "name": "新潟の未来を見つめ続けて",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "新潟の未来を見つめ続けて",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 21:00頃)で打ち上げられるベスビアス超大型スターマイン「新潟の未来を見つめ続けて」(ダイア建設新潟協賛)。火山の噴火にたとえられる長岡伝統の超大型スターマインで、湧き上がる光の奔流が夜空を焦がす。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 21:00頃打上げ。ダイア建設新潟協賛のベスビアス超大型スターマイン。",
+      "description_en_long": "\"新潟の未来を見つめ続けて\" is Nagaoka's traditional Vesuvius super starmine, a volcanic torrent of light, sponsored by ダイア建設新潟, launched around 21:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "Nagaoka's traditional vesuvius super starmine, a volcanic torrent of light at the Nagaoka Fireworks Show (August 3, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000167,
+    "name": "パラダイス・イン・ザ・スカイ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "パラダイス・イン・ザ・スカイ",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 21:00頃)で打ち上げられるスターマイン「パラダイス・イン・ザ・スカイ」(スーパーセンタームサシ長岡店協賛)。速射連発花火。次々と打ち上がる花火が途切れなく夜空を彩る。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 21:00頃打上げ。スーパーセンタームサシ長岡店協賛のスターマイン。",
+      "description_en_long": "\"パラダイス・イン・ザ・スカイ\" is a rapid-fire starmine, sponsored by スーパーセンタームサシ長岡店, launched around 21:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A rapid-fire starmine at the Nagaoka Fireworks Show (August 3, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  },
+  {
+    "id": 9000168,
+    "name": "支社開設60周年 感謝を空へ 安心を未来へ",
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 2026,
+    "prefecture": "新潟県",
+    "priority": 900,
+    "description": {
+      "title_ja": "支社開設60周年 感謝を空へ 安心を未来へ",
+      "description_ja_long": "長岡まつり大花火大会(8月3日 21:00頃)で打ち上げられるベスビアス大スターマイン「支社開設60周年 感謝を空へ 安心を未来へ」(日本生命協賛)。長岡伝統のベスビアス型スターマインで、連射される花火が夜空に大きな光の柱を描く。信濃川河川敷の夜空を舞台に、慰霊と復興、平和への祈りを受け継ぐ長岡花火のプログラムの一つ。",
+      "description_ja_short": "8月3日 21:00頃打上げ。日本生命協賛のベスビアス大スターマイン。",
+      "description_en_long": "\"支社開設60周年 感謝を空へ 安心を未来へ\" is a traditional Vesuvius-style grand starmine, sponsored by 日本生命, launched around 21:00 on August 3 at the Nagaoka Festival Grand Fireworks Show over the Shinano River.",
+      "description_en_short": "A traditional vesuvius-style grand starmine at the Nagaoka Fireworks Show (August 3, around 21:00).",
+      "tags_ja": [
+        "花火",
+        "長岡花火"
+      ],
+      "tags_en": [
+        "Fireworks",
+        "Nagaoka"
+      ],
       "quality": "good",
       "url": "https://nagaokamatsuri.com/"
     }
