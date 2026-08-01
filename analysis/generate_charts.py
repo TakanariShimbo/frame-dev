@@ -61,7 +61,7 @@ ax.set_title("いいね数トップ10", color=INK, fontsize=13, pad=14, loc="lef
 savefig(fig, "chart_top_likes.png")
 
 # 3) クラスタ構成（full_report.md の分類に基づく）
-clusters = [("要望・指摘", 3), ("ネタ・#間違った使い方", 6), ("用途の拡張発見", 8),
+clusters = [("要望・指摘", 3), ("ネタ・#間違った使い方", 7), ("用途の拡張発見", 8),
             ("感想・絶賛", 18), ("運営アナウンス", 27), ("作品・山行記録", 28)]
 names, sizes = zip(*clusters)
 fig, ax = plt.subplots(figsize=(9, 4.6), facecolor=BG)
@@ -71,7 +71,7 @@ for b, v in zip(bars, sizes):
 style_ax(ax); ax.set_xticks([])
 ax.tick_params(axis="y", labelcolor=INK)
 ax.set_xlim(0, max(sizes) * 1.14)
-ax.set_title("投稿クラスタの構成（92件）", color=INK, fontsize=13, pad=14, loc="left")
+ax.set_title("投稿クラスタの構成（93件）", color=INK, fontsize=13, pad=14, loc="left")
 savefig(fig, "chart_clusters.png")
 
 print("done")
