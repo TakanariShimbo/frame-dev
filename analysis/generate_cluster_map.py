@@ -71,7 +71,7 @@ for i, r in enumerate(rows):
     if int(r["likes"] or 0) >= 80:
         ax.annotate(r["text"][:12] + "…", (xy[i, 0], xy[i, 1]), xytext=(0, 12),
                     textcoords="offset points", ha="center", color=INK, fontsize=9)
-ax.set_title("投稿内容のクラスタマップ（93件 / 点の大きさ＝いいね数）",
+ax.set_title("投稿内容のクラスタマップ（94件 / 点の大きさ＝いいね数）",
              color=INK, fontsize=13, pad=14, loc="left")
 ax.margins(0.10)
 ax.set_ylim(bottom=xy[:,1].min() - 1.6)

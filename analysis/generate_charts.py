@@ -71,7 +71,7 @@ for b, v in zip(bars, sizes):
 style_ax(ax); ax.set_xticks([])
 ax.tick_params(axis="y", labelcolor=INK)
 ax.set_xlim(0, max(sizes) * 1.14)
-ax.set_title("投稿クラスタの構成（93件）", color=INK, fontsize=13, pad=14, loc="left")
+ax.set_title("投稿クラスタの構成（94件）", color=INK, fontsize=13, pad=14, loc="left")
 savefig(fig, "chart_clusters.png")
 
 print("done")
