@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useModeT } from "../lib/useModeT";
 import { IconDownload, IconCaret, IconChevron, IconEye, IconEyeOff } from "./icons";
 import { nameLines, oneLineName, type ArLabel } from "../lib/labels";
 import { loadImage, canvasToJpegBlob, releaseCanvas, saveBlob } from "../lib/exportImage";
@@ -565,7 +565,7 @@ type StudioProps = {
 };
 
 export default function Studio({ photoUrl, initialLabels, initialSnapshot = null, onExit, onReselect, nextCount = 0, onNext }: StudioProps) {
-  const { t } = useTranslation();
+  const { t } = useModeT();
   // 復元用スタイル（一覧からの再編集時のみ non-null）。各stateの初期値に使う。
   const initStyle = initialSnapshot?.style;
 

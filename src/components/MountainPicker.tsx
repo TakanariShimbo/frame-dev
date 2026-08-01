@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useModeT } from "../lib/useModeT";
 import { IconSearch, IconMountain, IconPlus } from "./icons";
 import { searchMountains, loadDescriptionsFor, type MountainHit } from "../lib/mountains";
 import { buildLabels, type ArLabel, type PickedPlace } from "../lib/labels";
@@ -17,7 +17,7 @@ type Props = {
 
 // 山選び画面: 写真1枚ごとに通る。ホーム（写真選択）とは独立した専用ステップ。
 export default function MountainPicker({ photoUrl, photoIndex, photoTotal, onStart, onBoard }: Props) {
-  const { t } = useTranslation();
+  const { t } = useModeT();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<MountainHit[]>([]);
   const [selected, setSelected] = useState<PickedPlace[]>([]);
