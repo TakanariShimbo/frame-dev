@@ -25,6 +25,8 @@ const PREF_EN: Record<string, string> = {
   徳島県: "Tokushima", 香川県: "Kagawa", 愛媛県: "Ehime", 高知県: "Kochi", 福岡県: "Fukuoka",
   佐賀県: "Saga", 長崎県: "Nagasaki", 熊本県: "Kumamoto", 大分県: "Oita", 宮崎県: "Miyazaki",
   鹿児島県: "Kagoshima", 沖縄県: "Okinawa",
+  // フィーチャーエントリの「場所」欄（県名の代わりにイベント名を入れる場合）の英語表記
+  長岡花火: "Nagaoka Fireworks",
 };
 const prefEn = (pref: string) =>
   pref.split("/").map((p) => PREF_EN[p.trim()] ?? p.trim().replace(/[県府都道]$/, "")).join(" / ");
