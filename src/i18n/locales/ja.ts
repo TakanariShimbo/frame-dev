@@ -215,15 +215,15 @@ export default {
       tagUsageText: "文字",
     },
     title: {
-    sideSize: "上下のサイズ",
-    sideSizeAria: "上下（小見出し・標高）のサイズ",
+      sideSize: "補足サイズ",
+      sideSizeAria: "小見出し（場所）と標高のサイズ",
       enable: "中央に大きく題字を入れる",
       language: "言語",
       languageAria: "題字の言語",
       showSub: "小見出し（場所）",
       showElevation: "標高",
-      size: "サイズ",
-      sizeAria: "題字サイズ",
+      size: "山名サイズ",
+      sizeAria: "題字の山名サイズ",
       textColor: "文字の色",
       textColorAria: "題字の色",
       textShadow: "文字の影",
@@ -317,6 +317,11 @@ export default {
       proceedHint: "花火を1つ以上選んでください。",
     },
     studio: {
+      title: {
+        size: "演目名サイズ",
+        sizeAria: "題字の演目名サイズ",
+        sideSizeAria: "小見出し（場所）と年号のサイズ",
+      },
       theme: {
         reselect: "花火を選び直す",
         miyabi: { sub: "花火名を美しく", hint: "明朝体の演目名に英語表記を添える、まず選びたい王道の仕上がり。どんな写真にもなじむ。" },
