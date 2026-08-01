@@ -30,6 +30,7 @@ export default {
     instruction: "Choose the mountains to add to this photo (you can pick more than one).",
     searchPlaceholder: "Search by name (e.g. Mt. Fuji / Fuji)",
     searchLabel: "Search mountains",
+    featuredTag: "Featured",
     added: "Added",
     useAsIs: 'Use "{{query}}" as-is',
     freeInputHint: "Free text · huts, lakes, place names all OK",

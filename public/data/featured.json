@@ -1,0 +1,29 @@
+[
+  {
+    "id": 9000001,
+    "name": "長岡花火",
+    "name_kana": "ながおかはなび",
+    "name_en": "Nagaoka Fireworks",
+    "aliases": [
+      { "name": "長岡まつり大花火大会", "kana": "ながおかまつりおおはなびたいかい" },
+      { "name": "花火", "kana": "はなび" }
+    ],
+    "latitude": 37.4463,
+    "longitude": 138.8367,
+    "elevation_m": 650,
+    "prefecture": "新潟県",
+    "priority": 1000,
+    "description": {
+      "title_ja": "長岡花火",
+      "title_en": "Nagaoka Fireworks Festival",
+      "description_ja_long": "毎年8月2日・3日に新潟県長岡市の信濃川河川敷で開催される「長岡まつり大花火大会」。日本三大花火大会の一つに数えられる。1945年8月1日の長岡空襲からの復興を願い、慰霊と平和への祈りを込めて打ち上げられてきた歴史を持つ。夜空に直径約650mの大輪を咲かせる正三尺玉や、全長約2kmにわたって広がる復興祈願花火「フェニックス」は圧巻で、信濃川の川面を彩る光と音の共演が多くの観客を魅了する。",
+      "description_ja_short": "毎年8月2日・3日、信濃川河川敷で開催される日本三大花火の一つ。慰霊と復興の祈りを込めた正三尺玉とフェニックスが夜空を彩る。",
+      "description_en_long": "The Nagaoka Festival Grand Fireworks Show is held every August 2nd and 3rd along the Shinano River in Nagaoka, Niigata. Counted among Japan's three greatest fireworks displays, it began as a prayer for recovery and peace after the air raid of August 1, 1945. Highlights include the Shosanjakudama, a giant shell blooming roughly 650 meters across, and the Phoenix, a restoration-prayer display stretching about two kilometers along the riverbank.",
+      "description_en_short": "One of Japan's three greatest fireworks festivals, held August 2nd and 3rd on the Shinano River in Nagaoka as a prayer for peace and recovery.",
+      "tags_ja": ["花火", "夏", "新潟県", "祭り"],
+      "tags_en": ["Fireworks", "Summer", "Niigata", "Festival"],
+      "quality": "good",
+      "url": "https://nagaokamatsuri.com/"
+    }
+  }
+]

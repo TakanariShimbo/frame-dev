@@ -30,6 +30,7 @@ export default {
     instruction: "この写真にのせる山を選んでください（複数選べます）。",
     searchPlaceholder: "山名・読みで検索（例: 富士山 / ふじ）",
     searchLabel: "山名で検索",
+    featuredTag: "期間限定",
     added: "追加済み",
     useAsIs: "「{{query}}」をそのまま使う",
     freeInputHint: "自由入力 ・ 山小屋・池・地名などもOK",
