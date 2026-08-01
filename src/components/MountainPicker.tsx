@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IconSearch, IconMountain, IconPlus } from "./icons";
-import { searchMountains, loadDescriptionsFor, getFeaturedHits, type MountainHit } from "../lib/mountains";
+import { searchMountains, loadDescriptionsFor, type MountainHit } from "../lib/mountains";
 import { buildLabels, type ArLabel, type PickedPlace } from "../lib/labels";
 
 type Props = {
@@ -20,17 +20,6 @@ export default function MountainPicker({ photoUrl, photoIndex, photoTotal, onSta
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<MountainHit[]>([]);
-  // フィーチャー（期間限定）エントリ。検索を始める前の初期状態にだけ表示する。
-  const [featured, setFeatured] = useState<MountainHit[]>([]);
-  useEffect(() => {
-    let cancelled = false;
-    getFeaturedHits().then((hits) => {
-      if (!cancelled) setFeatured(hits);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
   const [selected, setSelected] = useState<PickedPlace[]>([]);
   const [loading, setLoading] = useState(false);
   // 自由入力の採番。辞書idと衝突しないよう負の値を使う。
@@ -124,9 +113,9 @@ export default function MountainPicker({ photoUrl, photoIndex, photoTotal, onSta
           />
         </div>
 
-        {(query.trim() ? results : featured).length > 0 && (
+        {results.length > 0 && (
           <ul className="pick-results">
-            {(query.trim() ? results : featured).map((m) => (
+            {results.map((m) => (
               <li key={m.id}>
                 <button
                   type="button"
