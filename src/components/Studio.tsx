@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useModeT } from "../lib/useModeT";
+import { formatElev, formatElevTitle } from "../lib/mode";
 import { IconDownload, IconCaret, IconChevron, IconEye, IconEyeOff } from "./icons";
 import { nameLines, oneLineName, type ArLabel } from "../lib/labels";
 import { loadImage, canvasToJpegBlob, releaseCanvas, saveBlob } from "../lib/exportImage";
@@ -24,6 +25,8 @@ const PREF_EN: Record<string, string> = {
   徳島県: "Tokushima", 香川県: "Kagawa", 愛媛県: "Ehime", 高知県: "Kochi", 福岡県: "Fukuoka",
   佐賀県: "Saga", 長崎県: "Nagasaki", 熊本県: "Kumamoto", 大分県: "Oita", 宮崎県: "Miyazaki",
   鹿児島県: "Kagoshima", 沖縄県: "Okinawa",
+  // フィーチャーエントリの「場所」欄（県名の代わりにイベント名を入れる場合）の英語表記
+  長岡花火: "Nagaoka Fireworks",
 };
 const prefEn = (pref: string) =>
   pref.split("/").map((p) => PREF_EN[p.trim()] ?? p.trim().replace(/[県府都道]$/, "")).join(" / ");
@@ -760,7 +763,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   // 指定言語のチップ文字列（高さ→場所→選択タグの順）。
   const capChips = (lb: ArLabel, lang: "ja" | "en"): string[] => {
     const chips: string[] = [];
-    if (capShowElev && lb.elevM != null) chips.push(`${Math.round(lb.elevM).toLocaleString()}m`);
+    if (capShowElev && lb.elevM != null) chips.push(formatElev(lb.elevM, lang === "en"));
     if (capShowLoc && lb.prefecture)
       chips.push(lang === "en" ? prefEn(lb.prefecture) : lb.prefecture.replace(/\//g, "・"));
     const tj = lb.tagsJa ?? [];
@@ -886,7 +889,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       titleShowOver && it.prefecture
         ? up(en ? prefEn(it.prefecture) : it.prefecture.replace(/\//g, "・"))
         : "";
-    const num = titleShowNum && it.elevM != null ? `${Math.round(it.elevM).toLocaleString()} ${en ? "M" : "m"}` : "";
+    const num = titleShowNum && it.elevM != null ? formatElevTitle(it.elevM, en) : "";
     return { over, main, num };
   };
 
@@ -899,7 +902,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const en = nameLines(lb.nameEn || lb.name).join("\n");
     const enSub = oneLineName(lb.nameEn || lb.name);
     // 標高なし（自由入力）の場合は標高部分だけ省いて表示する。
-    const elev = lb.elevM != null ? `${Math.round(lb.elevM).toLocaleString()}m` : "";
+    const elev = lb.elevM != null ? formatElev(lb.elevM) : "";
     switch (labelMode) {
       case "jaOnly":
         return { name: ja, sub: "" };

@@ -3,6 +3,7 @@ import { useModeT } from "../lib/useModeT";
 import { IconSearch, IconMountain, IconPlus } from "./icons";
 import { searchMountains, loadDescriptionsFor, type MountainHit } from "../lib/mountains";
 import { buildLabels, type ArLabel, type PickedPlace } from "../lib/labels";
+import { formatElev } from "../lib/mode";
 
 type Props = {
   // いま仕上げる写真。山を選んだらラベル列を返して仕上げ画面へ。
@@ -127,7 +128,7 @@ export default function MountainPicker({ photoUrl, photoIndex, photoTotal, onSta
                   <span className="pick-result-name">{m.name}</span>
                   <span className="pick-result-meta">
                     {m.id >= 9_000_000 ? `${t("mountainPicker.featuredTag")} ・ ` : ""}
-                    {Math.round(m.elevationM).toLocaleString()}m
+                    {formatElev(m.elevationM)}
                     {m.prefecture ? ` ・ ${m.prefecture.replace(/\//g, "・")}` : ""}
                   </span>
                   <span className="pick-result-add">{isSelected(m.id) ? t("mountainPicker.added") : <IconPlus size={16} />}</span>
@@ -188,7 +189,7 @@ export default function MountainPicker({ photoUrl, photoIndex, photoTotal, onSta
                     </span>
                   ) : (
                     m.elevationM != null && (
-                      <span className="pick-chip-elev">{Math.round(m.elevationM).toLocaleString()}m</span>
+                      <span className="pick-chip-elev">{formatElev(m.elevationM)}</span>
                     )
                   )}
                   <button
