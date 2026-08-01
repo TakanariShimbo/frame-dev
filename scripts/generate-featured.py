@@ -552,3 +552,36 @@ for title, m in merged.items():
 
 json.dump(entries, open("public/data/featured.json", "w"), ensure_ascii=False, indent=2)
 print(f"{len(entries)} entries written")
+
+# --- 解説一覧（日本語のみ）を docs/nagaoka-hanabi/descriptions.md に書き出す ---
+import os
+os.makedirs("docs/nagaoka-hanabi", exist_ok=True)
+by_name = {e["name"]: e for e in entries}
+md = ["# 長岡花火 解説一覧（日本語）", "",
+      "`public/data/featured.json` の解説を演目ごとにまとめたもの。",
+      "`python3 scripts/generate-featured.py` で featured.json とあわせて再生成される。", ""]
+
+md += ["## 主要演目", ""]
+for e in entries[:9]:
+    d = e["description"]
+    md += [f"### {e['name']}", "",
+           f"- **長め**: {d['description_ja_long']}",
+           f"- **短め**: {d['description_ja_short']}", ""]
+
+def day_section(day_label, items):
+    out = [f"## {day_label}のプログラム", ""]
+    seen = set()
+    for _day, time, typ, title, sponsor in items:
+        if title in seen or title not in by_name: continue
+        seen.add(title)
+        d = by_name[title]["description"]
+        out += [f"### {time}　{title}", "",
+                f"- 種別: {typ} ／ 協賛: {sponsor}",
+                f"- **長め**: {d['description_ja_long']}",
+                f"- **短め**: {d['description_ja_short']}", ""]
+    return out
+
+md += day_section("8月2日", P2)
+md += day_section("8月3日", [x for x in P3 if x[3] not in {t for _,_,_,t,_ in P2}])
+open("docs/nagaoka-hanabi/descriptions.md", "w").write("\n".join(md))
+print("docs/nagaoka-hanabi/descriptions.md written")
