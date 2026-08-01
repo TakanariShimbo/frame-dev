@@ -121,9 +121,9 @@ STORIES = {
   "越後製菓が創業80年の感謝を込める",
   "Echigo Seika, known for its rice crackers and mochi, marks 80 years of history with a resounding display of gratitude."),
  "真夏のイルミネーション": (
-  "冬に本社を彩るイルミネーションで知られるユニオンツールが、その光を真夏の夜空に咲かせる。",
+  "冬に長岡工場を彩るイルミネーションで知られるユニオンツールが、その光を真夏の夜空に咲かせる。",
   "冬の名物イルミネーションを真夏の夜空に",
-  "Union Tool, famous for the winter illuminations that adorn its headquarters, brings that glow to the midsummer night sky."),
+  "Union Tool, famous for the winter illuminations that adorn its Nagaoka plant, brings that glow to the midsummer night sky."),
  "人が想い描く未来、その先へ": (
   "人が想い描く未来のさらに先へ、という願いを掲げ、光の連なりが夜空の奥へと駆け上がる。",
   "想い描く未来のさらに先へ駆ける光",
