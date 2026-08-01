@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useModeT } from "../lib/useModeT";
-import { formatElev, formatElevTitle } from "../lib/mode";
+import { formatElev, formatElevTitle, getAppMode } from "../lib/mode";
 import { IconDownload, IconCaret, IconChevron, IconEye, IconEyeOff } from "./icons";
 import { nameLines, oneLineName, type ArLabel } from "../lib/labels";
 import { loadImage, canvasToJpegBlob, releaseCanvas, saveBlob } from "../lib/exportImage";
@@ -2276,7 +2276,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       aria-label={i === tplIdx ? t("studio.theme.finishWith", { sub: t(it.sub) }) : t("studio.theme.previewOf", { sub: t(it.sub) })}
                     >
                       {it.tpl ? (
-                        <img src={`${import.meta.env.BASE_URL}template-previews/${it.id}.jpg${TPL_PREVIEW_VER}`} alt={t(it.sub)} />
+                        <img src={`${import.meta.env.BASE_URL}template-previews/${getAppMode() === "hanabi" ? "hanabi/" : ""}${it.id}.jpg${TPL_PREVIEW_VER}`} alt={t(it.sub)} />
                       ) : (
                         <div className="tpl-card-custom">{t("studio.theme.customCard")}</div>
                       )}
@@ -2343,7 +2343,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           aria-label={off === 0 ? t("studio.theme.finishWith", { sub: t(it.sub) }) : t("studio.theme.previewOf", { sub: t(it.sub) })}
                         >
                           {it.tpl ? (
-                            <img src={`${import.meta.env.BASE_URL}template-previews/${it.id}.jpg${TPL_PREVIEW_VER}`} alt="" />
+                            <img src={`${import.meta.env.BASE_URL}template-previews/${getAppMode() === "hanabi" ? "hanabi/" : ""}${it.id}.jpg${TPL_PREVIEW_VER}`} alt="" />
                           ) : (
                             <div className="tpl-card-custom">{t("studio.theme.customCard")}</div>
                           )}
