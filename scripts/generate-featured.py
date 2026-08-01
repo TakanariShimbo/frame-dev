@@ -153,9 +153,9 @@ STORIES = {
   "すべてのいのちへの感謝と祈りを込めて",
   "A prayerful display from Nagaoka's Buddhist association, entrusting gratitude and remembrance for all life to its quiet light."),
  "AIRMANスパーキング": (
-  "建設機械ブランドAIRMANを擁する北越工業が、火花のように弾ける光で会場を沸かせる。",
+  "エンジンコンプレッサで知られる建機メーカーAIRMAN（旧北越工業）が、火花のように弾ける光で沸かせる。",
   "AIRMANブランドの火花のように弾ける光",
-  "Hokuetsu Industries, home of the AIRMAN construction machinery brand, rouses the crowd with light that bursts like flying sparks."),
+  "AIRMAN, the machinery maker formerly known as Hokuetsu Industries, rouses the crowd with light that bursts like flying sparks."),
  "故郷はひとつ": (
   "多数の協賛で打ち上げる合同プログラム。ふるさとへの想いをひとつにし、しっとりと夜空を彩る。",
   "ふるさとへの想いをひとつにする合同花火",
@@ -193,9 +193,9 @@ STORIES = {
   "水しぶきのような光と炎の舞",
   "A starmine built around dancing flames and light that bursts like flying spray, with big, sweeping motion as its highlight."),
  "ホテルニューオータニ長岡感謝の大輪": (
-  "会場からほど近い地元ホテルが、日頃の感謝を込めて打ち上げる、まっすぐで大ぶりな感謝の大輪。",
+  "長岡駅前に立つ地元のホテルが、日頃の感謝を込めて打ち上げる、まっすぐで大ぶりな感謝の大輪。",
   "地元ホテルが贈る感謝の大輪",
-  "The local Hotel New Otani Nagaoka, just steps from the venue, fires generous blooms of straightforward gratitude."),
+  "Hotel New Otani Nagaoka, standing right in front of Nagaoka Station, fires generous blooms of straightforward gratitude."),
  "長岡とともに技大、感謝の50年": (
   "長岡技術科学大学の開学50周年を記念し、長岡とともに歩んだ半世紀の感謝を夜空に刻む。",
   "技大開学50周年の感謝を夜空に刻む",
@@ -229,9 +229,9 @@ STORIES = {
   "映画タイアップの両日最後のサプライズ",
   "A surprise finale on both nights, presented in tie-up with the film Kimi to Hanabi to Yakusoku to, set against the Nagaoka fireworks."),
  "上場記念花火アリガトウナガオカ": (
-  "長岡発のIT企業フラーが株式上場を記念し、育ててくれた街へ「アリガトウナガオカ」を打ち上げる。",
+  "新潟に本社を置くIT企業フラーが株式上場を記念し、感謝の「アリガトウナガオカ」を夜空に掲げる。",
   "上場記念、育った街へのアリガトウ",
-  "Fuller, an IT company born in Nagaoka, celebrates its stock listing by firing a thank-you to the city that raised it."),
+  "Fuller, an IT company headquartered in Niigata, celebrates its stock listing by firing a heartfelt thank-you, Arigato Nagaoka, into the sky."),
  "マンマのフルーツカーニバル": (
   "調理や製菓を学ぶ北陸学園が贈る、果物を山盛りにしたようなカラフルで甘い光のカーニバル。",
   "果物を山盛りにしたようなカラフルな光",
@@ -345,9 +345,9 @@ STORIES = {
   "宝石箱を開けたような多彩な光",
   "Packaging-machine maker Omori opens a jewel box of ideas and engineering, spilling out light of every color."),
  "未来飛翔": (
-  "障害のある人の仕事を支える共同受注グループ「けやき」が、未来へ羽ばたく願いを打ち上げる。",
+  "地元の事業所が力を合わせる共同受注グループ「けやき」が、未来へ羽ばたく願いを夜空に打ち上げる。",
   "未来へ羽ばたく願いを込めた花火",
-  "Keyaki, a group supporting work opportunities for people with disabilities, launches its wish to soar into the future."),
+  "Keyaki, a joint group of local workplaces pooling their strength, launches its shared wish to soar into the future."),
  "新潟の未来を見つめ続けて": (
   "新潟の街づくりに携わる協賛社が、この地の未来を見つめ続ける決意を穏やかな光の連なりに込める。",
   "新潟の未来を見つめる決意を光に",
