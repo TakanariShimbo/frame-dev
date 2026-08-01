@@ -216,15 +216,15 @@ export default {
       tagUsageText: "Text",
     },
     title: {
-    sideSize: "Top & bottom size",
-    sideSizeAria: "Size of the top and bottom lines",
+      sideSize: "Sub size",
+      sideSizeAria: "Size of the location and elevation lines",
       enable: "Add a large centered title",
       language: "Language",
       languageAria: "Title language",
       showSub: "Subheading (location)",
       showElevation: "Elevation",
-      size: "Size",
-      sizeAria: "Title size",
+      size: "Name size",
+      sizeAria: "Title name size",
       textColor: "Text color",
       textColorAria: "Title color",
       textShadow: "Text shadow",
@@ -318,6 +318,11 @@ export default {
       proceedHint: "Choose at least one fireworks program.",
     },
     studio: {
+      title: {
+        size: "Program name size",
+        sizeAria: "Title program name size",
+        sideSizeAria: "Size of the location and year lines",
+      },
       theme: {
         reselect: "Re-choose fireworks",
         miyabi: { sub: "Elegant program name", hint: "A serif program name with its English form — the classic finish that suits any photo." },
