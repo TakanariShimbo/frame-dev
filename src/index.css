@@ -1516,6 +1516,12 @@ button {
 .ar-title:active {
   cursor: grabbing;
 }
+/* 左揃え（titleAlign=left）。titlePos を左端アンカーにして左詰めで積む */
+.ar-title.is-left {
+  transform: translate(0, -50%);
+  align-items: flex-start;
+  text-align: left;
+}
 .ar-title-over {
   font-size: calc(1.95cqmax * var(--title-fs, 1) * var(--title-side-fs, 1));
   font-weight: var(--title-sub-fw, 500);
@@ -1539,6 +1545,16 @@ button {
   margin-right: calc(-0.3em * var(--title-ls, 1));
   margin-top: calc(0.7cqmax * var(--title-fs, 1) * var(--title-gap, 1));
 }
+.ar-title-tag {
+  /* サブテキスト（題字の下の一言）。焼き込みの tagFs = mainFs×0.2 と一致 */
+  white-space: pre-line;
+  font-size: calc(1.5cqmax * var(--title-fs, 1) * var(--title-side-fs, 1));
+  font-weight: var(--title-sub-fw, 500);
+  letter-spacing: 0.12em;
+  margin-right: -0.12em;
+  line-height: 1.4;
+  margin-top: calc(0.8cqmax * var(--title-fs, 1) * var(--title-gap, 1));
+}
 /* 選択枠（編集UIのみ・出力には焼き込まれない）。 */
 .ar-title::before {
   content: "";
@@ -1547,6 +1563,148 @@ button {
   border: 0.2cqmax solid rgba(214, 180, 106, 0.6);
   border-radius: 1cqmax;
   pointer-events: none;
+}
+
+/* --- イベントフレーム（山の日など。出力と一致させる寸法。変更しない） --- */
+.ar-event {
+  position: absolute;
+  font-family: var(--event-ff, inherit);
+  color: #fff;
+  text-shadow:
+    0 0 0.2cqmax var(--event-sh, transparent),
+    0 0.1cqmax 0.4cqmax var(--event-sh, transparent);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+.ar-event:active {
+  cursor: grabbing;
+}
+/* 選択枠（編集UIのみ・出力には焼き込まれない）。 */
+.ar-event::before {
+  content: "";
+  position: absolute;
+  inset: -1.2cqmax -1.6cqmax;
+  border: 0.2cqmax solid rgba(214, 180, 106, 0.6);
+  border-radius: 1cqmax;
+  pointer-events: none;
+}
+.ar-event-rule {
+  display: block;
+  height: 0.1cqmax;
+  min-height: 1px;
+  background: currentColor;
+}
+/* editorial: 左に日付＋下線 / 右に大見出し（右揃え） */
+.ar-event.is-editorial {
+  width: 92%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.ar-event-ed-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: calc(2.3cqmax * var(--event-fs, 1));
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  line-height: 1.7;
+}
+.ar-event-ed-date .ar-event-rule {
+  margin-top: 0.35em;
+  width: 3.2em;
+}
+.ar-event-ed-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  font-size: calc(2.8cqmax * var(--event-fs, 1));
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  margin-right: -0.28em;
+  line-height: 1.45;
+}
+.ar-event-ed-title .ar-event-rule {
+  align-self: flex-end;
+  margin-top: 0.35em;
+  margin-right: 0.28em; /* 字間ぶん右へ戻した文字端と揃える */
+  width: 3.2em;
+}
+/* fieldnote: 見出し＋日付＋情報リスト（アイコン付き） */
+.ar-event.is-fieldnote {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ar-event-fn-title {
+  display: flex;
+  flex-direction: column;
+  font-size: calc(4.2cqmax * var(--event-fs, 1));
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+.ar-event-fn-date {
+  margin-top: calc(1.45cqmax * var(--event-fs, 1));
+  font-size: calc(1.9cqmax * var(--event-fs, 1));
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  line-height: 1;
+}
+.ar-event-rows {
+  display: flex;
+  flex-direction: column;
+  gap: calc(2.65cqmax * var(--event-fs, 1));
+  margin-top: calc(3.35cqmax * var(--event-fs, 1));
+}
+.ar-event-row {
+  display: flex;
+  /* アイコンは行ブロック全体（座標などの複数行）の縦中央に置く */
+  align-items: center;
+  gap: calc(1.25cqmax * var(--event-fs, 1));
+  font-size: calc(1.65cqmax * var(--event-fs, 1));
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+.ar-event-row svg {
+  flex: none;
+  width: calc(2.25cqmax * var(--event-fs, 1));
+  height: calc(2.25cqmax * var(--event-fs, 1));
+}
+/* minimal: 日付・和文名・欧文名を小さく縦積み＋細い下線 */
+.ar-event.is-minimal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.ar-event-min-date {
+  font-size: calc(3cqmax * var(--event-fs, 1));
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  line-height: 1;
+}
+.ar-event-min-ja {
+  margin-top: calc(2.25cqmax * var(--event-fs, 1));
+  font-size: calc(2.4cqmax * var(--event-fs, 1));
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  line-height: 1;
+}
+.ar-event-min-en {
+  margin-top: calc(1.7cqmax * var(--event-fs, 1));
+  font-size: calc(1.5cqmax * var(--event-fs, 1));
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1;
+}
+.ar-event-min-rule {
+  margin-top: calc(3cqmax * var(--event-fs, 1));
+  width: calc(4.8cqmax * var(--event-fs, 1));
+  height: 0.08cqmax;
 }
 
 /* ============================================================================
@@ -1846,6 +2004,25 @@ button {
 }
 .studio-data-input--en {
   flex: 1 1 0;
+}
+/* 記念タブ・題字サブテキストの入力欄。縦積み（.studio-sec 直下）では自然な高さのまま、
+   横並びの行（.ar-fs-row 内）ではラベルの右いっぱいに広げる。
+   flex を無条件に付けると縦flexで高さが潰れてスクロール不能になるので行内に限定する。 */
+.studio-event-input {
+  flex: none;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.45;
+}
+.ar-fs-row .studio-event-input {
+  flex: 1 1 0;
+}
+/* パネル内の補足文（小さく淡く） */
+.studio-hint {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: var(--ink-sub);
+  line-height: 1.5;
 }
 .studio-data-elev {
   display: inline-flex;
