@@ -3920,19 +3920,23 @@ button {
   color: var(--gold);
 }
 
-/* --- テーマ ＋ 開催期間（外枠を縦線で分割） --- */
-.pcan-themebox {
+/* --- テーマ / 開催期間 / 応募条件 / 応募プラットフォーム（1つの外枠を罫線で2×2に分割） --- */
+.pcan-infobox {
   display: grid;
   grid-template-columns: 1.35fr 1fr;
   margin: clamp(20px, 3vw, 44px);
   border: 1px solid var(--pcan-border);
 }
-.pcan-theme {
+.pcan-infocell {
+  min-width: 0;
   padding: clamp(22px, 2.8vw, 44px);
 }
-.pcan-period {
-  padding: clamp(22px, 2.8vw, 44px);
+/* 2列グリッドなので、右列に縦線・2行目に横線を引くと格子が揃う */
+.pcan-infocell:nth-child(even) {
   border-left: 1px solid var(--pcan-border);
+}
+.pcan-infocell:nth-child(n + 3) {
+  border-top: 1px solid var(--pcan-border);
 }
 .pcan-theme-title {
   margin: 0 0 clamp(12px, 1.4vw, 18px);
@@ -3967,15 +3971,7 @@ button {
   color: var(--ink-sub);
 }
 
-/* --- 応募条件 / 応募プラットフォーム（＋指定アカウント）（2カラム） --- */
-.pcan-info {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: clamp(24px, 4vw, 72px);
-  padding: clamp(22px, 3vw, 44px) clamp(20px, 3vw, 44px) clamp(28px, 3.5vw, 52px);
-  border-top: 1px solid var(--pcan-border);
-  margin: 0 clamp(20px, 3vw, 44px);
-}
+/* --- 応募条件 / 応募プラットフォーム（＋指定アカウント） --- */
 .pcan-req {
   list-style: none;
   margin: 0;
@@ -4067,30 +4063,41 @@ a.pcan-mention-link:hover .pcan-mention-handle {
   letter-spacing: 0.06em;
 }
 
+/* --- 大セクション見出し（協賛ブランド / 景品で共通） --- */
+.pcan-sechead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 clamp(22px, 3vw, 40px);
+  text-align: center;
+}
+.pcan-sechead-eyebrow {
+  font-family: var(--font-latin);
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.pcan-sechead-line {
+  width: 54px;
+  height: 1px;
+  background: var(--gold-line);
+}
+.pcan-sechead-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(19px, 1.9vw, 25px);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
 /* --- 協賛ブランド --- */
 .pcan-sponsors-sec {
   padding: clamp(26px, 3.5vw, 50px) clamp(20px, 3vw, 44px);
   border-top: 1px solid var(--pcan-border);
-}
-.pcan-sponsors-head {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin: 0 0 clamp(20px, 2.5vw, 36px);
-}
-.pcan-sponsors-line {
-  flex: 1;
-  max-width: 180px;
-  height: 1px;
-  background: var(--gold-line);
-}
-.pcan-sponsors-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(16px, 1.6vw, 22px);
-  letter-spacing: 0.1em;
-  color: var(--ink);
 }
 .pcan-sponsors {
   list-style: none;
@@ -4159,36 +4166,6 @@ a.pcan-mention-link:hover .pcan-mention-handle {
   padding: clamp(26px, 3.5vw, 50px) clamp(20px, 3vw, 44px);
   border-top: 1px solid var(--pcan-border);
 }
-.pcan-prizes-head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 clamp(22px, 3vw, 40px);
-  text-align: center;
-}
-.pcan-prizes-eyebrow {
-  font-family: var(--font-latin);
-  font-size: clamp(11px, 0.9vw, 13px);
-  font-weight: 600;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-.pcan-prizes-line {
-  width: 54px;
-  height: 1px;
-  background: var(--gold-line);
-}
-.pcan-prizes-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(19px, 1.9vw, 25px);
-  letter-spacing: 0.06em;
-  color: var(--ink);
-}
-
 .pcan-prizes {
   list-style: none;
   margin: 0;
@@ -4234,6 +4211,22 @@ a.pcan-mention-link:hover .pcan-mention-handle {
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+/* 別々の製品2点のとき（imageLayout: "pair"）は重ねず、左右等分で対等に並べる */
+.pcan-prize-media-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(8px, 1vw, 14px);
+  align-items: start;
+}
+.pcan-prize-img-pair {
+  display: block;
+}
+.pcan-prize-media-pair img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
 }
 .pcan-prize-body {
@@ -4454,13 +4447,18 @@ a.pcan-mention-link:hover .pcan-mention-handle {
     font-size: clamp(30px, 9vw, 46px);
   }
 
-  /* テーマ＋期間: 1カラム（縦線→横線） */
-  .pcan-themebox {
+  /* テーマ/期間/応募条件/プラットフォーム: 1カラムに縦積み（格子→横線区切り） */
+  .pcan-infobox {
     grid-template-columns: 1fr;
     margin: 18px;
   }
-  .pcan-period {
+  .pcan-infocell {
+    padding: 22px;
+  }
+  .pcan-infocell:nth-child(even) {
     border-left: 0;
+  }
+  .pcan-infocell + .pcan-infocell {
     border-top: 1px solid var(--pcan-border);
   }
   .pcan-period-date {
@@ -4468,20 +4466,9 @@ a.pcan-mention-link:hover .pcan-mention-handle {
     white-space: normal; /* 枠内に収まらない日付は " — " で折り返す */
   }
 
-  /* 情報3カラム→縦積み */
-  .pcan-info {
-    grid-template-columns: 1fr;
-    gap: clamp(24px, 6vw, 34px);
-    margin: 0 18px;
-    padding: 22px 0 30px;
-  }
-
   /* 協賛: 縦積みの行（名称 ＋ アイコン ＋ ラベル ＋ 右矢印） */
   .pcan-sponsors-sec {
     padding: 26px 18px;
-  }
-  .pcan-sponsors-line {
-    max-width: 60px;
   }
   .pcan-sponsors {
     grid-template-columns: 1fr;
@@ -4530,6 +4517,13 @@ a.pcan-mention-link:hover .pcan-mention-handle {
     right: 10px;
     bottom: 10px;
   }
+  /* 並列2枚はスマホでも横2列のまま（縦に伸ばさないよう正方形にする） */
+  .pcan-prize-media-pair {
+    gap: 8px;
+  }
+  .pcan-prize-media-pair img {
+    aspect-ratio: 1 / 1;
+  }
   .pcan-prize-body {
     flex: none;
   }
@@ -4553,9 +4547,11 @@ a.pcan-mention-link:hover .pcan-mention-handle {
   .pcan-hero-copy {
     padding: 18px 14px 6px;
   }
-  .pcan-themebox,
-  .pcan-info {
+  .pcan-infobox {
     margin-left: 14px;
     margin-right: 14px;
+  }
+  .pcan-infocell {
+    padding: 18px 16px;
   }
 }
