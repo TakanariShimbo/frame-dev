@@ -4165,6 +4165,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           ))}
                         </div>
                       </div>
+                      <p className="studio-hint">
+                        {t(noteMode === "camera" ? "studio.note.contentHintCamera" : noteMode === "free" ? "studio.note.contentHintFree" : "studio.note.contentHintGallery")}
+                      </p>
                       {noteMode === "camera" ? (
                         <div className="studio-data-edit">
                           <span className="studio-data-head">{t("studio.note.exifHeading")}</span>
