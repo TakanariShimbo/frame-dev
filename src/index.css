@@ -2213,6 +2213,7 @@ button {
   font-weight: 700;
   color: var(--exif-main, #3c3c3c);
   letter-spacing: 0.01em;
+  line-height: 1.45;
 }
 .ar-exif-model .ar-exif-dim {
   font-weight: 500;
@@ -2223,6 +2224,7 @@ button {
   font-weight: 500;
   color: var(--exif-sub, #969696);
   letter-spacing: 0.04em;
+  line-height: 1.45;
 }
 /* 自由入力モード（山行記録など。書体は inline style で明朝/ゴシック切替） */
 .ar-exif-free {

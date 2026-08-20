@@ -670,6 +670,7 @@ export type StudioSnapshot = {
     // 追加分（旧スナップショットには無いので optional）: 帯のモード・自由入力・書体・地色
     // "gallery" は旧スナップショット用（現在は自由記述3行＋右寄せ＋広縁へ変換して読む）
     mode?: "camera" | "free" | "gallery";
+    date?: string; // 機材スタイルの撮影日行
     line3?: string;
     l3?: { bold: boolean; italic: boolean; dim: boolean };
     align?: "left" | "center" | "right"; // 自由記述の文字位置
@@ -852,6 +853,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [exifModel, setExifModel] = useState(initExif?.model ?? "");
   const [exifMaker, setExifMaker] = useState(initExif?.maker ?? "");
   const [exifSpec, setExifSpec] = useState(initExif?.spec ?? "");
+  const [exifDate, setExifDate] = useState(initExif?.date ?? ""); // 機材スタイルの撮影日行
   const [noteLine1, setNoteLine1] = useState(
     initExif?.line1 ?? (initFromGallery ? [initExif?.gTitle, initExif?.gDate].filter(Boolean).join(", ") : ""),
   );
@@ -887,6 +889,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       setExifModel((v) => v || si.model);
       setExifMaker((v) => v || si.maker);
       setExifSpec((v) => v || si.spec);
+      setExifDate((v) => v || si.date);
       shootingInfoRef.current = si; // 自由記述の「撮影情報を挿入」ボタン用に保持
       setHasShootingInfo(true);
     });
@@ -2034,40 +2037,56 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       const mainFs = Math.round(L * 0.019);
       const subFs = Math.round(L * 0.014);
       const cy = OH + nBand / 2; // translate 済み座標: 内側コンテンツの直下が帯
-      const gap = Math.round(mainFs * 0.8);
       ctx.save();
       ctx.textBaseline = "middle";
       if (noteMode === "camera") {
+        // 機材: 1行目=Shot on カメラ名 / 2行目=撮影設定 / 3行目=撮影日。空の行は省き、
+        // 位置（左/中央/右）と行送りは自由記述・プレビューと揃える。
         const segs: Array<{ text: string; font: string; color: string }> = [];
         if (exifModel || exifMaker) {
           segs.push({ text: "Shot on ", font: `500 ${mainFs}px ${noteFF}`, color: ink.sub });
           if (exifModel) segs.push({ text: `${exifModel} `, font: `700 ${mainFs}px ${noteFF}`, color: ink.main });
           if (exifMaker) segs.push({ text: exifMaker, font: `500 ${mainFs}px ${noteFF}`, color: ink.sub });
         }
-        const both = segs.length > 0 && !!exifSpec;
-        if (segs.length > 0) {
-          // 部分ごとに太さ・色が違うため、全体幅を測ってから左詰めで中央揃えに描く。
-          setLS(mainFs * 0.01); // プレビュー(.ar-exif-model の letter-spacing: 0.01em)と揃える
-          let total = 0;
-          for (const s of segs) {
-            ctx.font = s.font;
-            total += ctx.measureText(s.text).width;
-          }
-          let x = OW / 2 - total / 2;
+        type CamLine = { kind: "segs" } | { kind: "text"; text: string };
+        const lines1: CamLine[] = [];
+        if (segs.length) lines1.push({ kind: "segs" });
+        if (exifSpec) lines1.push({ kind: "text", text: exifSpec });
+        if (exifDate) lines1.push({ kind: "text", text: exifDate });
+        if (lines1.length) {
+          const gapY = Math.round(L * 0.0055); // プレビュー(.ar-exif-free の gap: 0.55cqmax)と一致
+          const boxH = (l: CamLine) => Math.round((l.kind === "segs" ? mainFs : subFs) * 1.45);
+          const total = lines1.reduce((a, l) => a + boxH(l), 0) + gapY * (lines1.length - 1);
+          let yy = cy - total / 2;
           ctx.textAlign = "left";
-          for (const s of segs) {
-            ctx.font = s.font;
-            ctx.fillStyle = s.color;
-            ctx.fillText(s.text, x, both ? cy - gap : cy);
-            x += ctx.measureText(s.text).width;
+          for (const l of lines1) {
+            const yMid = yy + boxH(l) / 2;
+            if (l.kind === "segs") {
+              // 部分ごとに太さ・色が違うため、全体幅を測ってから左詰めで描く。
+              setLS(mainFs * 0.01); // プレビュー(.ar-exif-model の letter-spacing: 0.01em)と揃える
+              let w = 0;
+              for (const s of segs) {
+                ctx.font = s.font;
+                w += ctx.measureText(s.text).width;
+              }
+              let x = noteAlign === "left" ? 0 : noteAlign === "center" ? OW / 2 - w / 2 : OW - w + mainFs * 0.01;
+              for (const s of segs) {
+                ctx.font = s.font;
+                ctx.fillStyle = s.color;
+                ctx.fillText(s.text, x, yMid);
+                x += ctx.measureText(s.text).width;
+              }
+            } else {
+              ctx.font = `500 ${subFs}px ${noteFF}`;
+              setLS(subFs * 0.04); // プレビュー(.ar-exif-spec の letter-spacing: 0.04em)と揃える
+              ctx.fillStyle = ink.sub;
+              const w = ctx.measureText(l.text).width;
+              const x = noteAlign === "left" ? 0 : noteAlign === "center" ? OW / 2 - w / 2 : OW - w + subFs * 0.04;
+              ctx.fillText(l.text, x, yMid);
+            }
+            yy += boxH(l) + gapY;
           }
-        }
-        if (exifSpec) {
-          ctx.textAlign = "center";
-          ctx.font = `500 ${subFs}px ${noteFF}`;
-          setLS(subFs * 0.04); // プレビュー(.ar-exif-spec の letter-spacing: 0.04em)と揃える
-          ctx.fillStyle = ink.sub;
-          ctx.fillText(exifSpec, OW / 2, both ? cy + gap : cy);
+          setLS(0);
         }
       } else {
         // 自由記述（最大3行）。位置は左/中央/右、行ごとに 太字/斜体/淡色を切り替えられる。
@@ -2314,6 +2333,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
             model: exifModel,
             maker: exifMaker,
             spec: exifSpec,
+            date: exifDate,
             mode: noteMode,
             line1: noteLine1,
             line2: noteLine2,
@@ -3388,7 +3408,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                     aria-hidden="true"
                   >
                     {noteMode === "camera" ? (
-                      <>
+                      <span className={`ar-exif-free is-${noteAlign}`}>
                         {(exifModel || exifMaker) && (
                           <span className="ar-exif-model">
                             <span className="ar-exif-dim">Shot on</span> <b>{exifModel}</b>
@@ -3396,7 +3416,8 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           </span>
                         )}
                         {exifSpec && <span className="ar-exif-spec">{exifSpec}</span>}
-                      </>
+                        {exifDate && <span className="ar-exif-spec">{exifDate}</span>}
+                      </span>
                     ) : (
                       <span className={`ar-exif-free is-${noteAlign}`}>
                         {(
@@ -4154,6 +4175,15 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       <p className="studio-hint">
                         {t(noteMode === "camera" ? "studio.note.contentHintCamera" : "studio.note.contentHintFree")}
                       </p>
+                      {/* 文字位置（左/中央/右）。機材・自由の両スタイル共通。左右は写真の端に揃う */}
+                      <div className="ar-fs-row">
+                        <span>{t("studio.note.freeAlign")}</span>
+                        <div className="seg" role="group" aria-label={t("studio.note.freeAlign")}>
+                          {([[t("studio.note.alignLeft"), "left"], [t("studio.note.alignCenter"), "center"], [t("studio.note.alignRight"), "right"]] as [string, "left" | "center" | "right"][]).map(([lab, v]) => (
+                            <button key={v} className={noteAlign === v ? "is-active" : ""} onClick={() => setNoteAlign(v)}>{lab}</button>
+                          ))}
+                        </div>
+                      </div>
                       {noteMode === "camera" ? (
                         <div className="studio-data-edit">
                           <span className="studio-data-head">{t("studio.note.exifHeading")}</span>
@@ -4184,18 +4214,18 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                             aria-label={t("studio.note.exifSpecAria")}
                             autoComplete="off"
                           />
+                          <input
+                            type="text"
+                            className="studio-data-input"
+                            value={exifDate}
+                            onChange={(e) => setExifDate(e.target.value)}
+                            placeholder={t("studio.note.exifDatePlaceholder")}
+                            aria-label={t("studio.note.exifDateAria")}
+                            autoComplete="off"
+                          />
                         </div>
                       ) : (
                         <>
-                          {/* 自由記述: 文字位置（左/中央/右）＋最大3行。EXIFの撮影情報も流し込める */}
-                          <div className="ar-fs-row">
-                            <span>{t("studio.note.freeAlign")}</span>
-                            <div className="seg" role="group" aria-label={t("studio.note.freeAlign")}>
-                              {([[t("studio.note.alignLeft"), "left"], [t("studio.note.alignCenter"), "center"], [t("studio.note.alignRight"), "right"]] as [string, "left" | "center" | "right"][]).map(([lab, v]) => (
-                                <button key={v} className={noteAlign === v ? "is-active" : ""} onClick={() => setNoteAlign(v)}>{lab}</button>
-                              ))}
-                            </div>
-                          </div>
                           <div className="studio-data-edit">
                             <span className="studio-data-head">{t("studio.note.freeHeading")}</span>
                             {(
