@@ -131,7 +131,7 @@ export default {
       caption: "解説",
       title: "題字",
       event: "記念",
-      frame: "サイズ",
+      frame: "構図",
       note: "記録",
     },
     label: {
