@@ -2602,34 +2602,6 @@ button {
   color: var(--ink-sub);
   opacity: 0.7;
 }
-/* カテゴリタブ。横スクロール可能な丸ボタン列 */
-.studio-size-cats {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  scrollbar-width: none;
-}
-.studio-size-cats::-webkit-scrollbar {
-  display: none;
-}
-.studio-size-cat {
-  flex: none;
-  font: inherit;
-  font-size: 12px;
-  color: var(--ink-sub);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 6px 14px;
-  cursor: pointer;
-}
-.studio-size-cat.is-active {
-  color: #1c1610;
-  font-weight: 600;
-  background: var(--gold, #d6b46a);
-  border-color: var(--gold, #d6b46a);
-}
 .studio-size-body {
   flex: 1;
   min-height: 0;

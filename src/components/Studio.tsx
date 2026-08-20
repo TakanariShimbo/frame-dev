@@ -578,16 +578,14 @@ const EVENT_ICON_KEYS = ["mountain", "elev", "pin"] as const;
 // 「切り抜き後の写真」が目標比率になるよう中央基準で cropInset を設定する
 // （余白・記録の帯は含まない。位置の微調整は「余白」タブの切り抜きで行う）。
 // name/uses は i18n キー。用途のサービス名は両言語共通だが語尾が違うため文言ごと持つ。
-type SizeCategory = "sns" | "photo" | "video";
-type SizePreset = { id: string; w: number; h: number; name: string; uses: string; cats: SizeCategory[] };
+type SizePreset = { id: string; w: number; h: number; name: string; uses: string };
 const SIZE_PRESETS: SizePreset[] = [
-  { id: "3-2", w: 3, h: 2, name: "studio.size.p32.name", uses: "studio.size.p32.uses", cats: ["photo", "sns"] },
-  { id: "1-1", w: 1, h: 1, name: "studio.size.p11.name", uses: "studio.size.p11.uses", cats: ["sns"] },
-  { id: "3-4", w: 3, h: 4, name: "studio.size.p34.name", uses: "studio.size.p34.uses", cats: ["sns", "photo"] },
-  { id: "9-16", w: 9, h: 16, name: "studio.size.p916.name", uses: "studio.size.p916.uses", cats: ["sns"] },
-  { id: "16-9", w: 16, h: 9, name: "studio.size.p169.name", uses: "studio.size.p169.uses", cats: ["video", "sns"] },
+  { id: "3-2", w: 3, h: 2, name: "studio.size.p32.name", uses: "studio.size.p32.uses" },
+  { id: "1-1", w: 1, h: 1, name: "studio.size.p11.name", uses: "studio.size.p11.uses" },
+  { id: "3-4", w: 3, h: 4, name: "studio.size.p34.name", uses: "studio.size.p34.uses" },
+  { id: "9-16", w: 9, h: 16, name: "studio.size.p916.name", uses: "studio.size.p916.uses" },
+  { id: "16-9", w: 16, h: 9, name: "studio.size.p169.name", uses: "studio.size.p169.uses" },
 ];
-const SIZE_CATS = ["all", "sns", "photo", "video"] as const;
 
 // スマホ判定（テーマ選択をスワイプ式に切り替える）。
 function useIsNarrow(): boolean {
@@ -1163,7 +1161,6 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   // --- 書き出しサイズ（アスペクト比プリセット） --- //
   const [sizeOpen, setSizeOpen] = useState(false);
   const [sizeQuery, setSizeQuery] = useState("");
-  const [sizeCat, setSizeCat] = useState<(typeof SIZE_CATS)[number]>("all");
   const noCrop = cropInset.l === 0 && cropInset.t === 0 && cropInset.r === 0 && cropInset.b === 0;
   // 現在の切り抜き後の写真比率に一致するプリセット。切り抜きなし=オリジナル、
   // どれにも一致しない切り抜き=カスタム（null。テンプレ由来や手動調整）。
@@ -2838,7 +2835,6 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       {sizeOpen && (() => {
         const q = sizeQuery.trim().toLowerCase();
         const matches = (p: SizePreset) =>
-          (sizeCat === "all" || p.cats.includes(sizeCat)) &&
           (!q ||
             `${p.w}:${p.h}`.includes(q) ||
             `${p.w}${p.h}`.includes(q.replace(/[:：]/g, "")) ||
@@ -2862,18 +2858,6 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                 aria-label={t("studio.size.searchPlaceholder")}
                 autoComplete="off"
               />
-              <div className="studio-size-cats" role="group" aria-label={t("studio.size.catAria")}>
-                {SIZE_CATS.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    className={`studio-size-cat${sizeCat === c ? " is-active" : ""}`}
-                    onClick={() => setSizeCat(c)}
-                  >
-                    {t(`studio.size.cat_${c}`)}
-                  </button>
-                ))}
-              </div>
               <div className="studio-size-body">
                 {/* オリジナルは比率プリセットとは別枠（元画像の比率をそのまま使用） */}
                 <button
