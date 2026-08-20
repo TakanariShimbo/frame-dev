@@ -866,8 +866,15 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     initExif?.line1 ??
       (initFromGallery ? [initExif?.gTitle, initExif?.gDate].filter(Boolean).join(", ") : defaultNoteLine1()),
   );
-  const [noteLine2, setNoteLine2] = useState(initExif?.line2 ?? (initFromGallery ? initExif?.gCamera ?? "" : ""));
-  const [noteLine3, setNoteLine3] = useState(initExif?.line3 ?? (initFromGallery ? initExif?.gLens ?? "" : ""));
+  // 2・3行目の初期値（カメラ名/レンズ名の見本）。EXIFが読めたら（未編集のときだけ）実データへ差し替える。
+  const DEF_NOTE_LINE2 = "Canon EOS R5";
+  const DEF_NOTE_LINE3 = "RF15-35mm F2.8 L IS USM";
+  const [noteLine2, setNoteLine2] = useState(
+    initExif ? initExif.line2 ?? (initFromGallery ? initExif.gCamera ?? "" : "") : DEF_NOTE_LINE2,
+  );
+  const [noteLine3, setNoteLine3] = useState(
+    initExif ? initExif.line3 ?? (initFromGallery ? initExif.gLens ?? "" : "") : DEF_NOTE_LINE3,
+  );
   // 書体（10種のフォントペア）。旧スナップショットの serif(明朝/ゴシック2択) から引き継ぐ。
   const [noteFont, setNoteFont] = useState<FontPairId>(
     initExif?.font ?? (initExif?.serif === true ? "posterMincho" : initExif?.serif === false ? "modernGothic" : "gothic"),
@@ -903,6 +910,13 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       shootingInfoRef.current = si; // 自由記述の「撮影情報を挿入」ボタン用に保持
       setHasShootingInfo(true);
       if (si.date) setNoteLine1((v) => (isDefaultNoteLine1(v) ? `My favorite mountain, ${si.date}` : v));
+      const cam2 =
+        si.model && si.maker && !si.model.toLowerCase().startsWith(si.maker.toLowerCase())
+          ? `${si.maker} ${si.model}`
+          : si.model || si.maker;
+      if (cam2) setNoteLine2((v) => (v === "" || v === DEF_NOTE_LINE2 ? cam2 : v));
+      const lens2 = si.lens || si.spec;
+      if (lens2) setNoteLine3((v) => (v === "" || v === DEF_NOTE_LINE3 ? lens2 : v));
     });
     return () => {
       live = false;
@@ -936,10 +950,10 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     bold: initExif?.l1?.bold ?? initExif?.bold ?? true,
   });
   const [noteL2, setNoteL2] = useState<NoteLineStyle>(
-    initLineStyle(initExif?.l2 ?? (initFromGallery ? { bold: false, italic: false, dim: true } : undefined)),
+    initExif ? initLineStyle(initExif.l2 ?? (initFromGallery ? { bold: false, italic: false, dim: true } : undefined)) : { bold: false, italic: false, dim: true },
   );
   const [noteL3, setNoteL3] = useState<NoteLineStyle>(
-    initLineStyle(initExif?.l3 ?? (initFromGallery ? { bold: false, italic: false, dim: true } : undefined)),
+    initExif ? initLineStyle(initExif.l3 ?? (initFromGallery ? { bold: false, italic: false, dim: true } : undefined)) : { bold: false, italic: false, dim: true },
   );
   const toggleExif = (on: boolean) => setExifOn(on);
 
