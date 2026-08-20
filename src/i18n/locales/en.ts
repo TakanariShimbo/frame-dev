@@ -132,7 +132,7 @@ export default {
       caption: "Description",
       title: "Title",
       event: "Occasion",
-      frame: "Margin",
+      frame: "Size",
       note: "Record",
     },
     label: {

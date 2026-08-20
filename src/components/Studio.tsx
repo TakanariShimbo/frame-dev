@@ -576,7 +576,7 @@ const EVENT_ICON_KEYS = ["mountain", "elev", "pin"] as const;
 
 // 書き出しサイズ（アスペクト比）のプリセット。Canva風のカード一覧から選び、
 // 「切り抜き後の写真」が目標比率になるよう中央基準で cropInset を設定する
-// （余白・記録の帯は含まない。位置の微調整は「余白」タブの切り抜きで行う）。
+// （余白・記録の帯は含まない。位置の微調整は「サイズ」タブの切り抜きで行う）。
 // name/uses は i18n キー。用途のサービス名は両言語共通だが語尾が違うため文言ごと持つ。
 type SizePreset = { id: string; w: number; h: number; name: string; uses: string };
 const SIZE_PRESETS: SizePreset[] = [
@@ -626,7 +626,7 @@ const orientStyle = (t: ExportTemplate, portrait: boolean): ExportStyle => {
 };
 
 // 操作パネルのタブID（表示順もこの順）。
-// タブの役割分担: 「余白」(frame) は空・間などポスター的な見た目づくり（余白・切り抜き・
+// タブの役割分担: 「サイズ」(frame) は書き出し比率と、空・間などポスター的な見た目づくり（余白・切り抜き・
 // ふち）、「記録」(note) は下の帯に載せる情報（撮影情報や山行記録）。どちらも余白を使うが
 // 前者は「形の自由度」、後者は「内容」を編集する。
 type PanelTab = "label" | "caption" | "title" | "event" | "frame" | "note";
