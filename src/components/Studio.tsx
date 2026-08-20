@@ -854,8 +854,17 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [exifMaker, setExifMaker] = useState(initExif?.maker ?? "");
   const [exifSpec, setExifSpec] = useState(initExif?.spec ?? "");
   const [exifDate, setExifDate] = useState(initExif?.date ?? ""); // 機材スタイルの撮影日行
+  // 自由スタイル1行目の初期値（タイトル, 日付 の見本）。日付はまず今日で仮置きし、
+  // EXIFから撮影日が読めたら（未編集のときだけ）そちらへ差し替える。
+  const defaultNoteLine1 = () => {
+    const d = new Date();
+    const p2 = (n: number) => String(n).padStart(2, "0");
+    return `My favorite mountain, ${d.getFullYear()}.${p2(d.getMonth() + 1)}.${p2(d.getDate())}`;
+  };
+  const isDefaultNoteLine1 = (v: string) => v === "" || /^My favorite mountain, \d{4}\.\d{2}\.\d{2}$/.test(v);
   const [noteLine1, setNoteLine1] = useState(
-    initExif?.line1 ?? (initFromGallery ? [initExif?.gTitle, initExif?.gDate].filter(Boolean).join(", ") : ""),
+    initExif?.line1 ??
+      (initFromGallery ? [initExif?.gTitle, initExif?.gDate].filter(Boolean).join(", ") : defaultNoteLine1()),
   );
   const [noteLine2, setNoteLine2] = useState(initExif?.line2 ?? (initFromGallery ? initExif?.gCamera ?? "" : ""));
   const [noteLine3, setNoteLine3] = useState(initExif?.line3 ?? (initFromGallery ? initExif?.gLens ?? "" : ""));
@@ -893,6 +902,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       setExifDate((v) => v || si.date);
       shootingInfoRef.current = si; // 自由記述の「撮影情報を挿入」ボタン用に保持
       setHasShootingInfo(true);
+      if (si.date) setNoteLine1((v) => (isDefaultNoteLine1(v) ? `My favorite mountain, ${si.date}` : v));
     });
     return () => {
       live = false;
@@ -920,7 +930,11 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     italic: v?.italic ?? initExif?.italic ?? false,
     dim: v?.dim ?? false,
   });
-  const [noteL1, setNoteL1] = useState<NoteLineStyle>(initLineStyle(initExif?.l1));
+  // 1行目（タイトル行）は太字が既定。
+  const [noteL1, setNoteL1] = useState<NoteLineStyle>({
+    ...initLineStyle(initExif?.l1),
+    bold: initExif?.l1?.bold ?? initExif?.bold ?? true,
+  });
   const [noteL2, setNoteL2] = useState<NoteLineStyle>(
     initLineStyle(initExif?.l2 ?? (initFromGallery ? { bold: false, italic: false, dim: true } : undefined)),
   );
