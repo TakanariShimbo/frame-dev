@@ -2226,21 +2226,35 @@ button {
 }
 /* 自由入力モード（山行記録など。書体は inline style で明朝/ゴシック切替） */
 .ar-exif-free {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--note-padx, 3.5%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(0.55cqmax * var(--note-k, 1));
   color: var(--exif-main, #3c3c3c);
 }
+/* 文字位置（左/中央/右）。左右は写真の端に揃う（padding が縁と同じ幅のため） */
+.ar-exif-free.is-left {
+  align-items: flex-start;
+  text-align: left;
+}
+.ar-exif-free.is-right {
+  align-items: flex-end;
+  text-align: right;
+}
 .ar-exif-l1 {
   font-size: calc(1.9cqmax * var(--note-k, 1));
   font-weight: 600;
   letter-spacing: 0.03em;
+  line-height: 1.45;
 }
 .ar-exif-l2 {
   font-size: calc(1.6cqmax * var(--note-k, 1));
   font-weight: 400;
   letter-spacing: 0.03em;
+  line-height: 1.45;
 }
 /* 自由入力の行ごとスタイル切替（太字・斜体・淡色のトグル） */
 .ar-note-line-style {
@@ -2578,54 +2592,15 @@ button {
   font-size: 11.5px;
   line-height: 1.6;
 }
-/* --- 記録: ギャラリーモード（写真展風。出力と一致させる寸法） --- */
-.ar-exif-gallery {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0 var(--note-padx, 3.5%);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+/* 自由記述の「撮影情報を入れる」ボタン（入力欄の下に置く小さめの補助操作） */
+.studio-note-insert {
+  align-self: flex-start;
+  margin-top: 6px;
+  font-size: 12px;
 }
-.ar-exif-gallery.is-left {
-  align-items: flex-start;
-  text-align: left;
-}
-.ar-exif-gallery.is-center {
-  align-items: center;
-  text-align: center;
-}
-.ar-exif-gallery.is-right {
-  align-items: flex-end;
-  text-align: right;
-}
-.ar-exif-g1,
-.ar-exif-g2 {
-  letter-spacing: 0.08em;
-  line-height: 1.75;
-  white-space: nowrap;
-}
-.ar-exif-g1 {
-  font-size: calc(1.48cqmax * var(--note-k, 1));
-  font-weight: 500;
-  color: var(--exif-main);
-}
-.ar-exif-g2 {
-  font-size: calc(1.28cqmax * var(--note-k, 1));
-  font-weight: 400;
-  color: var(--exif-sub);
-}
-/* ギャラリー設定の行（表示スイッチ＋テキスト入力） */
-.studio-gallery-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.studio-gallery-row .studio-data-input {
-  flex: 1 1 0;
-}
-.studio-gallery-row .studio-data-input:disabled {
+.studio-note-insert:disabled {
   opacity: 0.45;
+  cursor: default;
 }
 
 /* ============================================================================
