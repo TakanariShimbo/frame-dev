@@ -629,14 +629,14 @@ const orientStyle = (t: ExportTemplate, portrait: boolean): ExportStyle => {
 // タブの役割分担: 「余白」(frame) は空・間などポスター的な見た目づくり（余白・切り抜き・
 // ふち）、「記録」(note) は下の帯に載せる情報（撮影情報や山行記録）。どちらも余白を使うが
 // 前者は「形の自由度」、後者は「内容」を編集する。
-type PanelTab = "label" | "caption" | "title" | "event" | "size" | "frame" | "note";
+type PanelTab = "label" | "caption" | "title" | "event" | "frame" | "note";
 // 「記録」はまだ本番未公開のフィーチャーフラグ付き。コード自体は本番にも入るが、
 // ビルド時に VITE_FEATURE_NOTE=1 を渡したとき（と開発サーバー）だけタブを見せる。
 // OFF のとき exifOn は常に false のままなので、書き出し・保存への影響もない。
 const NOTE_ENABLED = import.meta.env.VITE_FEATURE_NOTE === "1" || import.meta.env.DEV;
 const PANEL_TABS: PanelTab[] = NOTE_ENABLED
-  ? ["label", "caption", "title", "event", "size", "frame", "note"]
-  : ["label", "caption", "title", "event", "size", "frame"];
+  ? ["label", "caption", "title", "event", "frame", "note"]
+  : ["label", "caption", "title", "event", "frame"];
 // テンプレが実際に使う機能からタブを導出する（シンプルモードの表示対象）。
 const templateTabs = (s: ExportStyle): PanelTab[] => {
   const tabs: PanelTab[] = [];
@@ -2554,14 +2554,13 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     caption: captionLang !== "none",
     title: titleOn,
     event: eventOn,
-    size: activeSizeId !== "original",
     frame: frameActive,
     note: exifOn,
   };
   const relevantTabs = activeTemplate ? templateTabs(activeTemplate.style) : PANEL_TABS;
   // 「記録」はテンプレに依存しない機能なので、シンプルモードでも常に見せる。
   const visibleTabs =
-    panelMode === "simple" ? PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "size") : PANEL_TABS;
+    panelMode === "simple" ? PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "frame") : PANEL_TABS;
   const changePanelMode = (m: "simple" | "full") => {
     setPanelMode(m);
     try {
@@ -2570,7 +2569,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       /* 保存できなくても動作に支障なし */
     }
     if (m === "simple") {
-      const simple = PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "size");
+      const simple = PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "frame");
       if (!simple.includes(panelTab)) setPanelTab(simple[0] ?? "label");
     }
   };
@@ -3428,7 +3427,6 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                     ["caption", t("studio.tabs.caption")],
                     ["title", t("studio.tabs.title")],
                     ["event", t("studio.tabs.event")],
-                    ["size", t("studio.tabs.size")],
                     ["frame", t("studio.tabs.frame")],
                     ["note", t("studio.tabs.note")],
                   ] as [PanelTab, string][]
@@ -3942,8 +3940,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                 </section>
                 )}
 
-                {/* 書き出しサイズ（アスペクト比プリセット） */}
-                {panelTab === "size" && (
+                {/* 余白・切り抜き（先頭にかんたんなサイズ選択、下に詳細スライダー） */}
+                {panelTab === "frame" && (
+                <>
                 <section className="studio-sec">
                   <h3>{t("studio.size.heading")}</h3>
                   <div className="ar-fs-row">
@@ -3959,13 +3958,29 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                   <button type="button" className="ar-btn-main studio-size-open" onClick={() => setSizeOpen(true)}>
                     {t("studio.size.choose")}
                   </button>
+                  {/* 比率固定のまま「どこを残すか」を動かすスライダー。プリセット適用中だけ表示 */}
+                  {activeSizeId && activeSizeId !== "original" && (cropInset.l + cropInset.r > 0 || cropInset.t + cropInset.b > 0) && (() => {
+                    const horiz = cropInset.l + cropInset.r > 0;
+                    const total = horiz ? cropInset.l + cropInset.r : cropInset.t + cropInset.b;
+                    const pos = (horiz ? cropInset.l : cropInset.t) / total;
+                    const setPos = (v: number) =>
+                      setCropInset(
+                        horiz
+                          ? { l: total * v, r: total * (1 - v), t: 0, b: 0 }
+                          : { l: 0, r: 0, t: total * v, b: total * (1 - v) },
+                      );
+                    return (
+                      <>
+                        <div className="ar-fs-slider-row">
+                          <span>{t(horiz ? "studio.size.posH" : "studio.size.posV")}</span>
+                          <span className="ar-fs-val">{Math.round(pos * 100)}%</span>
+                        </div>
+                        <FsSlider min={0} max={1} step={0.01} value={pos} onChange={setPos} ariaLabel={t(horiz ? "studio.size.posH" : "studio.size.posV")} />
+                      </>
+                    );
+                  })()}
                   <p className="studio-hint">{t("studio.size.hint")}</p>
                 </section>
-                )}
-
-                {/* 余白・切り抜き */}
-                {panelTab === "frame" && (
-                <>
                 <section className="studio-sec">
                   <h3>{t("studio.frame.marginHeading")}</h3>
                   {(["t", "b", "l", "r"] as const).map((d) => {
