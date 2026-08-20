@@ -2578,6 +2578,56 @@ button {
   font-size: 11.5px;
   line-height: 1.6;
 }
+/* --- 記録: ギャラリーモード（写真展風。出力と一致させる寸法） --- */
+.ar-exif-gallery {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--note-padx, 3.5%);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.ar-exif-gallery.is-left {
+  align-items: flex-start;
+  text-align: left;
+}
+.ar-exif-gallery.is-center {
+  align-items: center;
+  text-align: center;
+}
+.ar-exif-gallery.is-right {
+  align-items: flex-end;
+  text-align: right;
+}
+.ar-exif-g1,
+.ar-exif-g2 {
+  letter-spacing: 0.08em;
+  line-height: 1.75;
+  white-space: nowrap;
+}
+.ar-exif-g1 {
+  font-size: calc(1.48cqmax * var(--note-k, 1));
+  font-weight: 500;
+  color: var(--exif-main);
+}
+.ar-exif-g2 {
+  font-size: calc(1.28cqmax * var(--note-k, 1));
+  font-weight: 400;
+  color: var(--exif-sub);
+}
+/* ギャラリー設定の行（表示スイッチ＋テキスト入力） */
+.studio-gallery-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.studio-gallery-row .studio-data-input {
+  flex: 1 1 0;
+}
+.studio-gallery-row .studio-data-input:disabled {
+  opacity: 0.45;
+}
+
 /* ============================================================================
    サイズ選択モーダル（Canva風のカード一覧。検索＋カテゴリタブ＋グリッド）
    ============================================================================ */

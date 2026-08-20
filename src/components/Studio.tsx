@@ -668,7 +668,17 @@ export type StudioSnapshot = {
     maker: string;
     spec: string;
     // 追加分（旧スナップショットには無いので optional）: 帯のモード・自由入力・書体・地色
-    mode?: "camera" | "free";
+    mode?: "camera" | "free" | "gallery";
+    // ギャラリーモード（写真展風）の設定
+    gAlign?: "left" | "center" | "right";
+    gTitle?: string;
+    gTitleOn?: boolean;
+    gDate?: string;
+    gDateOn?: boolean;
+    gCamera?: string;
+    gCameraOn?: boolean;
+    gLens?: string;
+    gLensOn?: boolean;
     line1?: string;
     line2?: string;
     serif?: boolean; // 旧: 明朝/ゴシック2択（font が無いスナップショットの引き継ぎ用）
@@ -829,7 +839,29 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   // モードは2つ: camera=撮影情報（Shot on 表記）、free=自由入力（山行記録など）。
   const initExif = initialSnapshot?.exif;
   const [exifOn, setExifOn] = useState(initExif?.on ?? false);
-  const [noteMode, setNoteMode] = useState<"camera" | "free">(initExif?.mode ?? "camera");
+  const [noteMode, setNoteMode] = useState<"camera" | "free" | "gallery">(initExif?.mode ?? "camera");
+  // --- ギャラリーモード（写真展・写真集風。広い白フチ＋作品情報を小さく） --- //
+  const [galleryAlign, setGalleryAlign] = useState<"left" | "center" | "right">(initExif?.gAlign ?? "right");
+  const [galleryTitle, setGalleryTitle] = useState(initExif?.gTitle ?? "");
+  const [galleryTitleOn, setGalleryTitleOn] = useState(initExif?.gTitleOn ?? true);
+  const [galleryDate, setGalleryDate] = useState(initExif?.gDate ?? "");
+  const [galleryDateOn, setGalleryDateOn] = useState(initExif?.gDateOn ?? true);
+  const [galleryCamera, setGalleryCamera] = useState(initExif?.gCamera ?? "");
+  const [galleryCameraOn, setGalleryCameraOn] = useState(initExif?.gCameraOn ?? true);
+  const [galleryLens, setGalleryLens] = useState(initExif?.gLens ?? "");
+  const [galleryLensOn, setGalleryLensOn] = useState(initExif?.gLensOn ?? true);
+  // 表示する行を組み立てる（1行目=タイトル, 撮影日 / 2行目=カメラ / 3行目=レンズ。
+  // OFF・空欄の項目は行ごと省く。プレビューと焼き込みで共通）。
+  const galleryLines = (): { text: string; main: boolean }[] => {
+    const out: { text: string; main: boolean }[] = [];
+    const l1 = [galleryTitleOn ? galleryTitle.trim() : "", galleryDateOn ? galleryDate.trim() : ""]
+      .filter(Boolean)
+      .join(", ");
+    if (l1) out.push({ text: l1, main: true });
+    if (galleryCameraOn && galleryCamera.trim()) out.push({ text: galleryCamera.trim(), main: false });
+    if (galleryLensOn && galleryLens.trim()) out.push({ text: galleryLens.trim(), main: false });
+    return out;
+  };
   const [exifModel, setExifModel] = useState(initExif?.model ?? "");
   const [exifMaker, setExifMaker] = useState(initExif?.maker ?? "");
   const [exifSpec, setExifSpec] = useState(initExif?.spec ?? "");
@@ -847,6 +879,15 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       setExifModel((v) => v || si.model);
       setExifMaker((v) => v || si.maker);
       setExifSpec((v) => v || si.spec);
+      // ギャラリーモードのプレフィル。カメラ名はメーカー込みの表記（モデル名が
+      // 既にメーカー名で始まる場合は重ねない。例: "Canon EOS R5"）。
+      const cam =
+        si.model && si.maker && !si.model.toLowerCase().startsWith(si.maker.toLowerCase())
+          ? `${si.maker} ${si.model}`
+          : si.model || si.maker;
+      setGalleryCamera((v) => v || cam);
+      setGalleryLens((v) => v || si.lens);
+      setGalleryDate((v) => v || si.date);
     });
     return () => {
       live = false;
@@ -856,6 +897,8 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   // 切り抜き込み）の外側に、liit の見本比率で縁を一周巻いてそこに文字を描く:
   // 上・左・右 = 写真の高さの3.5%（ピクセル等幅）、下 = 18%（帯）。色も独立（noteBg）。
   const NOTE_EDGE = 0.035;
+  // ギャラリーモードは写真展のマットのように縁を広く取る。
+  const noteEdge = noteMode === "gallery" ? 0.07 : NOTE_EDGE;
   const [noteBg, setNoteBg] = useState(initExif?.bg ?? "#ffffff");
   // 文字色。auto=フレーム色の明るさから2トーンを自動決定 / 手動=好きな色（淡い側は半透明で作る）。
   const [noteInkAuto, setNoteInkAuto] = useState(initExif?.inkAuto ?? true);
@@ -1257,7 +1300,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const ch = (photoNat?.h ?? 1000) * fChF;
     const cw = (photoNat?.w ?? 1500) * fCwF;
     const innerW = cw * (1 + fMlr), innerH = ch * (1 + fMtb);
-    const edge = exifOn ? NOTE_EDGE * ch : 0;
+    const edge = exifOn ? noteEdge * ch : 0;
     const band = exifOn ? noteBand * ch : 0;
     const outerAR = (innerW + edge * 2) / (innerH + edge + band);
     let w = sw, h = sw / outerAR;
@@ -1272,7 +1315,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     wrap.style.padding = `${edgePx}px ${edgePx}px ${bandPx}px`;
     frame.style.width = `${Math.round(w) - edgePx * 2}px`;
     frame.style.height = `${Math.round(h) - edgePx - bandPx}px`;
-  }, [frameAR, measureTick, exportView, exifOn, noteBand, photoNat, fChF, fCwF, fMlr, fMtb]);
+  }, [frameAR, measureTick, exportView, exifOn, noteBand, noteEdge, photoNat, fChF, fCwF, fMlr, fMtb]);
 
   // ラベル実寸を測って正規化で保持（引き出し線の辺アンカー計算に使う）。
   useLayoutEffect(() => {
@@ -1325,7 +1368,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const pfy = (pv: number) => mT + ((pv - cropInset.t) / fChF) * chR;
     const L = Math.max(OW, OH);
     // 記録の帯（外側フレーム）。「余白」とは独立に、合成結果の外へさらに一周巻く。
-    const nEdge = exifOn ? Math.round(NOTE_EDGE * chR) : 0;
+    const nEdge = exifOn ? Math.round(noteEdge * chR) : 0;
     const nBand = exifOn ? Math.round(noteBand * chR) : 0;
     const TW = OW + nEdge * 2, TH = OH + nEdge + nBand;
     // iOS(WebKit)は Canvas の最大ピクセル面積に上限があり、高解像度写真＋大きな余白で
@@ -2020,6 +2063,30 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
           ctx.fillStyle = ink.sub;
           ctx.fillText(exifSpec, OW / 2, both ? cy + gap : cy);
         }
+      } else if (noteMode === "gallery") {
+        // ギャラリー: 作品情報を小さく（1行目=タイトル,日付 / 2行目=カメラ / 3行目=レンズ）。
+        // 揃え位置は写真の端（left=左端 / right=右端）に合わせる。
+        const lines2 = galleryLines();
+        if (lines2.length) {
+          const fsMain = Math.round(L * 0.0148);
+          const fsSub = Math.round(L * 0.0128);
+          const lineH = Math.round(fsMain * 1.75);
+          const x = galleryAlign === "left" ? 0 : galleryAlign === "center" ? OW / 2 : OW;
+          ctx.textAlign = galleryAlign;
+          const total = lines2.length * lineH;
+          let yy = cy - total / 2 + lineH / 2;
+          for (const ln of lines2) {
+            const fs = ln.main ? fsMain : fsSub;
+            ctx.font = `${ln.main ? 500 : 400} ${fs}px ${noteFF}`;
+            setLS(fs * 0.08); // プレビュー(.ar-exif-g* の letter-spacing: 0.08em)と揃える
+            ctx.fillStyle = ln.main ? ink.main : ink.sub;
+            // 右揃えは末尾の字間ぶん左へ寄るので、その分だけ右へ戻して端を揃える。
+            ctx.fillText(ln.text, x + (galleryAlign === "right" ? fs * 0.08 : 0), yy);
+            yy += lineH;
+          }
+          ctx.textAlign = "left";
+          setLS(0);
+        }
       } else {
         const ff = noteFF;
         const both = !!noteLine1 && !!noteLine2;
@@ -2263,6 +2330,15 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
             l2: noteL2,
             inkAuto: noteInkAuto,
             ink: noteInk,
+            gAlign: galleryAlign,
+            gTitle: galleryTitle,
+            gTitleOn: galleryTitleOn,
+            gDate: galleryDate,
+            gDateOn: galleryDateOn,
+            gCamera: galleryCamera,
+            gCameraOn: galleryCameraOn,
+            gLens: galleryLens,
+            gLensOn: galleryLensOn,
           },
         }
       : null;
@@ -3302,8 +3378,8 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                 const ch = (photoNat?.h ?? 1000) * fChF;
                 const cw = (photoNat?.w ?? 1500) * fCwF;
                 const innerW = cw * (1 + fMlr), innerH = ch * (1 + fMtb);
-                const totalH = innerH + NOTE_EDGE * ch + noteBand * ch;
-                const outerW = innerW + NOTE_EDGE * ch * 2;
+                const totalH = innerH + noteEdge * ch + noteBand * ch;
+                const outerW = innerW + noteEdge * ch * 2;
                 // 焼き込みの文字サイズ基準は内側（L=max(OW,OH)）。プレビューの cqmax は
                 // 外枠（縁＋帯込み）基準なので、その比で補正して実寸を揃える。
                 const noteK = Math.max(innerW, innerH) / Math.max(outerW, totalH);
@@ -3317,11 +3393,18 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                         "--exif-main": ink.main,
                         "--exif-sub": ink.sub,
                         "--note-k": noteK,
+                        "--note-padx": `${((noteEdge * ch) / outerW) * 100}%`,
                       } as React.CSSProperties
                     }
                     aria-hidden="true"
                   >
-                    {noteMode === "camera" ? (
+                    {noteMode === "gallery" ? (
+                      <span className={`ar-exif-gallery is-${galleryAlign}`}>
+                        {galleryLines().map((ln, i) => (
+                          <span key={i} className={ln.main ? "ar-exif-g1" : "ar-exif-g2"}>{ln.text}</span>
+                        ))}
+                      </span>
+                    ) : noteMode === "camera" ? (
                       <>
                         {(exifModel || exifMaker) && (
                           <span className="ar-exif-model">
@@ -4064,20 +4147,20 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       {/* 下の帯の高さは「上の縁より何%広げるか」で指定。+0% = 上下の縁が同じ幅。 */}
                       <div className="ar-fs-slider-row">
                         <span>{t("studio.note.bandHeight")}</span>
-                        <span className="ar-fs-val">+{Math.round(Math.max(0, noteBand - NOTE_EDGE) * 100)}%</span>
+                        <span className="ar-fs-val">+{Math.round(Math.max(0, noteBand - noteEdge) * 100)}%</span>
                       </div>
                       <FsSlider
                         min={0}
                         max={0.35}
                         step={0.005}
-                        value={Math.max(0, noteBand - NOTE_EDGE)}
-                        onChange={(v) => setNoteBand(NOTE_EDGE + v)}
+                        value={Math.max(0, noteBand - noteEdge)}
+                        onChange={(v) => setNoteBand(noteEdge + v)}
                         ariaLabel={t("studio.note.bandHeightAria")}
                       />
                       <div className="ar-fs-row">
                         <span>{t("studio.note.content")}</span>
                         <div className="seg" role="group" aria-label={t("studio.note.contentAria")}>
-                          {([[t("studio.note.contentCamera"), "camera"], [t("studio.note.contentFree"), "free"]] as [string, "camera" | "free"][]).map(([lab, v]) => (
+                          {([[t("studio.note.contentCamera"), "camera"], [t("studio.note.contentFree"), "free"], [t("studio.note.contentGallery"), "gallery"]] as [string, "camera" | "free" | "gallery"][]).map(([lab, v]) => (
                             <button key={v} className={noteMode === v ? "is-active" : ""} onClick={() => setNoteMode(v)}>{lab}</button>
                           ))}
                         </div>
@@ -4113,6 +4196,49 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                             autoComplete="off"
                           />
                         </div>
+                      ) : noteMode === "gallery" ? (
+                        <>
+                          {/* ギャラリー: 文字位置（左/中央/右）＋作品情報4項目のON/OFFと編集 */}
+                          <div className="ar-fs-row">
+                            <span>{t("studio.note.galleryAlign")}</span>
+                            <div className="seg" role="group" aria-label={t("studio.note.galleryAlign")}>
+                              {([[t("studio.note.alignLeft"), "left"], [t("studio.note.alignCenter"), "center"], [t("studio.note.alignRight"), "right"]] as [string, "left" | "center" | "right"][]).map(([lab, v]) => (
+                                <button key={v} className={galleryAlign === v ? "is-active" : ""} onClick={() => setGalleryAlign(v)}>{lab}</button>
+                              ))}
+                            </div>
+                          </div>
+                          <div className="studio-data-edit">
+                            <span className="studio-data-head">{t("studio.note.galleryHeading")}</span>
+                            {(
+                              [
+                                [t("studio.note.galleryTitlePlaceholder"), t("studio.note.galleryTitleAria"), galleryTitleOn, setGalleryTitleOn, galleryTitle, setGalleryTitle],
+                                [t("studio.note.galleryDatePlaceholder"), t("studio.note.galleryDateAria"), galleryDateOn, setGalleryDateOn, galleryDate, setGalleryDate],
+                                [t("studio.note.galleryCameraPlaceholder"), t("studio.note.galleryCameraAria"), galleryCameraOn, setGalleryCameraOn, galleryCamera, setGalleryCamera],
+                                [t("studio.note.galleryLensPlaceholder"), t("studio.note.galleryLensAria"), galleryLensOn, setGalleryLensOn, galleryLens, setGalleryLens],
+                              ] as [string, string, boolean, (v: boolean) => void, string, (v: string) => void][]
+                            ).map(([ph, aria, on, setOn, text, setText]) => (
+                              <div key={aria} className="studio-gallery-row">
+                                <input
+                                  type="checkbox"
+                                  className="switch"
+                                  checked={on}
+                                  onChange={(e) => setOn(e.target.checked)}
+                                  aria-label={t("studio.note.galleryToggleAria", { label: aria })}
+                                />
+                                <input
+                                  type="text"
+                                  className="studio-data-input"
+                                  value={text}
+                                  onChange={(e) => setText(e.target.value)}
+                                  placeholder={ph}
+                                  aria-label={aria}
+                                  autoComplete="off"
+                                  disabled={!on}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </>
                       ) : (
                         <>
                           <div className="studio-data-edit">
