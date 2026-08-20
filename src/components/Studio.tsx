@@ -878,8 +878,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     setNoteLine1((v) => v || si.date);
     setNoteLine2((v) => v || cam);
     if (cam) setNoteL2((s) => ({ ...s, dim: true }));
-    setNoteLine3((v) => v || si.lens);
-    if (si.lens) setNoteL3((s) => ({ ...s, dim: true }));
+    const line3 = si.lens || si.spec; // レンズ情報が無い写真では撮影設定で代用
+    setNoteLine3((v) => v || line3);
+    if (line3) setNoteL3((s) => ({ ...s, dim: true }));
   };
   // 元写真の EXIF から初期値を補完する（手で入力済みの欄は上書きしない）。
   useEffect(() => {
@@ -4187,42 +4188,27 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       {noteMode === "camera" ? (
                         <div className="studio-data-edit">
                           <span className="studio-data-head">{t("studio.note.exifHeading")}</span>
-                          <input
-                            type="text"
-                            className="studio-data-input"
-                            value={exifModel}
-                            onChange={(e) => setExifModel(e.target.value)}
-                            placeholder={t("studio.note.exifModelPlaceholder")}
-                            aria-label={t("studio.note.exifModelAria")}
-                            autoComplete="off"
-                          />
-                          <input
-                            type="text"
-                            className="studio-data-input"
-                            value={exifMaker}
-                            onChange={(e) => setExifMaker(e.target.value)}
-                            placeholder={t("studio.note.exifMakerPlaceholder")}
-                            aria-label={t("studio.note.exifMakerAria")}
-                            autoComplete="off"
-                          />
-                          <input
-                            type="text"
-                            className="studio-data-input"
-                            value={exifSpec}
-                            onChange={(e) => setExifSpec(e.target.value)}
-                            placeholder={t("studio.note.exifSpecPlaceholder")}
-                            aria-label={t("studio.note.exifSpecAria")}
-                            autoComplete="off"
-                          />
-                          <input
-                            type="text"
-                            className="studio-data-input"
-                            value={exifDate}
-                            onChange={(e) => setExifDate(e.target.value)}
-                            placeholder={t("studio.note.exifDatePlaceholder")}
-                            aria-label={t("studio.note.exifDateAria")}
-                            autoComplete="off"
-                          />
+                          {(
+                            [
+                              [t("studio.note.labelModel"), exifModel, setExifModel, t("studio.note.exifModelPlaceholder"), t("studio.note.exifModelAria")],
+                              [t("studio.note.labelMaker"), exifMaker, setExifMaker, t("studio.note.exifMakerPlaceholder"), t("studio.note.exifMakerAria")],
+                              [t("studio.note.labelSpec"), exifSpec, setExifSpec, t("studio.note.exifSpecPlaceholder"), t("studio.note.exifSpecAria")],
+                              [t("studio.note.labelDate"), exifDate, setExifDate, t("studio.note.exifDatePlaceholder"), t("studio.note.exifDateAria")],
+                            ] as [string, string, (v: string) => void, string, string][]
+                          ).map(([label, value, setValue, ph, aria]) => (
+                            <div key={aria} className="ar-fs-row">
+                              <span>{label}</span>
+                              <input
+                                type="text"
+                                className="studio-data-input studio-event-input"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                placeholder={ph}
+                                aria-label={aria}
+                                autoComplete="off"
+                              />
+                            </div>
+                          ))}
                         </div>
                       ) : (
                         <>
