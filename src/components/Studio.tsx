@@ -574,6 +574,21 @@ const EVENT_ICONS: Record<"mountain" | "elev" | "pin", string> = {
 };
 const EVENT_ICON_KEYS = ["mountain", "elev", "pin"] as const;
 
+// 書き出しサイズ（アスペクト比）のプリセット。Canva風のカード一覧から選び、
+// 「切り抜き後の写真」が目標比率になるよう中央基準で cropInset を設定する
+// （余白・記録の帯は含まない。位置の微調整は「余白」タブの切り抜きで行う）。
+// name/uses は i18n キー。用途のサービス名は両言語共通だが語尾が違うため文言ごと持つ。
+type SizeCategory = "sns" | "photo" | "video";
+type SizePreset = { id: string; w: number; h: number; name: string; uses: string; cats: SizeCategory[] };
+const SIZE_PRESETS: SizePreset[] = [
+  { id: "3-2", w: 3, h: 2, name: "studio.size.p32.name", uses: "studio.size.p32.uses", cats: ["photo", "sns"] },
+  { id: "1-1", w: 1, h: 1, name: "studio.size.p11.name", uses: "studio.size.p11.uses", cats: ["sns"] },
+  { id: "3-4", w: 3, h: 4, name: "studio.size.p34.name", uses: "studio.size.p34.uses", cats: ["sns", "photo"] },
+  { id: "9-16", w: 9, h: 16, name: "studio.size.p916.name", uses: "studio.size.p916.uses", cats: ["sns"] },
+  { id: "16-9", w: 16, h: 9, name: "studio.size.p169.name", uses: "studio.size.p169.uses", cats: ["video", "sns"] },
+];
+const SIZE_CATS = ["all", "sns", "photo", "video"] as const;
+
 // スマホ判定（テーマ選択をスワイプ式に切り替える）。
 function useIsNarrow(): boolean {
   const [narrow, setNarrow] = useState(() => window.matchMedia("(max-width: 720px)").matches);
@@ -616,14 +631,14 @@ const orientStyle = (t: ExportTemplate, portrait: boolean): ExportStyle => {
 // タブの役割分担: 「余白」(frame) は空・間などポスター的な見た目づくり（余白・切り抜き・
 // ふち）、「記録」(note) は下の帯に載せる情報（撮影情報や山行記録）。どちらも余白を使うが
 // 前者は「形の自由度」、後者は「内容」を編集する。
-type PanelTab = "label" | "caption" | "title" | "event" | "frame" | "note";
+type PanelTab = "label" | "caption" | "title" | "event" | "size" | "frame" | "note";
 // 「記録」はまだ本番未公開のフィーチャーフラグ付き。コード自体は本番にも入るが、
 // ビルド時に VITE_FEATURE_NOTE=1 を渡したとき（と開発サーバー）だけタブを見せる。
 // OFF のとき exifOn は常に false のままなので、書き出し・保存への影響もない。
 const NOTE_ENABLED = import.meta.env.VITE_FEATURE_NOTE === "1" || import.meta.env.DEV;
 const PANEL_TABS: PanelTab[] = NOTE_ENABLED
-  ? ["label", "caption", "title", "event", "frame", "note"]
-  : ["label", "caption", "title", "event", "frame"];
+  ? ["label", "caption", "title", "event", "size", "frame", "note"]
+  : ["label", "caption", "title", "event", "size", "frame"];
 // テンプレが実際に使う機能からタブを導出する（シンプルモードの表示対象）。
 const templateTabs = (s: ExportStyle): PanelTab[] => {
   const tabs: PanelTab[] = [];
@@ -1144,6 +1159,37 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   });
   const fPhotoAR = photoNat ? photoNat.w / photoNat.h : 1;
   const frameAR = fPhotoAR * (fCwF / fChF) * ((1 + fMlr) / (1 + fMtb));
+
+  // --- 書き出しサイズ（アスペクト比プリセット） --- //
+  const [sizeOpen, setSizeOpen] = useState(false);
+  const [sizeQuery, setSizeQuery] = useState("");
+  const [sizeCat, setSizeCat] = useState<(typeof SIZE_CATS)[number]>("all");
+  const noCrop = cropInset.l === 0 && cropInset.t === 0 && cropInset.r === 0 && cropInset.b === 0;
+  // 現在の切り抜き後の写真比率に一致するプリセット。切り抜きなし=オリジナル、
+  // どれにも一致しない切り抜き=カスタム（null。テンプレ由来や手動調整）。
+  const croppedAR = photoNat ? (photoNat.w * fCwF) / (photoNat.h * fChF) : null;
+  const activeSizeId: string | null = noCrop
+    ? "original"
+    : croppedAR == null
+      ? null
+      : SIZE_PRESETS.find((p) => Math.abs(croppedAR - p.w / p.h) / (p.w / p.h) < 0.01)?.id ?? null;
+  // プリセット適用。中央基準で目標比率へ切り抜く（null=オリジナル: 切り抜き解除）。
+  const applySizePreset = (p: SizePreset | null) => {
+    if (!p) {
+      setCropInset({ l: 0, t: 0, r: 0, b: 0 });
+      return;
+    }
+    const nat = photoNat ?? { w: 3, h: 2 };
+    const cur = nat.w / nat.h;
+    const target = p.w / p.h;
+    if (cur > target) {
+      const f = (1 - target / cur) / 2;
+      setCropInset({ l: f, r: f, t: 0, b: 0 });
+    } else {
+      const f = (1 - cur / target) / 2;
+      setCropInset({ l: 0, r: 0, t: f, b: f });
+    }
+  };
   const framePhotoStyle: React.CSSProperties = {
     position: "absolute",
     left: `${(frameMargin.l / (1 + fMlr)) * 100}%`,
@@ -2511,13 +2557,14 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     caption: captionLang !== "none",
     title: titleOn,
     event: eventOn,
+    size: activeSizeId !== "original",
     frame: frameActive,
     note: exifOn,
   };
   const relevantTabs = activeTemplate ? templateTabs(activeTemplate.style) : PANEL_TABS;
   // 「記録」はテンプレに依存しない機能なので、シンプルモードでも常に見せる。
   const visibleTabs =
-    panelMode === "simple" ? PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note") : PANEL_TABS;
+    panelMode === "simple" ? PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "size") : PANEL_TABS;
   const changePanelMode = (m: "simple" | "full") => {
     setPanelMode(m);
     try {
@@ -2526,7 +2573,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       /* 保存できなくても動作に支障なし */
     }
     if (m === "simple") {
-      const simple = PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note");
+      const simple = PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "size");
       if (!simple.includes(panelTab)) setPanelTab(simple[0] ?? "label");
     }
   };
@@ -2786,6 +2833,97 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
           </div>
         </div>
       )}
+
+      {/* サイズ選択（Canva風のカード一覧。検索＋カテゴリタブ＋比率サムネイルのグリッド） */}
+      {sizeOpen && (() => {
+        const q = sizeQuery.trim().toLowerCase();
+        const matches = (p: SizePreset) =>
+          (sizeCat === "all" || p.cats.includes(sizeCat)) &&
+          (!q ||
+            `${p.w}:${p.h}`.includes(q) ||
+            `${p.w}${p.h}`.includes(q.replace(/[:：]/g, "")) ||
+            t(p.name).toLowerCase().includes(q) ||
+            t(p.uses).toLowerCase().includes(q));
+        const list = SIZE_PRESETS.filter(matches);
+        const photoAR = photoNat ? photoNat.w / photoNat.h : 1.5;
+        return (
+          <div className="ar-preview" onClick={() => setSizeOpen(false)}>
+            <div className="ar-preview-card studio-size-card" onClick={(e) => e.stopPropagation()}>
+              <div className="ar-preview-head">
+                <span>{t("studio.size.heading")}</span>
+                <span className="ar-preview-note">{t("studio.size.sub")}</span>
+              </div>
+              <input
+                type="search"
+                className="studio-size-search"
+                value={sizeQuery}
+                onChange={(e) => setSizeQuery(e.target.value)}
+                placeholder={t("studio.size.searchPlaceholder")}
+                aria-label={t("studio.size.searchPlaceholder")}
+                autoComplete="off"
+              />
+              <div className="studio-size-cats" role="group" aria-label={t("studio.size.catAria")}>
+                {SIZE_CATS.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    className={`studio-size-cat${sizeCat === c ? " is-active" : ""}`}
+                    onClick={() => setSizeCat(c)}
+                  >
+                    {t(`studio.size.cat_${c}`)}
+                  </button>
+                ))}
+              </div>
+              <div className="studio-size-body">
+                {/* オリジナルは比率プリセットとは別枠（元画像の比率をそのまま使用） */}
+                <button
+                  type="button"
+                  className={`studio-size-orig${activeSizeId === "original" ? " is-active" : ""}`}
+                  onClick={() => {
+                    applySizePreset(null);
+                    setSizeOpen(false);
+                  }}
+                >
+                  <span className="studio-size-thumb">
+                    <span style={{ aspectRatio: `${photoAR}` }} />
+                  </span>
+                  <span className="studio-size-orig-text">
+                    <b>{t("studio.size.original")}</b>
+                    <span>{t("studio.size.originalDesc")}</span>
+                  </span>
+                </button>
+                {list.length === 0 ? (
+                  <p className="studio-size-empty">{t("studio.size.empty")}</p>
+                ) : (
+                  <div className="studio-size-grid">
+                    {list.map((p) => (
+                      <button
+                        key={p.id}
+                        type="button"
+                        className={`studio-size-item${activeSizeId === p.id ? " is-active" : ""}`}
+                        onClick={() => {
+                          applySizePreset(p);
+                          setSizeOpen(false);
+                        }}
+                      >
+                        <span className="studio-size-thumb">
+                          <span style={{ aspectRatio: `${p.w} / ${p.h}` }} />
+                        </span>
+                        <b className="studio-size-ratio">{p.w}:{p.h}</b>
+                        <span className="studio-size-name">{t(p.name)}</span>
+                        <span className="studio-size-uses">{t(p.uses)}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="ar-preview-actions">
+                <button className="ar-btn-sub" onClick={() => setSizeOpen(false)}>{t("studio.size.close")}</button>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* 編集 */}
       {exportView === "edit" && (
@@ -3306,6 +3444,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                     ["caption", t("studio.tabs.caption")],
                     ["title", t("studio.tabs.title")],
                     ["event", t("studio.tabs.event")],
+                    ["size", t("studio.tabs.size")],
                     ["frame", t("studio.tabs.frame")],
                     ["note", t("studio.tabs.note")],
                   ] as [PanelTab, string][]
@@ -3816,6 +3955,27 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       </div>
                     </>
                   )}
+                </section>
+                )}
+
+                {/* 書き出しサイズ（アスペクト比プリセット） */}
+                {panelTab === "size" && (
+                <section className="studio-sec">
+                  <h3>{t("studio.size.heading")}</h3>
+                  <div className="ar-fs-row">
+                    <span>{t("studio.size.current")}</span>
+                    <span className="studio-size-current">
+                      {activeSizeId === "original"
+                        ? t("studio.size.original")
+                        : activeSizeId
+                          ? `${SIZE_PRESETS.find((p) => p.id === activeSizeId)!.w}:${SIZE_PRESETS.find((p) => p.id === activeSizeId)!.h} ${t(SIZE_PRESETS.find((p) => p.id === activeSizeId)!.name)}`
+                          : t("studio.size.custom")}
+                    </span>
+                  </div>
+                  <button type="button" className="ar-btn-main studio-size-open" onClick={() => setSizeOpen(true)}>
+                    {t("studio.size.choose")}
+                  </button>
+                  <p className="studio-hint">{t("studio.size.hint")}</p>
                 </section>
                 )}
 
