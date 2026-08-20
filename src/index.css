@@ -2213,6 +2213,7 @@ button {
   font-weight: 700;
   color: var(--exif-main, #3c3c3c);
   letter-spacing: 0.01em;
+  line-height: 1.45;
 }
 .ar-exif-model .ar-exif-dim {
   font-weight: 500;
@@ -2223,24 +2224,39 @@ button {
   font-weight: 500;
   color: var(--exif-sub, #969696);
   letter-spacing: 0.04em;
+  line-height: 1.45;
 }
 /* 自由入力モード（山行記録など。書体は inline style で明朝/ゴシック切替） */
 .ar-exif-free {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 var(--note-padx, 3.5%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: calc(0.55cqmax * var(--note-k, 1));
   color: var(--exif-main, #3c3c3c);
 }
+/* 文字位置（左/中央/右）。左右は写真の端に揃う（padding が縁と同じ幅のため） */
+.ar-exif-free.is-left {
+  align-items: flex-start;
+  text-align: left;
+}
+.ar-exif-free.is-right {
+  align-items: flex-end;
+  text-align: right;
+}
 .ar-exif-l1 {
   font-size: calc(1.9cqmax * var(--note-k, 1));
   font-weight: 600;
   letter-spacing: 0.03em;
+  line-height: 1.45;
 }
 .ar-exif-l2 {
   font-size: calc(1.6cqmax * var(--note-k, 1));
   font-weight: 400;
   letter-spacing: 0.03em;
+  line-height: 1.45;
 }
 /* 自由入力の行ごとスタイル切替（太字・斜体・淡色のトグル） */
 .ar-note-line-style {
@@ -2578,6 +2594,158 @@ button {
   font-size: 11.5px;
   line-height: 1.6;
 }
+/* 自由記述の「撮影情報を入れる」ボタン（入力欄の下に置く小さめの補助操作） */
+.studio-note-insert {
+  align-self: flex-start;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.studio-note-insert:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ============================================================================
+   サイズ選択モーダル（Canva風のカード一覧。検索＋カテゴリタブ＋グリッド）
+   ============================================================================ */
+.studio-size-card {
+  width: min(860px, 100%);
+}
+.studio-size-search {
+  width: 100%;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 12px;
+}
+.studio-size-search:focus {
+  outline: none;
+  border-color: var(--gold-line);
+}
+.studio-size-search::placeholder {
+  color: var(--ink-sub);
+  opacity: 0.7;
+}
+.studio-size-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* サムネイル: 枠内に比率どおりの角丸ボックスを描く */
+.studio-size-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 74px;
+  flex: none;
+}
+.studio-size-thumb > span {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100%;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  opacity: 0.75;
+}
+/* 縦長比率は高さいっぱい、横長比率は幅から決まるよう width:auto に */
+.studio-size-thumb > span[style*="aspect-ratio"] {
+  width: auto;
+}
+/* オリジナル: 比率プリセットとは別枠の横長カード */
+.studio-size-orig {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: inherit;
+  color: var(--ink);
+  text-align: left;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.studio-size-orig .studio-size-thumb {
+  width: 74px;
+  height: 44px;
+}
+.studio-size-orig-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.studio-size-orig-text b {
+  font-size: 13.5px;
+}
+.studio-size-orig-text span {
+  font-size: 11.5px;
+  color: var(--ink-sub);
+}
+.studio-size-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.studio-size-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font: inherit;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 10px 10px;
+  cursor: pointer;
+}
+.studio-size-item:hover,
+.studio-size-orig:hover {
+  border-color: var(--gold-line);
+}
+.studio-size-item.is-active,
+.studio-size-orig.is-active {
+  border-color: var(--gold, #d6b46a);
+  background: rgba(214, 180, 106, 0.08);
+}
+/* アスペクト比を主役に大きく、名称・用途は補足 */
+.studio-size-ratio {
+  margin-top: 6px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.studio-size-name {
+  font-size: 12px;
+  color: var(--ink);
+}
+.studio-size-uses {
+  font-size: 10.5px;
+  color: var(--ink-sub);
+  text-align: center;
+  line-height: 1.4;
+}
+.studio-size-empty {
+  margin: 12px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-sub);
+}
+.studio-size-current {
+  color: var(--ink-sub);
+}
+.studio-size-open {
+  align-self: flex-start;
+}
+
 /* 書き出し・保存の失敗通知。プレビューモーダル(z:60)より手前に出す */
 .ar-export-toast {
   position: fixed;
