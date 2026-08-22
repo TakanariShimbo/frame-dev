@@ -293,7 +293,17 @@ type EventVariant = "editorial" | "fieldnote" | "minimal";
 // テンプレ適用時に日付プレフィル内の {year} を今の年へ置き換える。
 const fillYear = (s: string): string => s.replace(/\{year\}/g, String(new Date().getFullYear()));
 // mountainOnly=山モード専用（花火モードのテーマ一覧には出さない）。
-type ExportTemplate = { id: string; name: string; sub: string; hint: string; style: ExportStyle; mountainOnly?: boolean };
+// note=記録の帯（スナップショットの exif 側設定）もテンプレで初期設定したい場合に指定。
+// 記録タブがフィーチャーフラグOFFのビルドでは、note 付きテンプレは一覧に出さない。
+type ExportTemplate = {
+  id: string;
+  name: string;
+  sub: string;
+  hint: string;
+  style: ExportStyle;
+  mountainOnly?: boolean;
+  note?: { on: boolean; mode: "camera" | "free"; align: "left" | "center" | "right"; edge?: number; band?: number };
+};
 
 const GOLD = "#d6b46a";
 const NO_MARGIN = { t: 0, r: 0, b: 0, l: 0 };
@@ -550,6 +560,27 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
       eventJa: "山の日",
       eventDate: "08.11",
       eventPos: { u: 0.05, v: 0.07 },
+    },
+  },
+  // --- 額: 白フレーム＋英字の題字＋撮影情報クレジット（額装プリント風） --- //
+  {
+    id: "gaku",
+    name: "額",
+    sub: "studio.theme.gaku.sub",
+    hint: "studio.theme.gaku.hint",
+    mountainOnly: true,
+    note: { on: true, mode: "camera", align: "right" },
+    style: {
+      ...BASE_STYLE,
+      bakeLabels: false,
+      titleOn: true,
+      titleLang: "en",
+      titleShowOver: true,
+      titleShowNum: true,
+      titleScale: 1.15,
+      titleFont: "modernGothic",
+      titleLetterSpace: 3,
+      titlePos: { u: 0.5, v: 0.3 },
     },
   },
 ];
@@ -969,7 +1000,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [panelTab, setPanelTab] = useState<PanelTab>(() => (initStyle ? (templateTabs(initStyle)[0] ?? "label") : "label"));
   // このモードで見せるテーマ（山モード専用テンプレは花火モードの一覧から外す）。
   // モードは画面に入る前に確定しているため、レンダー中に固定値として参照してよい。
-  const tplItems = TPL_ITEMS.filter((x) => !(x.tpl?.mountainOnly && getAppMode() === "hanabi"));
+  const tplItems = TPL_ITEMS.filter(
+    (x) => !(x.tpl?.mountainOnly && getAppMode() === "hanabi") && !(x.tpl?.note && !NOTE_ENABLED),
+  );
   // テーマ選択カルーセルの現在位置（スマホ=スワイプ / PC=カバーフロー共通）。
   const [tplIdx, setTplIdx] = useState(() => {
     const i = tplItems.findIndex((x) => x.id === activeTemplateId);
@@ -2260,6 +2293,15 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     setFrameMarginAuto(s.frameMarginAuto);
     setCropInset(s.cropInset);
     setFrameFade(s.frameFade);
+    // 記録の帯の初期設定を持つテンプレ（額など）。指定が無ければ従来どおり触らない
+    // （記録はテンプレと独立という原則は保ちつつ、テンプレ側から「点けて始める」だけ許す）。
+    if (t.note) {
+      setExifOn(t.note.on);
+      setNoteMode(t.note.mode);
+      setNoteAlign(t.note.align);
+      setNoteEdge(t.note.edge ?? NOTE_EDGE);
+      if (t.note.band !== undefined) setNoteBand(t.note.band);
+    }
     setActiveTemplateId(t.id);
     // テンプレが使う最初の機能のタブを開く（例: 頂ならタイトル）。
     setPanelTab(templateTabs(t.style)[0] ?? "label");
