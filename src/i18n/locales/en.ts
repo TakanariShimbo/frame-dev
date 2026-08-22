@@ -80,6 +80,7 @@ export default {
       hare: { sub: "A cover for Mountain Day", hint: "An editorial layout with the date and a MOUNTAIN DAY heading, plus a serif title on the left. Dresses up your Mountain Day shot like a magazine cover." },
       roku: { sub: "A Mountain Day field note", hint: "A field-note look with a heading, the date, and notes for the peak's name, elevation, and summit coordinates — filled in automatically from the mountain dictionary." },
       shizu: { sub: "Mountain Day, quietly", hint: "A minimal finish that tucks the date and \"Mountain Day\" into a corner — marking the day while keeping the photo's calm." },
+      gaku: { sub: "Framed like a print", hint: "A white frame around the photo, with an English title and shooting credits — a framed-print look that shows off your gear, too." },
       custom: { sub: "Set it up yourself", hint: "Skip the themes and finish everything yourself from scratch." },
     },
     font: {
