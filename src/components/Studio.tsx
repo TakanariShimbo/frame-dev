@@ -302,6 +302,7 @@ type ExportTemplate = {
   hint: string;
   style: ExportStyle;
   mountainOnly?: boolean;
+  hidden?: boolean; // テーマ一覧に出さない（定義は残す。季節限定テンプレの公開終了用）
   note?: { on: boolean; mode: "camera" | "free"; align: "left" | "center" | "right"; edge?: number; band?: number };
 };
 
@@ -500,6 +501,7 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
   // --- 山の日（8/11）記念テンプレ3種。イベントフレーム（eventOn）を使う --- //
   {
     id: "hare",
+    hidden: true, // 山の日（8/11）限定。時期外なので一覧から非表示
     name: "祝",
     sub: "studio.theme.hare.sub",
     hint: "studio.theme.hare.hint",
@@ -529,6 +531,7 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
   },
   {
     id: "roku",
+    hidden: true, // 山の日（8/11）限定。時期外なので一覧から非表示
     name: "録",
     sub: "studio.theme.roku.sub",
     hint: "studio.theme.roku.hint",
@@ -546,6 +549,7 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
   },
   {
     id: "shizu",
+    hidden: true, // 山の日（8/11）限定。時期外なので一覧から非表示
     name: "静",
     sub: "studio.theme.shizu.sub",
     hint: "studio.theme.shizu.hint",
@@ -1001,7 +1005,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   // このモードで見せるテーマ（山モード専用テンプレは花火モードの一覧から外す）。
   // モードは画面に入る前に確定しているため、レンダー中に固定値として参照してよい。
   const tplItems = TPL_ITEMS.filter(
-    (x) => !(x.tpl?.mountainOnly && getAppMode() === "hanabi") && !(x.tpl?.note && !NOTE_ENABLED),
+    (x) => !x.tpl?.hidden && !(x.tpl?.mountainOnly && getAppMode() === "hanabi") && !(x.tpl?.note && !NOTE_ENABLED),
   );
   // テーマ選択カルーセルの現在位置（スマホ=スワイプ / PC=カバーフロー共通）。
   const [tplIdx, setTplIdx] = useState(() => {
