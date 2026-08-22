@@ -2719,8 +2719,14 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   };
   const relevantTabs = activeTemplate ? templateTabs(activeTemplate.style) : PANEL_TABS;
   // 「記録」はテンプレに依存しない機能なので、シンプルモードでも常に見せる。
-  const visibleTabs =
-    panelMode === "simple" ? PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "frame") : PANEL_TABS;
+  // 「記念」タブは季節限定機能なので、使っていない（eventOn でない）限りフルモードでも隠す。
+  // 開いている最中に OFF にしても、タブごと消えて戻れなくならないよう表示中は残す。
+  const eventTabVisible = tabOn.event || relevantTabs.includes("event") || panelTab === "event";
+  const visibleTabs = (
+    panelMode === "simple"
+      ? PANEL_TABS.filter((t) => relevantTabs.includes(t) || tabOn[t] || t === "note" || t === "frame")
+      : PANEL_TABS
+  ).filter((t) => t !== "event" || eventTabVisible);
   const changePanelMode = (m: "simple" | "full") => {
     setPanelMode(m);
     try {
