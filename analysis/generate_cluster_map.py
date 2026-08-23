@@ -26,7 +26,7 @@ rows = list(csv.DictReader(open("analysis/yamaframe_x_posts_2026-08-01.csv", enc
 
 def classify(r):
     t, h = r["text"], r["handle"]
-    if re.search(r"間違った使い方|グラビア|山頂超え|大喜利", t): return "ネタ・#間違った使い方"
+    if re.search(r"間違った使い方|グラビア|山頂超え|大喜利|猫動画", t): return "ネタ・#間違った使い方"
     if re.search(r"線は消えない|桜島|改行できると嬉しい", t): return "要望・指摘"
     if re.search(r"キャンプ|温泉|ツーリング|海沿い|猫写真|動物写真|日常でも|YAMAPのトップ|カバー写真|Exif", t): return "用途の拡張発見"
     if h == "@r_outdoor_photo" and re.search(r"ユーザー数|リリース|アップデート|更新しました|開催|協賛|検討中|皆様|認知|フック|サイクル", t): return "運営アナウンス"
@@ -71,7 +71,7 @@ for i, r in enumerate(rows):
     if int(r["likes"] or 0) >= 80:
         ax.annotate(r["text"][:12] + "…", (xy[i, 0], xy[i, 1]), xytext=(0, 12),
                     textcoords="offset points", ha="center", color=INK, fontsize=9)
-ax.set_title("投稿内容のクラスタマップ（92件 / 点の大きさ＝いいね数）",
+ax.set_title("投稿内容のクラスタマップ（94件 / 点の大きさ＝いいね数）",
              color=INK, fontsize=13, pad=14, loc="left")
 ax.margins(0.10)
 ax.set_ylim(bottom=xy[:,1].min() - 1.6)
