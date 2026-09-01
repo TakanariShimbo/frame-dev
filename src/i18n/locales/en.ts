@@ -273,7 +273,7 @@ export default {
       hint: "The ratio applies to the full export including margins. For finer control, use the margin and crop sliders below.",
       posH: "Crop position (left ⇔ right)",
       posV: "Crop position (top ⇔ bottom)",
-      balance: "How to fit (crop ⇔ margin)",
+      balance: "Margin amount (none ⇔ max)",
       searchPlaceholder: "Search for a size",
       original: "Original",
       originalDesc: "Keep the photo's own aspect ratio",

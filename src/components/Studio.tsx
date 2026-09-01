@@ -1292,9 +1292,11 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   // プリセット適用でこちらが足した余白量（片側ずつ）。ユーザーが元々設定していた
   // 余白と区別して、再適用時に二重に積み上がらないようにするための控え。
   const sizeExtraRef = useRef({ t: 0, r: 0, b: 0, l: 0 });
-  // プリセット適用。余白込みの出力枠が目標比率になるよう、中央基準の切り抜きと
-  // 余白の追加を balance で配分する（null=オリジナル: こちらが足した分を戻して切り抜き解除）。
-  const applySizePreset = (p: SizePreset | null, balance = sizeBalance) => {
+  // プリセット適用。余白込みの出力枠が目標比率になるよう、「余白の量」スライダーの
+  // 値から余白を決め、残りを中央基準の切り抜きで吸収する（null=オリジナル:
+  // こちらが足した分を戻して切り抜き解除）。balance 省略時は既存余白から逆算して
+  // スライダー位置を初期化する（プリセットを選んだ瞬間に余白が変わらないように）。
+  const applySizePreset = (p: SizePreset | null, balance?: number) => {
     const extra = sizeExtraRef.current;
     const base = {
       t: Math.max(0, frameMargin.t - extra.t),
@@ -1311,40 +1313,24 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const nat = photoNat ?? { w: 3, h: 2 };
     const natAR = nat.w / nat.h;
     const target = p.w / p.h;
-    // スライダーは2段階: 前半(0〜50%)は目標比率への補正を切り抜き⇔余白で配分、
-    // 後半(50〜100%)は比率を保ったまま余白をさらに増やす（写真は切り抜きで縮む）。
-    const v1 = Math.min(balance, 0.5) * 2;
-    const v2 = Math.max(0, balance - 0.5) * 2;
-    // 余白は「1+合計」を係数として比率に効くので、補正を係数の掛け算で考える。
-    const R0 = (natAR * (1 + base.l + base.r)) / ((1 + base.t + base.b) * target); // >1: 横長すぎ
-    const wide0 = R0 >= 1;
-    // 前半: 余白側が受け持つ補正係数 g。まず、はみ出している方向の既存余白を縮めて
-    // 使い切る。余りは、直交方向に既存余白があればそこへ足し、なければ（急に新しい
-    // 方向へ余白が生えないよう）切り抜きに任せる。既存余白が全くないときだけ直交方向へ足す。
-    const g = Math.pow(wide0 ? R0 : 1 / R0, v1);
-    const shrinkSum0 = wide0 ? base.l + base.r : base.t + base.b;
-    const growSum0 = wide0 ? base.t + base.b : base.l + base.r;
-    const used = Math.min(g, 1 + shrinkSum0);
-    const shrinkSum = (1 + shrinkSum0) / used - 1;
-    const leftover = g / used;
-    const growSum = leftover > 1 && (growSum0 > 0 || shrinkSum0 === 0) ? (1 + growSum0) * leftover - 1 : growSum0;
-    // 各辺への配分は既存の余白の比率を保つ（既存が0なら均等）。
+    // 余白を置く軸: 既存余白のある方向（両方あれば多い方）。余白が全くなければ、
+    // 目標比率に対して足りない側（レターボックスになる方向）。
+    const baseLR = base.l + base.r;
+    const baseTB = base.t + base.b;
+    const axisLR = baseLR > 0 || baseTB > 0 ? baseLR >= baseTB : natAR <= target;
+    // スライダー値 = 余白がその軸のフレーム幅に占める割合（0=余白なし、最大90%）。
+    // 省略時は既存余白の割合から逆算して、選択直後に見た目が変わらないようにする。
+    const axisSum0 = axisLR ? baseLR : baseTB;
+    const v = balance ?? Math.min(1, axisSum0 / (1 + axisSum0) / 0.9);
+    if (balance == null) setSizeBalance(v);
+    const s = v * 0.9;
+    const M = s / (1 - s); // 余白合計（切り抜き後の写真サイズ比）
+    // 各辺への配分は既存の余白の比率を保つ（既存が0なら均等）。反対の軸は既存のまま。
     const split = (sum: number, a: number, b: number): [number, number] =>
       a + b > 0 ? [(sum * a) / (a + b), (sum * b) / (a + b)] : [sum / 2, sum / 2];
-    let [mL, mR] = split(wide0 ? shrinkSum : growSum, base.l, base.r);
-    let [mT, mB] = split(wide0 ? growSum : shrinkSum, base.t, base.b);
-    // 後半: いまある余白を方向を保ったまま最大2倍まで拡大。余白が全くない場合だけ
-    // 全周へ均等に足す（均等なら比率は変わらない）。
-    if (v2 > 0) {
-      const u = 1 + v2;
-      if (mL + mR + mT + mB > 0) {
-        mL *= u; mR *= u; mT *= u; mB *= u;
-      } else {
-        const e = (u - 1) / 2;
-        mL = mR = mT = mB = e;
-      }
-    }
-    // 最後に、目標比率からのずれを中央基準の切り抜きで吸収する。
+    const [mL, mR] = axisLR ? split(M, base.l, base.r) : [base.l, base.r];
+    const [mT, mB] = axisLR ? [base.t, base.b] : split(M, base.t, base.b);
+    // 目標比率からのずれを中央基準の切り抜きで吸収する。
     const mlr1 = 1 + mL + mR;
     const mtb1 = 1 + mT + mB;
     const wide1 = (natAR * mlr1) / (mtb1 * target) >= 1;
@@ -4193,7 +4179,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       </>
                     );
                   })()}
-                  {/* 目標比率への合わせ方の配分（切り抜き ⇔ 余白）。プリセット適用中だけ表示 */}
+                  {/* 余白の量（0=切り抜きのみ ⇔ 最大=ほぼ余白）。プリセット適用中だけ表示 */}
                   {activeSizeId && activeSizeId !== "original" && (
                     <>
                       <div className="ar-fs-slider-row">
