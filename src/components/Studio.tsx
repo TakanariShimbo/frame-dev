@@ -1318,12 +1318,16 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const baseLR = base.l + base.r;
     const baseTB = base.t + base.b;
     const axisLR = baseLR > 0 || baseTB > 0 ? baseLR >= baseTB : natAR <= target;
-    // スライダー値 = 余白がその軸のフレーム幅に占める割合（0=余白なし、最大90%）。
+    // スライダー値 = 余白がその軸のフレーム幅に占める割合（5%〜45%に制限。
+    // 0%や大きすぎる余白は仕上がりが破綻しやすいので端を切る）。
     // 省略時は既存余白の割合から逆算して、選択直後に見た目が変わらないようにする。
+    const S_MIN = 0.05;
+    const S_MAX = 0.45;
     const axisSum0 = axisLR ? baseLR : baseTB;
-    const v = balance ?? Math.min(1, axisSum0 / (1 + axisSum0) / 0.9);
+    const s0 = axisSum0 / (1 + axisSum0);
+    const v = balance ?? Math.min(1, Math.max(0, (s0 - S_MIN) / (S_MAX - S_MIN)));
     if (balance == null) setSizeBalance(v);
-    const s = v * 0.9;
+    const s = S_MIN + v * (S_MAX - S_MIN);
     const M = s / (1 - s); // 余白合計（切り抜き後の写真サイズ比）
     // 各辺への配分は既存の余白の比率を保つ（既存が0なら均等）。反対の軸は既存のまま。
     const split = (sum: number, a: number, b: number): [number, number] =>

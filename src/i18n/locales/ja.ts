@@ -272,7 +272,7 @@ export default {
       hint: "比率は余白込みの書き出し全体に合わせます。さらに細かくは下の「余白」「切り抜き」で調整できます。",
       posH: "切り抜き位置（左 ⇔ 右）",
       posV: "切り抜き位置（上 ⇔ 下）",
-      balance: "余白の量（なし ⇔ 最大）",
+      balance: "余白の量（少 ⇔ 多）",
       searchPlaceholder: "変更したいサイズを検索",
       original: "オリジナル",
       originalDesc: "元画像の比率をそのまま使用",
