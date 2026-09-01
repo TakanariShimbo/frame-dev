@@ -1311,27 +1311,30 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const nat = photoNat ?? { w: 3, h: 2 };
     const natAR = nat.w / nat.h;
     const target = p.w / p.h;
-    const bLR = base.l + base.r;
-    const bTB = base.t + base.b;
-    // 既存の余白込みでの、切り抜きなし時の出力枠の比率。
-    const effAR = (natAR * (1 + bLR)) / (1 + bTB);
-    if (effAR > target) {
-      // 横長すぎ: 左右を切り抜き、残りは上下の余白で吸収する。
-      const cFull = 1 - (target * (1 + bTB)) / (natAR * (1 + bLR));
-      const c = cFull * (1 - balance);
-      const e = Math.max(0, (natAR * (1 - c) * (1 + bLR)) / target - (1 + bTB)) / 2;
-      setCropInset({ l: c / 2, r: c / 2, t: 0, b: 0 });
-      setFrameMargin({ l: base.l, r: base.r, t: base.t + e, b: base.b + e });
-      sizeExtraRef.current = { l: 0, r: 0, t: e, b: e };
-    } else {
-      // 縦長すぎ: 上下を切り抜き、残りは左右の余白で吸収する。
-      const cFull = 1 - (natAR * (1 + bLR)) / (target * (1 + bTB));
-      const c = cFull * (1 - balance);
-      const e = Math.max(0, (target * (1 + bTB) * (1 - c)) / natAR - (1 + bLR)) / 2;
-      setCropInset({ l: 0, r: 0, t: c / 2, b: c / 2 });
-      setFrameMargin({ t: base.t, b: base.b, l: base.l + e, r: base.r + e });
-      sizeExtraRef.current = { t: 0, b: 0, l: e, r: e };
-    }
+    // 余白は「1+合計」を係数として比率に効くので、補正を係数の掛け算で考える。
+    const mlr0 = 1 + base.l + base.r;
+    const mtb0 = 1 + base.t + base.b;
+    const R = (natAR * mlr0) / (mtb0 * target); // >1: 横長すぎ / <1: 縦長すぎ
+    const wide = R >= 1;
+    // 余白側が受け持つ補正係数 g。まず、はみ出している方向の既存余白を縮めて使い切り、
+    // 足りないぶんだけ直交方向へ余白を足す。残りは中央基準の切り抜きで合わせる。
+    const g = Math.pow(wide ? R : 1 / R, balance);
+    const shrink0 = wide ? mlr0 : mtb0;
+    const used = Math.min(g, shrink0);
+    const shrink1 = shrink0 / used;
+    const grow1 = (wide ? mtb0 : mlr0) * (g / used);
+    // 各辺への配分は既存の余白の比率を保つ（既存が0なら均等）。
+    const split = (sum: number, a: number, b: number): [number, number] =>
+      a + b > 0 ? [(sum * a) / (a + b), (sum * b) / (a + b)] : [sum / 2, sum / 2];
+    const [mL, mR] = split((wide ? shrink1 : grow1) - 1, base.l, base.r);
+    const [mT, mB] = split((wide ? grow1 : shrink1) - 1, base.t, base.b);
+    const mlr1 = 1 + mL + mR;
+    const mtb1 = 1 + mT + mB;
+    const c = Math.max(0, wide ? 1 - (target * mtb1) / (natAR * mlr1) : 1 - (natAR * mlr1) / (target * mtb1));
+    setCropInset(wide ? { l: c / 2, r: c / 2, t: 0, b: 0 } : { l: 0, r: 0, t: c / 2, b: c / 2 });
+    setFrameMargin({ t: mT, b: mB, l: mL, r: mR });
+    // 控えは差分（縮めた場合は負）。基準余白 = 現在値 - 控え で復元できる。
+    sizeExtraRef.current = { t: mT - base.t, b: mB - base.b, l: mL - base.l, r: mR - base.r };
   };
   const framePhotoStyle: React.CSSProperties = {
     position: "absolute",
