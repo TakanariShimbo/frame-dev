@@ -706,6 +706,7 @@ export type StudioSnapshot = {
     // "gallery" は旧スナップショット用（現在は自由記述3行＋右寄せ＋広縁へ変換して読む）
     mode?: "camera" | "free" | "gallery";
     date?: string; // 機材スタイルの撮影日行
+    place?: string; // 機材スタイルの山名（Shot on 行に添える）
     line3?: string;
     l3?: { bold: boolean; italic: boolean; dim: boolean };
     align?: "left" | "center" | "right"; // 自由記述の文字位置
@@ -889,6 +890,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [exifMaker, setExifMaker] = useState(initExif?.maker ?? "");
   const [exifSpec, setExifSpec] = useState(initExif?.spec ?? "");
   const [exifDate, setExifDate] = useState(initExif?.date ?? ""); // 機材スタイルの撮影日行
+  const [exifPlace, setExifPlace] = useState(initExif?.place ?? ""); // 機材スタイルの山名（Shot on 行に添える）
   // 自由スタイル1行目の初期値（タイトル, 日付 の見本）。日付はまず今日で仮置きし、
   // EXIFから撮影日が読めたら（未編集のときだけ）そちらへ差し替える。
   const defaultNoteLine1 = () => {
@@ -933,6 +935,11 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     setNoteLine3((v) => v || line3);
     if (line3) setNoteL3((s) => ({ ...s, dim: true }));
   };
+  // 山名の欄は「取り上げる山」から補完する（手で入力済みなら上書きしない）。
+  useEffect(() => {
+    const it = arLabels[captionIdx];
+    if (it) setExifPlace((v) => v || oneLineName(it.name));
+  }, [arLabels, captionIdx]);
   // 元写真の EXIF から初期値を補完する（手で入力済みの欄は上書きしない）。
   useEffect(() => {
     let live = true;
@@ -2174,6 +2181,10 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
           if (exifModel) segs.push({ text: `${exifModel} `, font: `700 ${mainFs}px ${noteFF}`, color: ink.main });
           if (exifMaker) segs.push({ text: exifMaker, font: `500 ${mainFs}px ${noteFF}`, color: ink.sub });
         }
+        if (exifPlace) {
+          if (segs.length) segs.push({ text: " at ", font: `500 ${mainFs}px ${noteFF}`, color: ink.sub });
+          segs.push({ text: exifPlace, font: `700 ${mainFs}px ${noteFF}`, color: ink.main });
+        }
         type CamLine = { kind: "segs" } | { kind: "text"; text: string };
         const lines1: CamLine[] = [];
         if (segs.length) lines1.push({ kind: "segs" });
@@ -2469,6 +2480,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
             maker: exifMaker,
             spec: exifSpec,
             date: exifDate,
+            place: exifPlace,
             mode: noteMode,
             line1: noteLine1,
             line2: noteLine2,
@@ -3550,10 +3562,20 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                   >
                     {noteMode === "camera" ? (
                       <span className={`ar-exif-free is-${noteAlign}`}>
-                        {(exifModel || exifMaker) && (
+                        {(exifModel || exifMaker || exifPlace) && (
                           <span className="ar-exif-model">
-                            <span className="ar-exif-dim">Shot on</span> <b>{exifModel}</b>
-                            {exifMaker && <span className="ar-exif-dim"> {exifMaker}</span>}
+                            {(exifModel || exifMaker) && (
+                              <>
+                                <span className="ar-exif-dim">Shot on</span> <b>{exifModel}</b>
+                                {exifMaker && <span className="ar-exif-dim"> {exifMaker}</span>}
+                              </>
+                            )}
+                            {exifPlace && (
+                              <>
+                                {(exifModel || exifMaker) && <span className="ar-exif-dim"> at </span>}
+                                <b>{exifPlace}</b>
+                              </>
+                            )}
                           </span>
                         )}
                         {exifSpec && <span className="ar-exif-spec">{exifSpec}</span>}
@@ -4351,6 +4373,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           <span className="studio-data-head">{t("studio.note.exifHeading")}</span>
                           {(
                             [
+                              [t("studio.note.labelPlace"), exifPlace, setExifPlace, t("studio.note.exifPlacePlaceholder"), t("studio.note.exifPlaceAria")],
                               [t("studio.note.labelModel"), exifModel, setExifModel, t("studio.note.exifModelPlaceholder"), t("studio.note.exifModelAria")],
                               [t("studio.note.labelMaker"), exifMaker, setExifMaker, t("studio.note.exifMakerPlaceholder"), t("studio.note.exifMakerAria")],
                               [t("studio.note.labelSpec"), exifSpec, setExifSpec, t("studio.note.exifSpecPlaceholder"), t("studio.note.exifSpecAria")],
