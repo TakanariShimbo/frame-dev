@@ -1280,23 +1280,34 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [sizeOpen, setSizeOpen] = useState(false);
   const [sizeQuery, setSizeQuery] = useState("");
   const noCrop = cropInset.l === 0 && cropInset.t === 0 && cropInset.r === 0 && cropInset.b === 0;
-  // 現在の出力枠（余白込み。記録の帯は除く）の比率に一致するプリセット。
-  // 切り抜き・余白なし=オリジナル、どれにも一致しない=カスタム（null。テンプレ由来や手動調整）。
-  const activeSizeId: string | null = noCrop && !fAnyMargin
+  // 現在の書き出し全体（余白と、ONなら記録の帯・縁も込み）の比率。
+  const noteE = exifOn ? noteEdge : 0;
+  const noteB = exifOn ? noteBand : 0;
+  const outAR = photoNat
+    ? (photoNat.w * fCwF * (1 + fMlr) + 2 * noteE * photoNat.h * fChF) /
+      (photoNat.h * fChF * (1 + fMtb + noteE + noteB))
+    : null;
+  // 上の比率に一致するプリセット。切り抜き・余白なし=オリジナル、
+  // どれにも一致しない=カスタム（null。テンプレ由来や手動調整）。
+  const activeSizeId: string | null = noCrop && !fAnyMargin && !exifOn
     ? "original"
-    : photoNat == null
+    : outAR == null
       ? null
-      : SIZE_PRESETS.find((p) => Math.abs(frameAR - p.w / p.h) / (p.w / p.h) < 0.01)?.id ?? null;
+      : SIZE_PRESETS.find((p) => Math.abs(outAR - p.w / p.h) / (p.w / p.h) < 0.01)?.id ?? null;
   // 余白と切り抜きの配分（0=すべて切り抜き、1=すべて余白で目標比率に合わせる）。
   const [sizeBalance, setSizeBalance] = useState(0);
   // プリセット適用でこちらが足した余白量（片側ずつ）。ユーザーが元々設定していた
   // 余白と区別して、再適用時に二重に積み上がらないようにするための控え。
   const sizeExtraRef = useRef({ t: 0, r: 0, b: 0, l: 0 });
+  // 最後に適用したプリセット。記録の帯のON/OFFや太さが変わったとき、
+  // 書き出し全体の比率を保つよう切り抜きを再計算するために控える。
+  const appliedSizeRef = useRef<SizePreset | null>(null);
   // プリセット適用。余白込みの出力枠が目標比率になるよう、「余白の量」スライダーの
   // 値から余白を決め、残りを中央基準の切り抜きで吸収する（null=オリジナル:
   // こちらが足した分を戻して切り抜き解除）。balance 省略時は既存余白から逆算して
   // スライダー位置を初期化する（プリセットを選んだ瞬間に余白が変わらないように）。
   const applySizePreset = (p: SizePreset | null, balance?: number) => {
+    appliedSizeRef.current = p;
     const extra = sizeExtraRef.current;
     const base = {
       t: Math.max(0, frameMargin.t - extra.t),
@@ -1334,16 +1345,26 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
       a + b > 0 ? [(sum * a) / (a + b), (sum * b) / (a + b)] : [sum / 2, sum / 2];
     const [mL, mR] = axisLR ? split(M, base.l, base.r) : [base.l, base.r];
     const [mT, mB] = axisLR ? [base.t, base.b] : split(M, base.t, base.b);
-    // 目標比率からのずれを中央基準の切り抜きで吸収する。
+    // 目標比率からのずれを中央基準の切り抜きで吸収する。記録の帯・縁（ON時）も
+    // 書き出しに含まれるので、外周込みの比率が目標になるように解く。
+    // 縁・帯は切り抜き後の写真高さ ch 基準: W = cw*mlr + 2*ne*ch, H = ch*(mtb + ne + nb)。
     const mlr1 = 1 + mL + mR;
     const mtb1 = 1 + mT + mB;
-    const wide1 = (natAR * mlr1) / (mtb1 * target) >= 1;
-    const c = Math.max(0, wide1 ? 1 - (target * mtb1) / (natAR * mlr1) : 1 - (natAR * mlr1) / (target * mtb1));
+    const K = target * (mtb1 + noteE + noteB) - 2 * noteE;
+    const ar0 = (natAR * mlr1 + 2 * noteE) / (mtb1 + noteE + noteB); // 切り抜きなし時の外周比率
+    const wide1 = ar0 >= target;
+    const c = K <= 0 ? 0 : Math.max(0, wide1 ? 1 - K / (natAR * mlr1) : 1 - (natAR * mlr1) / K);
     setCropInset(wide1 ? { l: c / 2, r: c / 2, t: 0, b: 0 } : { l: 0, r: 0, t: c / 2, b: c / 2 });
     setFrameMargin({ t: mT, b: mB, l: mL, r: mR });
     // 控えは差分（縮めた場合は負）。基準余白 = 現在値 - 控え で復元できる。
     sizeExtraRef.current = { t: mT - base.t, b: mB - base.b, l: mL - base.l, r: mR - base.r };
   };
+  // 記録の帯のON/OFF・太さが変わったら、適用中のプリセット比率を保つよう再適用する。
+  useEffect(() => {
+    const p = appliedSizeRef.current;
+    if (p) applySizePreset(p, sizeBalance);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exifOn, noteBand, noteEdge]);
   const framePhotoStyle: React.CSSProperties = {
     position: "absolute",
     left: `${(frameMargin.l / (1 + fMlr)) * 100}%`,
@@ -4216,7 +4237,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                         <span>{t("studio.frame.marginDir", { dir: dirLabel })}</span>
                         <span className="ar-fs-val">{Math.round(frameMargin[d] * 100)}%</span>
                       </div>
-                      <FsSlider min={0} max={1} step={0.01} value={frameMargin[d]} onChange={(v) => setFrameMargin((p) => ({ ...p, [d]: v }))} ariaLabel={t("studio.frame.marginDir", { dir: dirLabel })} />
+                      <FsSlider min={0} max={1} step={0.01} value={frameMargin[d]} onChange={(v) => { appliedSizeRef.current = null; sizeExtraRef.current = { t: 0, r: 0, b: 0, l: 0 }; setFrameMargin((p) => ({ ...p, [d]: v })); }} ariaLabel={t("studio.frame.marginDir", { dir: dirLabel })} />
                     </div>
                     );
                   })}
@@ -4244,7 +4265,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                         <span>{t("studio.frame.cropDir", { dir: dirLabel })}</span>
                         <span className="ar-fs-val">{Math.round(cropInset[d] * 100)}%</span>
                       </div>
-                      <FsSlider min={0} max={0.45} step={0.01} value={cropInset[d]} onChange={(v) => setCropInset((p) => ({ ...p, [d]: v }))} ariaLabel={t("studio.frame.cropDir", { dir: dirLabel })} />
+                      <FsSlider min={0} max={0.45} step={0.01} value={cropInset[d]} onChange={(v) => { appliedSizeRef.current = null; setCropInset((p) => ({ ...p, [d]: v })); }} ariaLabel={t("studio.frame.cropDir", { dir: dirLabel })} />
                     </div>
                     );
                   })}
