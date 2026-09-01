@@ -936,9 +936,10 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     if (line3) setNoteL3((s) => ({ ...s, dim: true }));
   };
   // 山名の欄は「取り上げる山」から補完する（手で入力済みなら上書きしない）。
+  // Shot on 行が英語表記なので、英語名があればそちらを使う。
   useEffect(() => {
     const it = arLabels[captionIdx];
-    if (it) setExifPlace((v) => v || oneLineName(it.name));
+    if (it) setExifPlace((v) => v || oneLineName(it.nameEn || it.name));
   }, [arLabels, captionIdx]);
   // 元写真の EXIF から初期値を補完する（手で入力済みの欄は上書きしない）。
   useEffect(() => {
