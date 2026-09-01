@@ -577,7 +577,7 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
     style: {
       ...BASE_STYLE,
       bakeLabels: false,
-      titleOn: true,
+      titleOn: false, // 題字は既定OFF（好みで「題字」タブからONにする）
       titleLang: "en",
       titleShowOver: true,
       titleShowNum: true,
@@ -610,8 +610,8 @@ const EVENT_ICONS: Record<"mountain" | "elev" | "pin", string> = {
 const EVENT_ICON_KEYS = ["mountain", "elev", "pin"] as const;
 
 // 書き出しサイズ（アスペクト比）のプリセット。Canva風のカード一覧から選び、
-// 「切り抜き後の写真」が目標比率になるよう中央基準で cropInset を設定する
-// （余白・記録の帯は含まない。位置の微調整は「構図」タブの切り抜きで行う）。
+// 書き出し全体（余白と、ONなら記録の帯・縁も込み）が目標比率になるよう
+// 余白と中央基準の cropInset を設定する（位置の微調整は「構図」タブで行う）。
 // name/uses は i18n キー。用途のサービス名は両言語共通だが語尾が違うため文言ごと持つ。
 type SizePreset = { id: string; w: number; h: number; name: string; uses: string };
 const SIZE_PRESETS: SizePreset[] = [
