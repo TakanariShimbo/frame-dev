@@ -1280,29 +1280,57 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [sizeOpen, setSizeOpen] = useState(false);
   const [sizeQuery, setSizeQuery] = useState("");
   const noCrop = cropInset.l === 0 && cropInset.t === 0 && cropInset.r === 0 && cropInset.b === 0;
-  // 現在の切り抜き後の写真比率に一致するプリセット。切り抜きなし=オリジナル、
-  // どれにも一致しない切り抜き=カスタム（null。テンプレ由来や手動調整）。
-  const croppedAR = photoNat ? (photoNat.w * fCwF) / (photoNat.h * fChF) : null;
-  const activeSizeId: string | null = noCrop
+  // 現在の出力枠（余白込み。記録の帯は除く）の比率に一致するプリセット。
+  // 切り抜き・余白なし=オリジナル、どれにも一致しない=カスタム（null。テンプレ由来や手動調整）。
+  const activeSizeId: string | null = noCrop && !fAnyMargin
     ? "original"
-    : croppedAR == null
+    : photoNat == null
       ? null
-      : SIZE_PRESETS.find((p) => Math.abs(croppedAR - p.w / p.h) / (p.w / p.h) < 0.01)?.id ?? null;
-  // プリセット適用。中央基準で目標比率へ切り抜く（null=オリジナル: 切り抜き解除）。
-  const applySizePreset = (p: SizePreset | null) => {
+      : SIZE_PRESETS.find((p) => Math.abs(frameAR - p.w / p.h) / (p.w / p.h) < 0.01)?.id ?? null;
+  // 余白と切り抜きの配分（0=すべて切り抜き、1=すべて余白で目標比率に合わせる）。
+  const [sizeBalance, setSizeBalance] = useState(0);
+  // プリセット適用でこちらが足した余白量（片側ずつ）。ユーザーが元々設定していた
+  // 余白と区別して、再適用時に二重に積み上がらないようにするための控え。
+  const sizeExtraRef = useRef({ t: 0, r: 0, b: 0, l: 0 });
+  // プリセット適用。余白込みの出力枠が目標比率になるよう、中央基準の切り抜きと
+  // 余白の追加を balance で配分する（null=オリジナル: こちらが足した分を戻して切り抜き解除）。
+  const applySizePreset = (p: SizePreset | null, balance = sizeBalance) => {
+    const extra = sizeExtraRef.current;
+    const base = {
+      t: Math.max(0, frameMargin.t - extra.t),
+      b: Math.max(0, frameMargin.b - extra.b),
+      l: Math.max(0, frameMargin.l - extra.l),
+      r: Math.max(0, frameMargin.r - extra.r),
+    };
+    sizeExtraRef.current = { t: 0, r: 0, b: 0, l: 0 };
     if (!p) {
       setCropInset({ l: 0, t: 0, r: 0, b: 0 });
+      setFrameMargin(base);
       return;
     }
     const nat = photoNat ?? { w: 3, h: 2 };
-    const cur = nat.w / nat.h;
+    const natAR = nat.w / nat.h;
     const target = p.w / p.h;
-    if (cur > target) {
-      const f = (1 - target / cur) / 2;
-      setCropInset({ l: f, r: f, t: 0, b: 0 });
+    const bLR = base.l + base.r;
+    const bTB = base.t + base.b;
+    // 既存の余白込みでの、切り抜きなし時の出力枠の比率。
+    const effAR = (natAR * (1 + bLR)) / (1 + bTB);
+    if (effAR > target) {
+      // 横長すぎ: 左右を切り抜き、残りは上下の余白で吸収する。
+      const cFull = 1 - (target * (1 + bTB)) / (natAR * (1 + bLR));
+      const c = cFull * (1 - balance);
+      const e = Math.max(0, (natAR * (1 - c) * (1 + bLR)) / target - (1 + bTB)) / 2;
+      setCropInset({ l: c / 2, r: c / 2, t: 0, b: 0 });
+      setFrameMargin({ l: base.l, r: base.r, t: base.t + e, b: base.b + e });
+      sizeExtraRef.current = { l: 0, r: 0, t: e, b: e };
     } else {
-      const f = (1 - cur / target) / 2;
-      setCropInset({ l: 0, r: 0, t: f, b: f });
+      // 縦長すぎ: 上下を切り抜き、残りは左右の余白で吸収する。
+      const cFull = 1 - (natAR * (1 + bLR)) / (target * (1 + bTB));
+      const c = cFull * (1 - balance);
+      const e = Math.max(0, (target * (1 + bTB) * (1 - c)) / natAR - (1 + bLR)) / 2;
+      setCropInset({ l: 0, r: 0, t: c / 2, b: c / 2 });
+      setFrameMargin({ t: base.t, b: base.b, l: base.l + e, r: base.r + e });
+      sizeExtraRef.current = { t: 0, b: 0, l: e, r: e };
     }
   };
   const framePhotoStyle: React.CSSProperties = {
@@ -4144,6 +4172,27 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                       </>
                     );
                   })()}
+                  {/* 目標比率への合わせ方の配分（切り抜き ⇔ 余白）。プリセット適用中だけ表示 */}
+                  {activeSizeId && activeSizeId !== "original" && (
+                    <>
+                      <div className="ar-fs-slider-row">
+                        <span>{t("studio.size.balance")}</span>
+                        <span className="ar-fs-val">{Math.round(sizeBalance * 100)}%</span>
+                      </div>
+                      <FsSlider
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={sizeBalance}
+                        onChange={(v) => {
+                          setSizeBalance(v);
+                          const p = SIZE_PRESETS.find((sp) => sp.id === activeSizeId);
+                          if (p) applySizePreset(p, v);
+                        }}
+                        ariaLabel={t("studio.size.balance")}
+                      />
+                    </>
+                  )}
                   <p className="studio-hint">{t("studio.size.hint")}</p>
                 </section>
                 <section className="studio-sec">
