@@ -1311,27 +1311,45 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     const nat = photoNat ?? { w: 3, h: 2 };
     const natAR = nat.w / nat.h;
     const target = p.w / p.h;
+    // スライダーは2段階: 前半(0〜50%)は目標比率への補正を切り抜き⇔余白で配分、
+    // 後半(50〜100%)は比率を保ったまま余白をさらに増やす（写真は切り抜きで縮む）。
+    const v1 = Math.min(balance, 0.5) * 2;
+    const v2 = Math.max(0, balance - 0.5) * 2;
     // 余白は「1+合計」を係数として比率に効くので、補正を係数の掛け算で考える。
-    const mlr0 = 1 + base.l + base.r;
-    const mtb0 = 1 + base.t + base.b;
-    const R = (natAR * mlr0) / (mtb0 * target); // >1: 横長すぎ / <1: 縦長すぎ
-    const wide = R >= 1;
-    // 余白側が受け持つ補正係数 g。まず、はみ出している方向の既存余白を縮めて使い切り、
-    // 足りないぶんだけ直交方向へ余白を足す。残りは中央基準の切り抜きで合わせる。
-    const g = Math.pow(wide ? R : 1 / R, balance);
-    const shrink0 = wide ? mlr0 : mtb0;
-    const used = Math.min(g, shrink0);
-    const shrink1 = shrink0 / used;
-    const grow1 = (wide ? mtb0 : mlr0) * (g / used);
+    const R0 = (natAR * (1 + base.l + base.r)) / ((1 + base.t + base.b) * target); // >1: 横長すぎ
+    const wide0 = R0 >= 1;
+    // 前半: 余白側が受け持つ補正係数 g。まず、はみ出している方向の既存余白を縮めて
+    // 使い切る。余りは、直交方向に既存余白があればそこへ足し、なければ（急に新しい
+    // 方向へ余白が生えないよう）切り抜きに任せる。既存余白が全くないときだけ直交方向へ足す。
+    const g = Math.pow(wide0 ? R0 : 1 / R0, v1);
+    const shrinkSum0 = wide0 ? base.l + base.r : base.t + base.b;
+    const growSum0 = wide0 ? base.t + base.b : base.l + base.r;
+    const used = Math.min(g, 1 + shrinkSum0);
+    const shrinkSum = (1 + shrinkSum0) / used - 1;
+    const leftover = g / used;
+    const growSum = leftover > 1 && (growSum0 > 0 || shrinkSum0 === 0) ? (1 + growSum0) * leftover - 1 : growSum0;
     // 各辺への配分は既存の余白の比率を保つ（既存が0なら均等）。
     const split = (sum: number, a: number, b: number): [number, number] =>
       a + b > 0 ? [(sum * a) / (a + b), (sum * b) / (a + b)] : [sum / 2, sum / 2];
-    const [mL, mR] = split((wide ? shrink1 : grow1) - 1, base.l, base.r);
-    const [mT, mB] = split((wide ? grow1 : shrink1) - 1, base.t, base.b);
+    let [mL, mR] = split(wide0 ? shrinkSum : growSum, base.l, base.r);
+    let [mT, mB] = split(wide0 ? growSum : shrinkSum, base.t, base.b);
+    // 後半: いまある余白を方向を保ったまま最大2倍まで拡大。余白が全くない場合だけ
+    // 全周へ均等に足す（均等なら比率は変わらない）。
+    if (v2 > 0) {
+      const u = 1 + v2;
+      if (mL + mR + mT + mB > 0) {
+        mL *= u; mR *= u; mT *= u; mB *= u;
+      } else {
+        const e = (u - 1) / 2;
+        mL = mR = mT = mB = e;
+      }
+    }
+    // 最後に、目標比率からのずれを中央基準の切り抜きで吸収する。
     const mlr1 = 1 + mL + mR;
     const mtb1 = 1 + mT + mB;
-    const c = Math.max(0, wide ? 1 - (target * mtb1) / (natAR * mlr1) : 1 - (natAR * mlr1) / (target * mtb1));
-    setCropInset(wide ? { l: c / 2, r: c / 2, t: 0, b: 0 } : { l: 0, r: 0, t: c / 2, b: c / 2 });
+    const wide1 = (natAR * mlr1) / (mtb1 * target) >= 1;
+    const c = Math.max(0, wide1 ? 1 - (target * mtb1) / (natAR * mlr1) : 1 - (natAR * mlr1) / (target * mtb1));
+    setCropInset(wide1 ? { l: c / 2, r: c / 2, t: 0, b: 0 } : { l: 0, r: 0, t: c / 2, b: c / 2 });
     setFrameMargin({ t: mT, b: mB, l: mL, r: mR });
     // 控えは差分（縮めた場合は負）。基準余白 = 現在値 - 控え で復元できる。
     sizeExtraRef.current = { t: mT - base.t, b: mB - base.b, l: mL - base.l, r: mR - base.r };
