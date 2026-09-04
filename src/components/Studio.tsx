@@ -303,9 +303,6 @@ type ExportTemplate = {
   style: ExportStyle;
   mountainOnly?: boolean;
   hidden?: boolean; // テーマ一覧に出さない（定義は残す。季節限定テンプレの公開終了用）
-  // 機能が既定OFFでも、シンプルモードで見せたいタブ（例: 額の題字。OFFだと
-  // templateTabs から漏れて、ONにする入口ごと消えてしまうのを防ぐ）
-  extraTabs?: PanelTab[];
   note?: { on: boolean; mode: "camera" | "free"; align: "left" | "center" | "right"; edge?: number; band?: number };
 };
 
@@ -577,7 +574,6 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
     hint: "studio.theme.gaku.hint",
     mountainOnly: true,
     note: { on: true, mode: "camera", align: "right" },
-    extraTabs: ["title"],
     style: {
       ...BASE_STYLE,
       bakeLabels: false,
@@ -2799,9 +2795,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     frame: frameActive,
     note: exifOn,
   };
-  const relevantTabs = activeTemplate
-    ? [...templateTabs(activeTemplate.style), ...(activeTemplate.extraTabs ?? [])]
-    : PANEL_TABS;
+  const relevantTabs = activeTemplate ? templateTabs(activeTemplate.style) : PANEL_TABS;
   // 「記録」はテンプレに依存しない機能なので、シンプルモードでも常に見せる。
   // 「記念」タブは季節限定機能なので、使っていない（eventOn でない）限りフルモードでも隠す。
   // 開いている最中に OFF にしても、タブごと消えて戻れなくならないよう表示中は残す。
