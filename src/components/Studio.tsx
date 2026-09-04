@@ -594,7 +594,7 @@ const EXPORT_TEMPLATES: ExportTemplate[] = [
 type TplItem = { id: string; name: string; sub: string; hint: string; tpl: ExportTemplate | null };
 // プレビュー画像のキャッシュバスター。同名のまま画像を差し替えたら数字を上げること
 // （public/ 配下はハッシュ付与されず、GitHub Pages 等でブラウザキャッシュが残るため）。
-const TPL_PREVIEW_VER = "?v=7";
+const TPL_PREVIEW_VER = "?v=8";
 const TPL_ITEMS: TplItem[] = [
   ...EXPORT_TEMPLATES.map((t) => ({ id: t.id, name: t.name, sub: t.sub, hint: t.hint, tpl: t as ExportTemplate | null })),
   { id: "custom", name: "素", sub: "studio.theme.custom.sub", hint: "studio.theme.custom.hint", tpl: null },
