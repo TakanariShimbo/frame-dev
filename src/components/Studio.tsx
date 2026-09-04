@@ -891,6 +891,9 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
   const [exifSpec, setExifSpec] = useState(initExif?.spec ?? "");
   const [exifDate, setExifDate] = useState(initExif?.date ?? ""); // 機材スタイルの撮影日行
   const [exifPlace, setExifPlace] = useState(initExif?.place ?? ""); // 機材スタイルの山名（Shot on 行に添える）
+  // 山名欄をユーザーが一度でも編集したか（空にしたのを自動補完で埋め戻さないための印。
+  // 復元スナップショットに place がある＝過去に編集画面を通っているので触った扱い）。
+  const exifPlaceTouchedRef = useRef(initExif?.place != null);
   // 自由スタイル1行目の初期値（タイトル, 日付 の見本）。日付はまず今日で仮置きし、
   // EXIFから撮影日が読めたら（未編集のときだけ）そちらへ差し替える。
   const defaultNoteLine1 = () => {
@@ -935,9 +938,11 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
     setNoteLine3((v) => v || line3);
     if (line3) setNoteL3((s) => ({ ...s, dim: true }));
   };
-  // 山名の欄は「取り上げる山」から補完する（手で入力済みなら上書きしない）。
+  // 山名の欄は「取り上げる山」から補完する（一度でも手で編集したら以後は触らない。
+  // 空にしたのに、ラベル移動や画面の出入りのたびに復活してしまわないように）。
   // Shot on 行が英語表記なので、英語名があればそちらを使う。
   useEffect(() => {
+    if (exifPlaceTouchedRef.current) return;
     const it = arLabels[captionIdx];
     if (it) setExifPlace((v) => v || oneLineName(it.nameEn || it.name));
   }, [arLabels, captionIdx]);
@@ -4374,7 +4379,7 @@ export default function Studio({ photoUrl, initialLabels, initialSnapshot = null
                           <span className="studio-data-head">{t("studio.note.exifHeading")}</span>
                           {(
                             [
-                              [t("studio.note.labelPlace"), exifPlace, setExifPlace, t("studio.note.exifPlacePlaceholder"), t("studio.note.exifPlaceAria")],
+                              [t("studio.note.labelPlace"), exifPlace, (v: string) => { exifPlaceTouchedRef.current = true; setExifPlace(v); }, t("studio.note.exifPlacePlaceholder"), t("studio.note.exifPlaceAria")],
                               [t("studio.note.labelModel"), exifModel, setExifModel, t("studio.note.exifModelPlaceholder"), t("studio.note.exifModelAria")],
                               [t("studio.note.labelMaker"), exifMaker, setExifMaker, t("studio.note.exifMakerPlaceholder"), t("studio.note.exifMakerAria")],
                               [t("studio.note.labelSpec"), exifSpec, setExifSpec, t("studio.note.exifSpecPlaceholder"), t("studio.note.exifSpecAria")],
